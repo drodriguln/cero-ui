@@ -25,10 +25,17 @@ const useStyles = makeStyles({
     left: type === 'opponent' ? 0 : undefined,
     margin: 10,
     maxWidth: 'calc(100% - 40px)', // strip margin and padding
-    overflowX: 'auto',
+    overflow: 'visible',
     backgroundColor: 'rgba(255, 255, 255, 0.40)',
     zIndex: 1
-  })
+  }),
+  card: {
+    cursor: 'pointer',
+    transition: 'transform .3s ease-out',
+    '&:hover': {
+      transform: 'translate(0, -15%)'
+    }
+  }
 });
 
 const Hand = React.forwardRef(({ cards, type }: Props, ref) => {
@@ -38,8 +45,13 @@ const Hand = React.forwardRef(({ cards, type }: Props, ref) => {
       <Grid container spacing={1} wrap='nowrap'>
         {cards.map(({ color, value }, index) => (
           <Fade key={index} timeout={1500} in>
-            <Grid key={index} item>
-              <Card color={color} value={value} hidden={type === 'opponent'} />
+            <Grid item>
+              <Card
+                color={color}
+                value={value}
+                hidden={type === 'opponent'}
+                className={type === 'player' ? classes.card : undefined}
+              />
             </Grid>
           </Fade>
         ))}

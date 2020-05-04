@@ -10,6 +10,7 @@ type Props = {
   size?: CardSize;
   title?: string;
   hidden?: boolean;
+  className?: string;
 }
 
 const findCardImage = (color: CardColor, value: CardValue) => {
@@ -17,10 +18,10 @@ const findCardImage = (color: CardColor, value: CardValue) => {
 }
 
 const Card = (props: Props) => {
-  const { value, color, size = 'md', title = `${color} ${value}`, hidden = false } = props;
+  const { value, color, size = 'md', title = `${color} ${value}`, hidden = false, className } = props;
   const { height, width } = sizeMap[size];
   const src = hidden ? backImageSrc : findCardImage(color, value);
-  return <img alt={title} src={src} height={height} width={width} />;
+  return <img alt={title} src={src} height={height} width={width} className={className} />;
 };
 
 export default Card;
