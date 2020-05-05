@@ -1,6 +1,8 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 
+import store from './store';
 import Field from './components/Field';
 import OpponentHand from './components/OpponentHand';
 import PlayerHand from './components/PlayerHand';
@@ -19,11 +21,13 @@ const App = () => {
   useGlobalStyles();
 
   return (
-    <Background>
-      <OpponentHand />
-      <Field />
-      <PlayerHand />
-    </Background>
+    <Provider store={store}>
+      <Background>
+        <OpponentHand />
+        <Field />
+        <PlayerHand />
+      </Background>
+    </Provider>
   );
 };
 

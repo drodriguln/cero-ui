@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 
-import { CardColor } from '../Card/types';
+import { CardColor } from '../../store/types';
 
 type Props = {
   children?: React.ReactNode;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Slide } from '@material-ui/core';
 
-import { CardData } from '../Card/types';
+import { CardData } from '../../store/types';
 import Hand from '../Hand';
 
 const initialCards: CardData[] = [

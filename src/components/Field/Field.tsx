@@ -3,6 +3,7 @@ import { Fade, Grid, makeStyles } from '@material-ui/core';
 
 import Card from '../Card';
 import CardMat from '../CardMat';
+import Deck from './Deck';
 
 const useStyles = makeStyles({
   root: {
@@ -11,7 +12,8 @@ const useStyles = makeStyles({
     left: '50%',
     transform: 'translate(-50%, -50%)',
     maxWidth: 'calc(100% - 100px)',
-    padding: '20px 40px'
+    padding: '20px 40px',
+    overflow: 'visible'
   }
 });
 
@@ -25,7 +27,7 @@ const Hand = () => {
             <Card color='blue' value='0' size='lg' />
           </Grid>
           <Grid item>
-            <Card color='blue' value='0' size='lg' hidden />
+            <Deck />
           </Grid>
         </Grid>
       </Fade>

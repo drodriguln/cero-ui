@@ -2,7 +2,7 @@ import React from 'react';
 import { Fade, Grid, makeStyles } from '@material-ui/core';
 
 import Card from '../Card';
-import { CardData } from '../Card/types';
+import { CardData } from '../../store/types';
 import CardMat from '../CardMat';
 
 type HandType = 'player' | 'opponent';
@@ -31,7 +31,7 @@ const useStyles = makeStyles({
   }),
   card: {
     cursor: 'pointer',
-    transition: 'transform .3s ease-out',
+    transition: 'transform .2s ease-out',
     '&:hover': {
       transform: 'translate(0, -15%)'
     }

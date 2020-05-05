@@ -1,20 +1,13 @@
 import React from 'react';
 import { Slide } from '@material-ui/core';
 
-import { CardData } from '../Card/types';
 import Hand from '../Hand';
-
-const initialCards: CardData[] = [
-  { color: 'blue', value: '0' },
-  { color: 'green', value: '1' },
-  { color: 'red', value: '2' },
-  { color: 'yellow', value: '3' },
-  { color: 'blue', value: 'reverse' },
-  { color: 'green', value: 'skip' }
-];
+import { useSelector } from 'react-redux';
+import { selectPlayer } from '../../store/player/selector';
 
 const PlayerHand = () => {
-  const [cards] = React.useState(initialCards);
+  const { cards } = useSelector(selectPlayer)
+
   return (
     <Slide direction='left' in>
       <Hand cards={cards} type='player' />
