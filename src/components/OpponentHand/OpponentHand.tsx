@@ -16,7 +16,7 @@ const initialCards: CardData[] = [
 const OpponentHand = () => {
   const [cards] = React.useState(initialCards);
   return (
-    <Slide direction='right' in>
+    <Slide direction='right' in timeout={600}>
       <Hand cards={cards} type='opponent' />
     </Slide>
   );

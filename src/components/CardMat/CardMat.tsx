@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { Card as MuiCard, makeStyles } from '@material-ui/core';
 
 type Props = {
@@ -23,7 +24,7 @@ const useStyles = makeStyles({
 const CardMat = React.forwardRef(({ zIndex = 0, raised = false, className, children }: Props, ref) => {
   const classes = useStyles({ zIndex });
   return (
-    <MuiCard ref={ref} className={`${classes.root} ${className}`} raised={raised}>
+    <MuiCard ref={ref} className={classNames(classes.root, className)} raised={raised}>
       {children}
     </MuiCard>
   );

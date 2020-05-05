@@ -1,5 +1,6 @@
 import React from 'react';
-import { Fade, Grid, makeStyles } from '@material-ui/core';
+import classNames from 'classnames';
+import { Grid, makeStyles } from '@material-ui/core';
 
 import Card from '../Card';
 import { CardData } from '../../store/types';
@@ -30,30 +31,40 @@ const useStyles = makeStyles({
     zIndex: 1
   }),
   card: {
+    animation: '0.6s ease-out 0s 1 $onLoadSlideDown'
+  },
+  playerCard: {
     cursor: 'pointer',
     transition: 'transform .2s ease-out',
     '&:hover': {
-      transform: 'translate(0, -15%)'
+      transform: 'translateY(-15%)'
+    }
+  },
+  '@keyframes onLoadSlideDown': {
+    '0%': {
+      transform: 'translateY(-20%)'
+    },
+    '100%': {
+      transform: 'translateY(0)'
     }
   }
 });
 
 const Hand = React.forwardRef(({ cards, type }: Props, ref) => {
   const classes = useStyles({ type });
+  const className = classNames(classes.card, type === 'player' ? classes.playerCard : undefined);
   return (
     <CardMat ref={ref} className={classes.root} raised>
       <Grid container spacing={1} wrap='nowrap'>
         {cards.map(({ color, value }, index) => (
-          <Fade key={index} timeout={1500} in>
-            <Grid item>
-              <Card
-                color={color}
-                value={value}
-                hidden={type === 'opponent'}
-                className={type === 'player' ? classes.card : undefined}
-              />
-            </Grid>
-          </Fade>
+          <Grid key={index} item>
+            <Card
+              color={color}
+              value={value}
+              hidden={type === 'opponent'}
+              className={className}
+            />
+          </Grid>
         ))}
       </Grid>
     </CardMat>

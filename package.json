@@ -12,6 +12,7 @@
   "author": "Daniel A. Rodriguez",
   "dependencies": {
     "@material-ui/core": "^4.9.12",
+    "classnames": "^2.2.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
@@ -20,6 +21,7 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.10",
     "@types/react-dom": "^16.9.7",
     "@types/react-redux": "^7.1.8",
     "file-loader": "^6.0.0",

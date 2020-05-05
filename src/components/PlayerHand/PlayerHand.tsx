@@ -9,7 +9,7 @@ const PlayerHand = () => {
   const { cards } = useSelector(selectPlayer)
 
   return (
-    <Slide direction='left' in>
+    <Slide direction='left' in timeout={600}>
       <Hand cards={cards} type='player' />
     </Slide>
   );
