@@ -1,15 +1,8 @@
-import { Action, CardData } from '../types';
+import { Action } from '../types';
 import { DeckAction } from './actions';
+import initialState from './initialState';
 
 export type DeckStore = typeof initialState;
-const initialState: CardData[] = [
-  { color: 'blue', value: '0' },
-  { color: 'green', value: '1' },
-  { color: 'red', value: '2' },
-  { color: 'yellow', value: '3' },
-  { color: 'blue', value: 'reverse' },
-  { color: 'green', value: 'skip' }
-];
 
 const deckReducer = (state = initialState, action: Action) => {
   switch (action.type) {

@@ -22,14 +22,14 @@ const Deck = () => {
   const deck = useSelector(selectDeck)
   const classes = useStyles();
 
-  const draw = () => {
+  const drawCard = () => {
     const [ topCard ] = deck?.slice(-1);
     if (topCard === undefined) return;
     dispatch(removeDeckCard)
     dispatch(addPlayerCard(topCard))
   }
 
-  return <Card color='blue' value='0' size='lg' hidden className={classes.root} onClick={draw} />;
+  return <Card color='blue' value='0' size='lg' hidden className={classes.root} onClick={drawCard} />;
 };
 
 export default Deck;
