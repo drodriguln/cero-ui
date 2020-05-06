@@ -1,9 +1,9 @@
 import React from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
 
-import Card from '../Card';
 import CardMat from '../CardMat';
 import Deck from './Deck';
+import Discard from './Discard';
 
 const useStyles = makeStyles({
   root: {
@@ -28,11 +28,12 @@ const useStyles = makeStyles({
 
 const Hand = () => {
   const classes = useStyles();
+
   return (
     <CardMat className={classes.root}>
       <Grid container spacing={8} wrap='nowrap'>
         <Grid item>
-          <Card color='blue' value='0' size='lg' />
+          <Discard />
         </Grid>
         <Grid item>
           <Deck />

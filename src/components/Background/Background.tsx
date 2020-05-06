@@ -2,6 +2,12 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core';
 
 import { CardColor } from '../../store/types';
+import { useSelector } from 'react-redux';
+import { selectDiscard } from '../../store/discard/selector';
+
+type BackgroundColorMap = {
+  [keys in CardColor]: string;
+}
 
 type Props = {
   children?: React.ReactNode;
@@ -9,27 +15,24 @@ type Props = {
 
 type GlobalStyleProps = {
   backgroundColor: {
-    previous: CardColor,
-    current: CardColor;
+    previous: string,
+    current: string;
   };
 }
 
 const useStyles = makeStyles({
-  root: ({backgroundColor}: GlobalStyleProps) => ({
+  root: ({ backgroundColor }: GlobalStyleProps) => ({
     position: 'absolute',
     height: '100%',
     width: '100%',
-    backgroundImage: `radial-gradient(
-      ${backgroundColorMap[backgroundColor.current]} 50%,
-      ${backgroundColorMap[backgroundColor.previous]}
-    )`,
+    backgroundImage: `radial-gradient(${backgroundColor.current} 50%, ${backgroundColor.previous})`,
     minHeight: '100%',
     backgroundRepeat: 'no-repeat',
     backgroundAttachment: 'fixed',
   })
 });
 
-const backgroundColorMap = {
+const backgroundColorMap: BackgroundColorMap = {
   blue: 'rgb(145, 179, 236)',
   green: 'rgb(150, 236, 145)',
   red: 'rgb(236, 151, 145)',
@@ -37,27 +40,17 @@ const backgroundColorMap = {
 }
 
 const Background = ({ children }: Props) => {
-  /*
-  const [backgroundColor, setBackgroundColor] = React.useState({
-    previous: 'green' as CardColor,
-    current: 'blue' as CardColor,
-  });
-   */
-
+  const discard = useSelector(selectDiscard);
+  const previousCard = discard?.length > 1 ? discard[discard.length - 2] : undefined;
+  const currentCard = discard?.length > 0 ? discard[discard.length - 1] : undefined;
+  const previousColor = previousCard !== undefined ? backgroundColorMap[previousCard.color] : 'rgb(192, 192, 192)';
+  const currentColor = currentCard !== undefined ? backgroundColorMap[currentCard.color] : 'rgb(192, 192, 192)';
   const classes = useStyles({
     backgroundColor: {
-      previous: 'green' as CardColor,
-      current: 'blue' as CardColor,
+      previous: previousColor,
+      current: currentColor
     }
   });
-
-  /*
-  const onChangeBackground = () => {
-    const newColor = backgroundColor.current === 'green' ? 'blue' : 'green';
-    setBackgroundColor({ previous: backgroundColor.current, current: newColor });
-    console.log(backgroundColorMap[backgroundColor.previous], backgroundColorMap[backgroundColor.current])
-  }
-   */
 
   return (
     <div className={classes.root}>

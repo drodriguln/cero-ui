@@ -4,8 +4,8 @@ import { makeStyles } from '@material-ui/core';
 
 import store from './store';
 import Field from './components/Field';
-import OpponentHand from './components/OpponentHand';
-import PlayerHand from './components/PlayerHand';
+import Opponent from './components/Opponent';
+import Player from './components/Player';
 import Background from './components/Background';
 
 const useGlobalStyles = makeStyles({
@@ -23,9 +23,9 @@ const App = () => {
   return (
     <Provider store={store}>
       <Background>
-        <OpponentHand />
+        <Opponent />
         <Field />
-        <PlayerHand />
+        <Player />
       </Background>
     </Provider>
   );
