@@ -39,10 +39,8 @@ const Player = () => {
   const classes = useStyles();
 
   const placeCard = (card: CeroCard) => {
-    const [ topCard ] = cards?.slice(-1);
-    if (topCard === undefined) return;
-    dispatch(removeCard(card))
     dispatch(addDispatchCard(card))
+    dispatch(removeCard(card))
   }
 
   return (

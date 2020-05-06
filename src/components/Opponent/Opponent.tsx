@@ -29,8 +29,9 @@ const initialCards: CeroCard[] = [
   { id: 201, color: 'green', value: '1' },
   { id: 202, color: 'red', value: '2' },
   { id: 203, color: 'yellow', value: '3' },
-  { id: 204, color: 'blue', value: 'reverse' },
-  { id: 205, color: 'green', value: 'skip' }
+  { id: 204, color: 'blue', value: '4' },
+  { id: 205, color: 'green', value: 'reverse' },
+  { id: 206, color: 'red', value: 'skip' }
 ];
 
 const Opponent = () => {

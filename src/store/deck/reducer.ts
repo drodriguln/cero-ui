@@ -7,7 +7,12 @@ export type DeckStore = typeof initialState;
 const deckReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case DeckAction.REMOVE_CARD:
-      return [ ...state.slice(0, -1) ];
+      return state.slice(0, -1);
+    case DeckAction.REMOVE_CARDS:
+      if (state.length < action.payload) {
+        throw Error(`Cannot remove ${action.payload} items from state when only ${state.length} exist.`);
+      }
+      return state.slice(0, -1 * action.payload);
     default:
       return state;
   }

@@ -2,25 +2,24 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Card from '../../Card';
-import { selectTopCard } from '../../../store/discard/selector';
-import { selectDeck } from '../../../store/deck/selector';
+import { selectTopCard as selectDiscardTopCard } from '../../../store/discard/selector';
+import { selectTopCard as selectDeckTopCard } from '../../../store/deck/selector';
 import { removeCard as removeDeckCard } from '../../../store/deck/actions';
 import { addCard } from '../../../store/discard/actions';
 
 const Discard = () => {
   const dispatch = useDispatch();
-  const card = useSelector(selectTopCard);
-  const deck = useSelector(selectDeck)
+  const discardCard = useSelector(selectDiscardTopCard);
+  const deckCard = useSelector(selectDeckTopCard)
 
   React.useEffect(() => {
-    const [ topDeckCard ] = deck?.slice(-1);
-    if (topDeckCard === undefined) return;
+    if (deckCard === undefined) return;
+    dispatch(addCard(deckCard))
     dispatch(removeDeckCard)
-    dispatch(addCard(topDeckCard))
   }, [])
 
-  return card !== undefined
-    ? <Card color={card.color} value={card.value} size='lg' />
+  return discardCard !== undefined
+    ? <Card color={discardCard.color} value={discardCard.value} size='lg' />
     : null;
 };
 

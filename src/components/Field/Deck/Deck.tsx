@@ -2,10 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 
-import { selectDeck } from '../../../store/deck/selector';
+import { selectDeck, selectTopCard } from '../../../store/deck/selector';
 import Card from '../../Card';
-import { removeCard as removeDeckCard} from '../../../store/deck/actions';
-import { addCard as addPlayerCard } from '../../../store/player/actions';
+import { removeCard as removeDeckCard, removeCards as removeDeckCards } from '../../../store/deck/actions';
+import { addCard as addPlayerCard, addCards as addPlayerCards } from '../../../store/player/actions';
 
 const useStyles = makeStyles({
   root: {
@@ -19,15 +19,21 @@ const useStyles = makeStyles({
 
 const Deck = () => {
   const dispatch = useDispatch();
-  const deck = useSelector(selectDeck)
+  const deck = useSelector(selectDeck);
+  const topCard = useSelector(selectTopCard)
   const classes = useStyles();
 
   const drawCard = () => {
-    const [ topCard ] = deck?.slice(-1);
     if (topCard === undefined) return;
+    dispatch(addPlayerCard(Object.assign({}, topCard)))
     dispatch(removeDeckCard)
-    dispatch(addPlayerCard(topCard))
   }
+
+  React.useEffect(() => {
+    if (deck?.length < 8) return;
+    dispatch(addPlayerCards(deck.slice(deck.length - 8, deck.length - 1)));
+    dispatch(removeDeckCards(7));
+  }, []);
 
   return <Card color='blue' value='0' size='lg' hidden className={classes.root} onClick={drawCard} />;
 };
