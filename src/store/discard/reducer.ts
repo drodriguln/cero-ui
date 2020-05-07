@@ -1,8 +1,8 @@
-import { Action, CeroCard } from '../types';
+import { Action, CardData } from '../types';
 import { DiscardAction } from './actions';
 
 export type DiscardStore = typeof initialState;
-const initialState = [] as CeroCard[];
+const initialState = [] as CardData[];
 
 const discardReducer = (state = initialState, action: Action) => {
   switch (action.type) {

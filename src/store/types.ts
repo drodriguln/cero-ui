@@ -11,7 +11,7 @@ export type CardDimensions = {
   height: number;
   width: number;
 }
-export type CeroCard = {
+export type CardData = {
   id: number;
   color: CardColor;
   value: CardValue;

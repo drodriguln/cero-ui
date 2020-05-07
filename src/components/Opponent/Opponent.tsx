@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, makeStyles, Slide } from '@material-ui/core';
 
-import { CeroCard } from '../../store/types';
+import { CardData } from '../../store/types';
 import Card from '../Card';
 import Hand from '../Hand';
 
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   }
 });
 
-const initialCards: CeroCard[] = [
+const initialCards: CardData[] = [
   { id: 200, color: 'blue', value: '0' },
   { id: 201, color: 'green', value: '1' },
   { id: 202, color: 'red', value: '2' },

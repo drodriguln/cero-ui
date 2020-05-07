@@ -3,5 +3,5 @@ export enum DeckAction {
   REMOVE_CARDS = 'DECK_REMOVE_CARDS'
 }
 
-export const removeCard = { type: DeckAction.REMOVE_CARD };
-export const removeCards = (count: number) => ({ type: DeckAction.REMOVE_CARDS, payload: count });
+export const removeDeckCard = { type: DeckAction.REMOVE_CARD };
+export const removeDeckCards = (count: number) => ({ type: DeckAction.REMOVE_CARDS, payload: count });

@@ -1,4 +1,4 @@
-import { CeroCard } from '../types';
+import { CardData } from '../types';
 
 export enum PlayerAction {
   ADD_CARD = 'PLAYER_ADD_CARD',
@@ -6,6 +6,6 @@ export enum PlayerAction {
   REMOVE_CARD = 'PLAYER_REMOVE_CARD'
 }
 
-export const addCard = (payload: CeroCard) => ({ type: PlayerAction.ADD_CARD, payload: payload });
-export const addCards = (payload: CeroCard[]) => ({ type: PlayerAction.ADD_CARDS, payload: payload });
-export const removeCard = (payload: CeroCard) => ({ type: PlayerAction.REMOVE_CARD, payload: payload });
+export const addPlayerCard = (card: CardData) => ({ type: PlayerAction.ADD_CARD, payload: card });
+export const addPlayerCards = (cards: CardData[]) => ({ type: PlayerAction.ADD_CARDS, payload: cards });
+export const removePlayerCard = (id: number) => ({ type: PlayerAction.REMOVE_CARD, payload: id });

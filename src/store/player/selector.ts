@@ -1,3 +1,3 @@
 import { Store } from '../types';
 
-export const selectPlayer = (state: Store) => state.player;
+export const playerSelector = (state: Store) => state.player;

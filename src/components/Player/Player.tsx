@@ -2,12 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid, makeStyles, Slide } from '@material-ui/core';
 
-import { selectPlayer } from '../../store/player/selector';
+import { playerSelector } from '../../store/player/selector';
 import Card from '../Card';
 import Hand from '../Hand';
-import { CeroCard } from '../../store/types';
-import { removeCard } from '../../store/player/actions';
-import { addCard as addDispatchCard } from '../../store/discard/actions';
+import { CardData } from '../../store/types';
+import { removePlayerCard } from '../../store/player/actions';
+import { addDiscardCard } from '../../store/discard/actions';
 
 const useStyles = makeStyles({
   root: {
@@ -35,12 +35,12 @@ const useStyles = makeStyles({
 
 const Player = () => {
   const dispatch = useDispatch();
-  const { cards } = useSelector(selectPlayer)
+  const { cards } = useSelector(playerSelector)
   const classes = useStyles();
 
-  const placeCard = (card: CeroCard) => {
-    dispatch(addDispatchCard(card))
-    dispatch(removeCard(card))
+  const placeCard = (card: CardData) => {
+    dispatch(addDiscardCard(card))
+    dispatch(removePlayerCard(card.id))
   }
 
   return (
