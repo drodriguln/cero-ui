@@ -11,8 +11,8 @@ type Props = {
 
 type StyleProps = {
   backgroundColor: {
-    previous: string,
     current: string;
+    previous: string;
   };
 }
 
@@ -21,10 +21,10 @@ const useStyles = makeStyles({
     position: 'absolute',
     height: '100%',
     width: '100%',
-    backgroundImage: `radial-gradient(${backgroundColor.current} 50%, ${backgroundColor.previous})`,
+    backgroundImage: `radial-gradient(${backgroundColor.current} 10%, ${backgroundColor.previous})`,
     minHeight: '100%',
     backgroundRepeat: 'no-repeat',
-    backgroundAttachment: 'fixed',
+    backgroundAttachment: 'fixed'
   })
 });
 
@@ -39,18 +39,16 @@ const backgroundColorMap = {
 const createBackgroundColor = (currentCard?: CardData, previousCard?: CardData) => {
   const currentColor = backgroundColorMap[currentCard?.color ?? 'gray'];
   const previousColor = backgroundColorMap[previousCard?.color ?? 'gray'];
-  return {
-    previous: previousColor,
-    current: currentColor
-  };
+  return { current: currentColor, previous: previousColor };
 };
 
 const Background = ({ children }: Props) => {
   const discard = useSelector(discardSelector);
   const currentCard = useSelector(discardTopCardSelector);
   const previousCard = discard?.length > 1 ? discard[discard.length - 2] : undefined;
-  const backgroundColor = createBackgroundColor(currentCard, previousCard)
-  const classes = useStyles({ backgroundColor });
+  const classes = useStyles({
+    backgroundColor: createBackgroundColor(currentCard, previousCard)
+  });
 
   return (
     <div className={classes.root}>

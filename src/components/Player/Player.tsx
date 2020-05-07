@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   card: {
     cursor: 'pointer',
     animation: '0.6s ease-out 0s 1 $onLoadSlideDown',
-    transition: 'transform .2s ease-out',
+    transition: 'transform .1s ease-out',
     '&:hover': {
       transform: 'translateY(-15%)'
     }
