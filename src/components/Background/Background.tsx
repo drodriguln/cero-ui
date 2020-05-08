@@ -31,7 +31,7 @@ const useStyles = makeStyles({
 const backgroundColorMap = {
   blue: 'rgb(145, 179, 236)',
   green: 'rgb(150, 236, 145)',
-  red: 'rgb(236, 151, 145)',
+  red: 'rgb(255, 185, 185)',
   yellow: 'rgb(244, 243, 184)',
   gray: 'rgb(192, 192, 192)'
 }

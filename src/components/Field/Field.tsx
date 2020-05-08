@@ -14,11 +14,11 @@ const useStyles = makeStyles({
     maxWidth: 'calc(100% - 100px)',
     padding: '20px 40px',
     overflow: 'visible',
-    animation: '0.6s ease-out 0s 1 $onLoadZoom',
+    animation: '0.5s ease-out 0s 1 $onLoadZoom',
   },
   '@keyframes onLoadZoom': {
     '0%': {
-      transform: 'translate(-50%, -50%) scale(1.35)'
+      transform: 'translate(-50%, -50%) scale(1.25)'
     },
     '100%': {
       transform: 'translate(-50%, -50%) scale(1)'

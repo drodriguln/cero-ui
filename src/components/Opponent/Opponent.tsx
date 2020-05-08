@@ -1,41 +1,21 @@
 import React from 'react';
-import { Grid, makeStyles, Slide } from '@material-ui/core';
+import { Grid, Grow, makeStyles, Slide } from '@material-ui/core';
 
-import { CardData } from '../../store/types';
 import Card from '../Card';
 import Hand from '../Hand';
+import { useSelector } from 'react-redux';
+import { opponentSelector } from '../../store/opponent/selector';
 
 const useStyles = makeStyles({
   root: {
     position: 'absolute',
     top: 0,
     left: 0
-  },
-  card: {
-    animation: '0.6s ease-out 0s 1 $onLoadSlideDown'
-  },
-  '@keyframes onLoadSlideDown': {
-    '0%': {
-      transform: 'translateY(-20%)'
-    },
-    '100%': {
-      transform: 'translateY(0)'
-    }
   }
 });
 
-const initialCards: CardData[] = [
-  { id: 200, color: 'blue', value: '0' },
-  { id: 201, color: 'green', value: '1' },
-  { id: 202, color: 'red', value: '2' },
-  { id: 203, color: 'yellow', value: '3' },
-  { id: 204, color: 'blue', value: '4' },
-  { id: 205, color: 'green', value: 'reverse' },
-  { id: 206, color: 'red', value: 'skip' }
-];
-
 const Opponent = () => {
-  const [cards] = React.useState(initialCards);
+  const { cards } = useSelector(opponentSelector)
   const classes = useStyles();
 
   return (
@@ -44,12 +24,9 @@ const Opponent = () => {
         <Grid container spacing={1} wrap='nowrap'>
           {cards.map(({ id, color, value }) => (
             <Grid key={id} item>
-              <Card
-                color={color}
-                value={value}
-                className={classes.card}
-                hidden
-              />
+              <Grow in timeout={500}>
+                <Card color={color} value={value} hidden />
+              </Grow>
             </Grid>
           ))}
         </Grid>

@@ -6,6 +6,7 @@ import { deckSelector, deckTopCardSelector } from '../../../store/deck/selector'
 import Card from '../../Card';
 import { removeDeckCard, removeDeckCards } from '../../../store/deck/actions';
 import { addPlayerCard, addPlayerCards } from '../../../store/player/actions';
+import { addOpponentCards } from '../../../store/opponent/actions';
 
 const useStyles = makeStyles({
   root: {
@@ -32,10 +33,11 @@ const Deck = () => {
   React.useEffect(() => {
     if (deck?.length < 8) return;
     dispatch(addPlayerCards(deck.slice(deck.length - 8, deck.length - 1)));
-    dispatch(removeDeckCards(7));
+    dispatch(addOpponentCards(deck.slice(deck.length - 16, deck.length - 9)));
+    dispatch(removeDeckCards(14));
   }, []);
 
-  return <Card color='blue' value='0' size='lg' hidden className={classes.root} onClick={drawCard} />;
+  return <Card.Empty size='lg' className={classes.root} onClick={drawCard} />;
 };
 
 export default Deck;

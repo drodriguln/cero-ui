@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     margin: 10,
     maxWidth: 'calc(100% - 40px)', // strip margin and padding
     overflow: 'visible',
-    backgroundColor: 'rgba(255, 255, 255, 0.40)',
+    backgroundColor: 'rgba(40, 40, 40, 0.2)',
     zIndex: 1
   }
 });
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 const Hand = React.forwardRef(({ className, children }: Props, ref) => {
   const classes = useStyles();
   return (
-    <CardMat ref={ref} className={classNames(classes.root, className)} raised>
+    <CardMat ref={ref} className={classNames(classes.root, className)}>
       {children}
     </CardMat>
   );

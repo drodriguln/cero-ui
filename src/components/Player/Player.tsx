@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Grid, makeStyles, Slide } from '@material-ui/core';
+import { Grid, Grow, makeStyles, Slide } from '@material-ui/core';
 
 import { playerSelector } from '../../store/player/selector';
 import Card from '../Card';
@@ -17,18 +17,9 @@ const useStyles = makeStyles({
   },
   card: {
     cursor: 'pointer',
-    animation: '0.6s ease-out 0s 1 $onLoadSlideDown',
     transition: 'transform .1s ease-out',
     '&:hover': {
       transform: 'translateY(-15%)'
-    }
-  },
-  '@keyframes onLoadSlideDown': {
-    '0%': {
-      transform: 'translateY(-20%)'
-    },
-    '100%': {
-      transform: 'translateY(0)'
     }
   }
 });
@@ -49,12 +40,14 @@ const Player = () => {
         <Grid container spacing={1} wrap='nowrap'>
           {cards.map((card) => (
             <Grid key={card.id} item>
-              <Card
-                color={card.color}
-                value={card.value}
-                className={classes.card}
-                onClick={() => placeCard(card)}
-              />
+              <Grow in timeout={500}>
+                <Card
+                  color={card.color}
+                  value={card.value}
+                  className={classes.card}
+                  onClick={() => placeCard(card)}
+                />
+              </Grow>
             </Grid>
           ))}
         </Grid>
