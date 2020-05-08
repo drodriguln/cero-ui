@@ -24,7 +24,7 @@ const Opponent = () => {
         <Grid container spacing={1} wrap='nowrap'>
           {cards.map(({ id, color, value }) => (
             <Grid key={id} item>
-              <Grow in timeout={500}>
+              <Grow in timeout={400}>
                 <Card color={color} value={value} hidden />
               </Grow>
             </Grid>

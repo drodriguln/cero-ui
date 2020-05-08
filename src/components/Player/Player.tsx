@@ -39,12 +39,11 @@ const Player = () => {
       <Hand className={classes.root}>
         <Grid container spacing={1} wrap='nowrap'>
           {cards.map((card) => (
-            <Grid key={card.id} item>
-              <Grow in timeout={500}>
+            <Grid key={card.id} item className={classes.card}>
+              <Grow in timeout={400}>
                 <Card
                   color={card.color}
                   value={card.value}
-                  className={classes.card}
                   onClick={() => placeCard(card)}
                 />
               </Grow>

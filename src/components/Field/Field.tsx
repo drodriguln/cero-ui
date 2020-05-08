@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
   '@keyframes onLoadZoom': {
     '0%': {
-      transform: 'translate(-50%, -50%) scale(1.25)'
+      transform: 'translate(-50%, -50%) scale(1.3)'
     },
     '100%': {
       transform: 'translate(-50%, -50%) scale(1)'
