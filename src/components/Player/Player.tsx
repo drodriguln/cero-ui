@@ -38,7 +38,7 @@ const Player = () => {
   const dispatch = useDispatch();
   const { cards } = useSelector(playerSelector)
   const classes = useStyles();
-  const hasWon = cards?.length === 0;
+  const hasCards = cards?.length === 0;
 
   const placeCard = (card: CardData) => {
     dispatch(addDiscardCard(card))
@@ -46,7 +46,7 @@ const Player = () => {
   }
 
   return (
-    <Slide direction='up' timeout={600} in={!hasWon} exit={!hasWon}>
+    <Slide direction='up' timeout={600} in={!hasCards} exit={!hasCards}>
       <Hand className={classes.root}>
         <Grid container spacing={1} wrap='nowrap'>
           {cards.map((card) => (
