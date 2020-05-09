@@ -21,6 +21,16 @@ const useStyles = makeStyles({
     '&:hover': {
       transform: 'translateY(-15%)'
     }
+  },
+  winMessage: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 200,
+    color: 'yellow'
   }
 });
 
@@ -28,6 +38,7 @@ const Player = () => {
   const dispatch = useDispatch();
   const { cards } = useSelector(playerSelector)
   const classes = useStyles();
+  const hasWon = cards?.length === 0;
 
   const placeCard = (card: CardData) => {
     dispatch(addDiscardCard(card))
@@ -35,12 +46,12 @@ const Player = () => {
   }
 
   return (
-    <Slide direction='left' timeout={600} in>
+    <Slide direction='up' timeout={600} in={!hasWon} exit={!hasWon}>
       <Hand className={classes.root}>
         <Grid container spacing={1} wrap='nowrap'>
           {cards.map((card) => (
             <Grid key={card.id} item className={classes.card}>
-              <Grow in timeout={400}>
+              <Grow timeout={400} in>
                 <Card
                   color={card.color}
                   value={card.value}

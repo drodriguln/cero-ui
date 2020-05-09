@@ -17,14 +17,15 @@ const useStyles = makeStyles({
 const Opponent = () => {
   const { cards } = useSelector(opponentSelector)
   const classes = useStyles();
+  const hasWon = cards?.length === 0;
 
   return (
-    <Slide direction='right' timeout={600} in>
+    <Slide direction='down' timeout={600} in={!hasWon}>
       <Hand className={classes.root}>
         <Grid container spacing={1} wrap='nowrap'>
           {cards.map(({ id, color, value }) => (
             <Grid key={id} item>
-              <Grow in timeout={400}>
+              <Grow timeout={400} in>
                 <Card color={color} value={value} hidden />
               </Grow>
             </Grid>
