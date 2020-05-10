@@ -16,7 +16,6 @@ type StyleProps = {
 const useStyles = makeStyles({
   root: ({ zIndex }: StyleProps) => ({
     backgroundColor: 'rgba(40, 40, 40, 0.2)',
-    padding: 10,
     zIndex: zIndex
   })
 });
