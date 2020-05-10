@@ -31,6 +31,7 @@ const useStyles = makeStyles({
     transform: 'scale(4)',
   },
   children: {
+    overflowX: 'auto',
     width: 760,
     flex: 1
   }

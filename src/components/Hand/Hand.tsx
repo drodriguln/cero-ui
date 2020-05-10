@@ -17,8 +17,7 @@ type Props = {
 const useStyles = makeStyles({
   root: {
     margin: 10,
-    maxWidth: 'calc(100% - 40px)', // strip margin and padding
-    overflow: 'visible',
+    maxWidth: 'calc(100% - 20px)', // strip margin and padding
     backgroundColor: 'rgba(40, 40, 40, 0.2)',
     zIndex: 1
   },
@@ -29,7 +28,7 @@ const useStyles = makeStyles({
     cursor: 'pointer',
     transition: 'transform .1s ease-out',
     '&:hover': {
-      transform: 'translateY(-15%)'
+      transform: 'translateY(-5%)'
     }
   },
 });
