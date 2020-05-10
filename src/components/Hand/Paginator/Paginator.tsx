@@ -13,9 +13,8 @@ const useStyles = makeStyles({
     display: 'flex'
   },
   button: {
-    flex: '0 0 30px',
-    minWidth: '30px',
-    width: '30px',
+    flex: '0 0 40px',
+    minWidth: '40px',
     borderRadius: 0,
     color: 'white'
   },
