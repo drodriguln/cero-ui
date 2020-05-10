@@ -1,6 +1,7 @@
 import React from 'react';
 
 import backImageSrc from './assets/img/back.png';
+import drawImageSrc from './assets/img/draw.png';
 import { imageMap, sizeMap } from './maps';
 import { CardColor, CardSize, CardValue } from '../../store/types';
 
@@ -32,9 +33,9 @@ const Card = (props: Props) => {
   return <img alt={title} src={src} height={height} width={width} {...otherProps} />;
 };
 
-Card.Empty = ({title = 'Hidden', size = 'md', ...otherProps}: EmptyCardProps) => {
+Card.Draw = ({title = 'Draw', size = 'md', ...otherProps}: EmptyCardProps) => {
   const { height, width } = sizeMap[size];
-  return <img alt={title} height={height} width={width} src={backImageSrc} {...otherProps} />;
+  return <img alt={title} height={height} width={width} src={drawImageSrc} {...otherProps} />;
 };
 
 export default Card;

@@ -37,7 +37,7 @@ const Deck = () => {
     dispatch(removeDeckCards(14));
   }, []);
 
-  return <Card.Empty size='lg' className={classes.root} onClick={drawCard} />;
+  return <Card.Draw size='lg' className={classes.root} onClick={drawCard} />;
 };
 
 export default Deck;
