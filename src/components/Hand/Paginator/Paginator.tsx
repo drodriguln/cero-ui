@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { Button, makeStyles } from '@material-ui/core';
 
 type Props = {
@@ -15,8 +16,16 @@ const useStyles = makeStyles({
   button: {
     flex: '0 0 40px',
     minWidth: '40px',
-    borderRadius: 0,
-    color: 'white'
+    color: 'white',
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.25)'
+    }
+  },
+  buttonLeft: {
+    borderRadius: '4px 0 0 4px'
+  },
+  buttonRight: {
+    borderRadius: '0 4px 4px 0'
   },
   buttonLabel: {
     transform: 'scale(4)',
@@ -32,7 +41,7 @@ const Paginator = ({ page, lastPage, onChange, children }: Props) => {
   return (
     <div className={classes.root}>
       <Button
-        classes={{root: classes.button, label: classes.buttonLabel}}
+        classes={{root: classNames(classes.button, classes.buttonLeft), label: classes.buttonLabel}}
         onClick={() => onChange(page - 1)}
         disabled={page === 1}
       >
@@ -42,7 +51,7 @@ const Paginator = ({ page, lastPage, onChange, children }: Props) => {
         {children}
       </div>
       <Button
-        classes={{root: classes.button, label: classes.buttonLabel}}
+        classes={{root: classNames(classes.button, classes.buttonRight), label: classes.buttonLabel}}
         onClick={() => onChange(page + 1)}
         disabled={page === lastPage}
       >
