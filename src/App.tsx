@@ -22,11 +22,12 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <Background>
+      <>
+        <Background />
         <Opponent />
         <Field />
         <Player />
-      </Background>
+      </>
     </Provider>
   );
 };
