@@ -6,6 +6,8 @@ export type DeckStore = typeof initialState;
 
 const deckReducer = (state = initialState, action: Action) => {
   switch (action.type) {
+    case DeckAction.ADD_CARDS:
+      return [ ...action.payload, ...state ];
     case DeckAction.REMOVE_CARD:
       return state.slice(0, -1);
     case DeckAction.REMOVE_CARDS:
