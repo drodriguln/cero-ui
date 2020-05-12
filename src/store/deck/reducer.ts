@@ -14,7 +14,7 @@ const deckReducer = (state = initialState, action: Action) => {
       if (state.length < action.payload) {
         throw Error(`Cannot remove ${action.payload} items from state when only ${state.length} exist.`);
       }
-      return state.slice(0, -1 * action.payload);
+      return state.slice(0, -1 * (action.payload + 1));
     default:
       return state;
   }
