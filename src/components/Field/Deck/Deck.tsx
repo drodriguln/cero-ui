@@ -25,12 +25,12 @@ const Deck = () => {
   const dispatch = useDispatch();
   const deck = useSelector(deckSelector);
   const discard = useSelector(discardSelector);
-  const deckTopCard = useSelector(deckTopCardSelector)
+  const topDeckCard = useSelector(deckTopCardSelector)
   const classes = useStyles();
 
   const drawCard = () => {
-    if (deckTopCard === undefined) return;
-    dispatch(addPlayerCard(deckTopCard))
+    if (topDeckCard === undefined) return;
+    dispatch(addPlayerCard(topDeckCard))
     dispatch(removeDeckCard)
   }
 

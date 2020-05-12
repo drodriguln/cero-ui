@@ -3,7 +3,8 @@ import { OpponentAction } from './actions';
 
 export type OpponentStore = typeof initialState;
 const initialState = {
-  cards: [] as CardData[]
+  cards: [] as CardData[],
+  isActive: false
 };
 
 const opponentReducer = (state = initialState, action: Action) => {
@@ -13,7 +14,9 @@ const opponentReducer = (state = initialState, action: Action) => {
     case OpponentAction.ADD_CARDS:
       return { ...state, cards: [ ...state.cards, ...action.payload ] };
     case OpponentAction.REMOVE_CARD:
-      return { ...state, cards: [  ...state.cards.filter((card) => card.id !== action.payload) ] };
+      return { ...state, cards: [ ...state.cards.filter((card) => card.id !== action.payload) ] };
+    case OpponentAction.SET_ACTIVITY:
+      return { ...state, isActive: action.payload };
     default:
       return state;
   }

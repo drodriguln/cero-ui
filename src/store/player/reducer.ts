@@ -3,7 +3,8 @@ import { PlayerAction } from './actions';
 
 export type PlayerStore = typeof initialState;
 const initialState = {
-  cards: [] as CardData[]
+  cards: [] as CardData[],
+  isActive: true
 };
 
 const playerReducer = (state = initialState, action: Action) => {
@@ -14,6 +15,8 @@ const playerReducer = (state = initialState, action: Action) => {
       return { ...state, cards: [ ...state.cards, ...action.payload ] };
     case PlayerAction.REMOVE_CARD:
       return { ...state, cards: [  ...state.cards.filter((card) => card.id !== action.payload) ] };
+    case PlayerAction.SET_ACTIVITY:
+      return { ...state, isActive: action.payload };
     default:
       return state;
   }
