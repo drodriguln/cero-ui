@@ -10,7 +10,7 @@ const backgroundColorMap = {
   green: 'rgb(150, 236, 145)',
   red: 'rgb(255, 185, 185)',
   yellow: 'rgb(244, 243, 184)',
-  gray: 'rgb(192, 192, 192)'
+  gray: 'rgb(212, 212, 212)'
 }
 
 const createBackgroundColor = (previousCard?: CardData, currentCard?: CardData) => {

@@ -43,7 +43,7 @@ const Opponent = () => {
       }, 1000);
     }
 
-  }, [isActive]);
+  }, [isActive, topDeckCard]); // i.e. topDeckCard = opponent drew from f
 
   const drawCard = () => {
     if (topDeckCard === undefined) return;
