@@ -43,7 +43,7 @@ const Opponent = () => {
       }, 1000);
     }
 
-  }, [isActive, topDeckCard]); // i.e. topDeckCard = opponent drew from f
+  }, [isActive, topDeckCard]); // i.e. topDeckCard changes == opponent draws from deck
 
   const drawCard = () => {
     if (topDeckCard === undefined) return;
