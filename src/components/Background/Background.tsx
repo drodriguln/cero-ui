@@ -1,32 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
 
 import { CardData } from '../../store/types';
 import { useSelector } from 'react-redux';
 import { discardSelector, discardTopCardSelector } from '../../store/discard/selector';
-
-type Props = {
-  children?: React.ReactNode;
-}
-
-type StyleProps = {
-  backgroundColor: {
-    current: string;
-    previous: string;
-  };
-}
-
-const useStyles = makeStyles({
-  root: ({ backgroundColor }: StyleProps) => ({
-    position: 'absolute',
-    height: '100%',
-    width: '100%',
-    backgroundImage: `radial-gradient(${backgroundColor.current} 10%, ${backgroundColor.previous})`,
-    minHeight: '100%',
-    backgroundRepeat: 'no-repeat',
-    backgroundAttachment: 'fixed'
-  })
-});
+import useStyles from './styles';
 
 const backgroundColorMap = {
   blue: 'rgb(145, 179, 236)',
@@ -36,23 +13,23 @@ const backgroundColorMap = {
   gray: 'rgb(192, 192, 192)'
 }
 
-const createBackgroundColor = (currentCard?: CardData, previousCard?: CardData) => {
-  const currentColor = backgroundColorMap[currentCard?.color ?? 'gray'];
+const createBackgroundColor = (previousCard?: CardData, currentCard?: CardData) => {
   const previousColor = backgroundColorMap[previousCard?.color ?? 'gray'];
-  return { current: currentColor, previous: previousColor };
+  const currentColor = backgroundColorMap[currentCard?.color ?? 'gray'];
+  return { previous: previousColor, current: currentColor };
 };
 
-const Background = ({ children }: Props) => {
+const Background = () => {
   const discard = useSelector(discardSelector);
   const currentCard = useSelector(discardTopCardSelector);
   const previousCard = discard?.length > 1 ? discard[discard.length - 2] : undefined;
-  const classes = useStyles({
-    backgroundColor: createBackgroundColor(currentCard, previousCard)
-  });
+  const backgroundColor = createBackgroundColor(previousCard, currentCard);
+  const classes = useStyles(backgroundColor.previous, backgroundColor.current)();
 
   return (
-    <div className={classes.root}>
-      {children}
+    <div>
+      <div className={classes.previousImage} />
+      <div className={classes.currentImage} />
     </div>
   );
 };
