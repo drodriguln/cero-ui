@@ -1,4 +1,4 @@
-import { CardData } from '../types';
+import { Activity, CardData } from '../types';
 
 export enum PlayerAction {
   ADD_CARD = 'PLAYER_ADD_CARD',
@@ -10,4 +10,4 @@ export enum PlayerAction {
 export const addPlayerCard = (card: CardData) => ({ type: PlayerAction.ADD_CARD, payload: card });
 export const addPlayerCards = (cards: CardData[]) => ({ type: PlayerAction.ADD_CARDS, payload: cards });
 export const removePlayerCard = (id: number) => ({ type: PlayerAction.REMOVE_CARD, payload: id });
-export const setPlayerActivity = (isActive: boolean) => ({ type: PlayerAction.SET_ACTIVITY, payload: isActive });
+export const setPlayerActivity = (activity: Activity) => ({ type: PlayerAction.SET_ACTIVITY, payload: activity });

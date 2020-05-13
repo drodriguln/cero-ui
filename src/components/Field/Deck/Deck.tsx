@@ -6,9 +6,10 @@ import { makeStyles } from '@material-ui/core';
 import Card from '../../Card';
 import { deckSelector, deckTopCardSelector } from '../../../store/deck/selector';
 import { discardSelector } from '../../../store/discard/selector';
+import { playerSelector } from '../../../store/player/selector';
 import { addDeckCards, removeDeckCard, removeDeckCards } from '../../../store/deck/actions';
 import { cleanDiscardCards } from '../../../store/discard/actions';
-import { addPlayerCard, addPlayerCards } from '../../../store/player/actions';
+import { addPlayerCard, addPlayerCards, setPlayerActivity } from '../../../store/player/actions';
 import { addOpponentCards } from '../../../store/opponent/actions';
 
 const useStyles = makeStyles({
@@ -25,11 +26,13 @@ const Deck = () => {
   const dispatch = useDispatch();
   const deck = useSelector(deckSelector);
   const discard = useSelector(discardSelector);
+  const { activity: playerActivity } = useSelector(playerSelector);
   const topDeckCard = useSelector(deckTopCardSelector)
   const classes = useStyles();
 
   const drawCard = () => {
     if (topDeckCard === undefined) return;
+    dispatch(setPlayerActivity('draw'));
     dispatch(addPlayerCard(topDeckCard))
     dispatch(removeDeckCard)
   }
@@ -52,7 +55,13 @@ const Deck = () => {
     dispatch(cleanDiscardCards());
   }, [deck?.length, discard?.length]);
 
-  return <Card.Draw size='lg' className={classes.root} onClick={drawCard} />;
+  return (
+    <Card.Draw
+      size='lg'
+      className={playerActivity === 'start' ? classes.root : undefined}
+      onClick={playerActivity === 'start' ? drawCard : undefined}
+    />
+  );
 };
 
 export default Deck;

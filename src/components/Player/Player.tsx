@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles, Slide } from '@material-ui/core';
 
 import Hand from '../Hand';
-import { playerSelector } from '../../store/player/selector';
 import { CardData } from '../../store/types';
-import { removePlayerCard, setPlayerActivity } from '../../store/player/actions';
-import { addDiscardCard } from '../../store/discard/actions';
-import { setOpponentActivity } from '../../store/opponent/actions';
 import { discardTopCardSelector } from '../../store/discard/selector';
+import { playerSelector } from '../../store/player/selector';
+import { opponentSelector } from '../../store/opponent/selector';
+import { removePlayerCard, setPlayerActivity } from '../../store/player/actions';
+import { setOpponentActivity } from '../../store/opponent/actions';
+import { addDiscardCard } from '../../store/discard/actions';
 
 const useStyles = makeStyles({
   root: {
@@ -27,10 +28,25 @@ const useStyles = makeStyles({
 
 const Player = () => {
   const dispatch = useDispatch();
-  const { cards, isActive } = useSelector(playerSelector)
+  const { cards, activity } = useSelector(playerSelector)
+  const { activity: opponentActivity } = useSelector(opponentSelector);
   const topDiscardCard = useSelector(discardTopCardSelector);
   const classes = useStyles();
   const hasCards = cards?.length === 0;
+
+  React.useEffect(() => {
+    if (opponentActivity === 'finish') {
+      dispatch(setPlayerActivity('start'));
+    }
+  }, [opponentActivity]);
+
+  React.useEffect(() => {
+    if (activity === 'skipped') {
+      dispatch(setPlayerActivity('finish'));
+    } else if (activity === 'draw') {
+      dispatch(setPlayerActivity('start'));
+    }
+  }, [activity]);
 
   const placeCard = (card: CardData) => {
     if (topDiscardCard?.value !== card.value && topDiscardCard?.color !== card.color) {
@@ -39,8 +55,10 @@ const Player = () => {
 
     dispatch(addDiscardCard(card));
     dispatch(removePlayerCard(card.id));
-    dispatch(setPlayerActivity(false));
-    dispatch(setOpponentActivity(true));
+    if (card.value === 'skip' || card.value === 'reverse') {
+      dispatch(setOpponentActivity('skipped'));
+    }
+    dispatch(setPlayerActivity('finish'));
   }
 
   return (
@@ -48,7 +66,7 @@ const Player = () => {
       <Hand
         cards={cards}
         onCardSelect={placeCard}
-        isActive={isActive}
+        isActive={activity !== 'finish'}
         className={classes.root}
       />
     </Slide>

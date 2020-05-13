@@ -1,10 +1,10 @@
-import { Action, CardData } from '../types';
+import { Action, Activity, CardData } from '../types';
 import { OpponentAction } from './actions';
 
 export type OpponentStore = typeof initialState;
 const initialState = {
   cards: [] as CardData[],
-  isActive: false
+  activity: 'finish' as Activity
 };
 
 const opponentReducer = (state = initialState, action: Action) => {
@@ -16,7 +16,7 @@ const opponentReducer = (state = initialState, action: Action) => {
     case OpponentAction.REMOVE_CARD:
       return { ...state, cards: [ ...state.cards.filter((card) => card.id !== action.payload) ] };
     case OpponentAction.SET_ACTIVITY:
-      return { ...state, isActive: action.payload };
+      return { ...state, activity: action.payload };
     default:
       return state;
   }

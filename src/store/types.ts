@@ -18,6 +18,8 @@ export type CardData = {
   value: CardValue;
 }
 
+export type Activity = 'start' | 'draw' | 'skipped' | 'finish';
+
 export type Store = {
   deck: DeckStore,
   discard: DiscardStore,
