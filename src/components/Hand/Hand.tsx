@@ -80,8 +80,12 @@ const Hand = React.forwardRef((props: Props, ref) => {
                   <Card
                     color={card.color}
                     value={card.value}
-                    onClick={() => isActive && onCardSelect !== undefined && onCardSelect(card)}
                     hidden={type === 'opponent'}
+                    onClick={() => {
+                      if (type === 'player' && playerActivity === 'start' && onCardSelect !== undefined) {
+                        onCardSelect(card)
+                      }
+                    }}
                   />
                 </Grow>
               </Grid>
