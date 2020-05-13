@@ -11,7 +11,7 @@
   },
   "author": "Daniel A. Rodriguez",
   "dependencies": {
-    "@material-ui/core": "^4.9.12",
+    "@material-ui/core": "^4.9.14",
     "classnames": "^2.2.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -27,8 +27,8 @@
     "@types/shuffle-array": "0.0.28",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.2.1",
-    "ts-loader": "^7.0.1",
-    "typescript": "^3.8.3",
+    "ts-loader": "^7.0.4",
+    "typescript": "^3.9.2",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
