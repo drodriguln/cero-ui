@@ -18,6 +18,9 @@ const useStyles = makeStyles({
     transition: 'transform .2s',
     '&:hover': {
       transform: 'scale(1.1)'
+    },
+    '&:active': {
+      transform: 'scale(0.95)'
     }
   }
 });
@@ -58,7 +61,7 @@ const Deck = () => {
   return (
     <Card.Draw
       size='lg'
-      className={playerActivity === 'start' ? classes.root : undefined}
+      className={classes.root}
       onClick={playerActivity === 'start' ? drawCard : undefined}
     />
   );

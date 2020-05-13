@@ -16,13 +16,6 @@ const useStyles = makeStyles({
     position: 'absolute',
     bottom: 0,
     right: 0
-  },
-  card: {
-    cursor: 'pointer',
-    transition: 'transform .1s ease-out',
-    '&:hover': {
-      transform: 'translateY(-15%)'
-    }
   }
 });
 
@@ -63,12 +56,7 @@ const Player = () => {
 
   return (
     <Slide direction='up' timeout={600} in={!hasCards} exit={!hasCards}>
-      <Hand
-        cards={cards}
-        onCardSelect={placeCard}
-        isActive={activity !== 'finish'}
-        className={classes.root}
-      />
+      <Hand cards={cards} onCardSelect={placeCard} className={classes.root} type='player' />
     </Slide>
   );
 };

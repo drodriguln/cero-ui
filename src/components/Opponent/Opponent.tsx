@@ -83,13 +83,7 @@ const Opponent = () => {
 
   return (
     <Slide direction='down' timeout={600} in={!hasCards} exit={!hasCards}>
-      <Hand
-        cards={cards}
-        onCardSelect={placeCard}
-        isActive={activity !== 'finish'}
-        className={classes.root}
-        hidden
-      />
+      <Hand cards={cards} onCardSelect={placeCard} className={classes.root} type='opponent' />
     </Slide>
   );
 };

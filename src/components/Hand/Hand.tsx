@@ -6,12 +6,16 @@ import CardMat from '../CardMat';
 import Card from '../Card';
 import Paginator from './Paginator';
 import { CardData } from '../../store/types';
+import { playerSelector } from '../../store/player/selector';
+import { opponentSelector } from '../../store/opponent/selector';
+import { useSelector } from 'react-redux';
+
+type HandType = 'player' | 'opponent';
 
 type Props = {
   cards: CardData[];
-  onCardSelect?: (card: CardData) => void;
-  isActive?: boolean;
-  hidden?: boolean;
+  type: HandType;
+  onCardSelect: (card: CardData) => void;
   className?: string;
 }
 
@@ -33,13 +37,20 @@ const useStyles = makeStyles({
     cursor: 'pointer',
     transition: 'transform .1s ease-out',
     '&:hover': {
-      transform: 'translateY(-5%)'
+      transform: 'scale(1.1)'
+    },
+    '&:active': {
+      transform: 'scale(0.95)'
     }
   },
 });
 
 const Hand = React.forwardRef((props: Props, ref) => {
-  const { cards, onCardSelect, isActive = false, hidden = false, className } = props;
+  const { cards, type, onCardSelect, className } = props;
+  const { activity: playerActivity } = useSelector(playerSelector);
+  const { activity: opponentActivity } = useSelector(opponentSelector);
+  const isActive = type === 'player' && (playerActivity === 'start' || playerActivity === 'draw')
+    || type === 'opponent' && (opponentActivity === 'start' || opponentActivity === 'draw');
   const classes = useStyles({ isActive });
   const [ page, setPage ] = React.useState(1);
   const maxCardsPerPage = 7;
@@ -64,13 +75,13 @@ const Hand = React.forwardRef((props: Props, ref) => {
           {cards
             ?.slice((page - 1) * maxCardsPerPage, page * maxCardsPerPage)
             .map((card) => (
-              <Grid key={card.id} item className={isActive ? classes.card : undefined}>
+              <Grid key={card.id} item className={type === 'player' ? classes.card : undefined}>
                 <Grow timeout={400} in>
                   <Card
                     color={card.color}
                     value={card.value}
                     onClick={() => isActive && onCardSelect !== undefined && onCardSelect(card)}
-                    hidden={hidden}
+                    hidden={type === 'opponent'}
                   />
                 </Grow>
               </Grid>
