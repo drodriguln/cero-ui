@@ -1,9 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Grid, makeStyles } from '@material-ui/core';
 
 import CardMat from '../CardMat';
 import Deck from './Deck';
 import Discard from './Discard';
+import { playerSelector } from '../../store/player/selector';
+import { opponentSelector } from '../../store/opponent/selector';
+import GlowTypography from '../GlowTypography';
 
 const useStyles = makeStyles({
   root: {
@@ -26,8 +30,19 @@ const useStyles = makeStyles({
 });
 
 const Hand = () => {
+  const { activity: playerActivity } = useSelector(playerSelector)
+  const { activity: opponentActivity } = useSelector(opponentSelector);
   const classes = useStyles();
 
+  if (playerActivity === 'won' || opponentActivity === 'won') {
+    return (
+      <CardMat className={classes.root}>
+        <GlowTypography variant='h4'>
+          {playerActivity === 'won' ? 'Player' : 'Opponent'} wins!
+        </GlowTypography>
+      </CardMat>
+    );
+  }
   return (
     <CardMat className={classes.root}>
       <Grid container spacing={8} wrap='nowrap'>

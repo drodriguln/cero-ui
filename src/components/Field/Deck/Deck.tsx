@@ -10,7 +10,7 @@ import { playerSelector } from '../../../store/player/selector';
 import { addDeckCards, removeDeckCard, removeDeckCards } from '../../../store/deck/actions';
 import { cleanDiscardCards } from '../../../store/discard/actions';
 import { addPlayerCard, addPlayerCards, setPlayerActivity } from '../../../store/player/actions';
-import { addOpponentCards } from '../../../store/opponent/actions';
+import { addOpponentCards, setOpponentActivity } from '../../../store/opponent/actions';
 
 const useStyles = makeStyles({
   root: {
@@ -45,6 +45,8 @@ const Deck = () => {
     dispatch(addPlayerCards(deck.slice(deck.length - 8, deck.length - 1)));
     dispatch(addOpponentCards(deck.slice(deck.length - 16, deck.length - 9)));
     dispatch(removeDeckCards(14));
+    dispatch(setPlayerActivity('start'));
+    dispatch(setOpponentActivity('end'))
   }, []);
 
   // Shuffle and move unused cards from discard pile into deck when it runs empty.

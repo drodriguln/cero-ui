@@ -21,28 +21,34 @@ const useStyles = makeStyles({
 
 const Player = () => {
   const dispatch = useDispatch();
-  const { cards, activity } = useSelector(playerSelector)
+  const { cards, activity: playerActivity } = useSelector(playerSelector)
   const { activity: opponentActivity } = useSelector(opponentSelector);
   const topDiscardCard = useSelector(discardTopCardSelector);
   const classes = useStyles();
-  const hasCards = cards?.length === 0;
+  const hasCards = cards?.length !== 0;
+  const hasGameEnded = opponentActivity === 'won' || playerActivity === 'won';
 
   React.useEffect(() => {
-    if (opponentActivity === 'finish') {
+    if (opponentActivity === 'end') {
       dispatch(setPlayerActivity('start'));
     }
   }, [opponentActivity]);
 
   React.useEffect(() => {
-    if (activity === 'skipped') {
-      dispatch(setPlayerActivity('finish'));
-    } else if (activity === 'draw') {
+    if (playerActivity === 'skipped') {
+      dispatch(setPlayerActivity('end'));
+    } else if (playerActivity === 'draw') {
       dispatch(setPlayerActivity('start'));
     }
-  }, [activity]);
+  }, [playerActivity]);
 
   const placeCard = (card: CardData) => {
     if (topDiscardCard?.value !== card.value && topDiscardCard?.color !== card.color) {
+      return;
+    }
+
+    if (cards?.length === 1 && opponentActivity !== 'initialize') {
+      dispatch(setPlayerActivity('won'));
       return;
     }
 
@@ -51,11 +57,16 @@ const Player = () => {
     if (card.value === 'skip' || card.value === 'reverse') {
       dispatch(setOpponentActivity('skipped'));
     }
-    dispatch(setPlayerActivity('finish'));
+    dispatch(setPlayerActivity('end'));
   }
 
   return (
-    <Slide direction='up' timeout={600} in={!hasCards} exit={!hasCards}>
+    <Slide
+      direction='up'
+      timeout={600}
+      in={hasCards && !hasGameEnded}
+      exit={!hasCards || hasGameEnded}
+    >
       <Hand cards={cards} onCardSelect={placeCard} className={classes.root} type='player' />
     </Slide>
   );

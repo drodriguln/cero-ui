@@ -23,26 +23,27 @@ const useStyles = makeStyles({
 
 const Opponent = () => {
   const dispatch = useDispatch();
-  const { cards, activity } = useSelector(opponentSelector);
+  const { cards, activity: opponentActivity } = useSelector(opponentSelector);
   const { activity: playerActivity } = useSelector(playerSelector);
   const topDiscardCard = useSelector(discardTopCardSelector);
   const topDeckCard = useSelector(deckTopCardSelector);
   const classes = useStyles();
-  const hasCards = cards?.length === 0;
+  const hasCards = cards?.length !== 0;
+  const hasGameEnded = opponentActivity === 'won' || playerActivity === 'won';
 
   React.useEffect(() => {
-    if (playerActivity === 'finish') {
+    if (playerActivity === 'end') {
       dispatch(setOpponentActivity('start'));
     }
   }, [playerActivity]);
 
   React.useEffect(() => {
-    if (activity === 'finish') {
+    if (opponentActivity === 'initialize' || opponentActivity === 'end') {
       return;
-    } else if (activity === 'skipped') {
-      dispatch(setOpponentActivity('finish'));
+    } else if (opponentActivity === 'skipped') {
+      dispatch(setOpponentActivity('end'));
       return;
-    } else if (activity === 'draw') {
+    } else if (opponentActivity === 'draw') {
       dispatch(setOpponentActivity('start'));
       return;
     }
@@ -59,7 +60,7 @@ const Opponent = () => {
       }, 1000);
     }
 
-  }, [activity]);
+  }, [opponentActivity]);
 
   const drawCard = () => {
     if (topDeckCard === undefined) return;
@@ -73,16 +74,26 @@ const Opponent = () => {
       return;
     }
 
+    if (cards?.length === 1 && opponentActivity !== 'initialize') {
+      dispatch(setOpponentActivity('won'));
+      return;
+    }
+
     dispatch(addDiscardCard(card));
     dispatch(removeOpponentCard(card.id));
     if (card.value === 'skip' || card.value === 'reverse') {
       dispatch(setPlayerActivity('skipped'));
     }
-    dispatch(setOpponentActivity('finish'));
+    dispatch(setOpponentActivity(hasCards ? 'end' : 'won'));
   }
 
   return (
-    <Slide direction='down' timeout={600} in={!hasCards} exit={!hasCards}>
+    <Slide
+      direction='down'
+      timeout={600}
+      in={hasCards && !hasGameEnded}
+      exit={!hasCards || hasGameEnded}
+    >
       <Hand cards={cards} onCardSelect={placeCard} className={classes.root} type='opponent' />
     </Slide>
   );

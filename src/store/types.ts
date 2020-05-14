@@ -18,7 +18,7 @@ export type CardData = {
   value: CardValue;
 }
 
-export type Activity = 'start' | 'draw' | 'skipped' | 'finish';
+export type Activity = 'initialize' | 'start' | 'draw' | 'skipped' | 'end' | 'won';
 
 export type Store = {
   deck: DeckStore,

@@ -4,7 +4,7 @@ import { PlayerAction } from './actions';
 export type PlayerStore = typeof initialState;
 const initialState = {
   cards: [] as CardData[],
-  activity: 'start' as Activity
+  activity: 'initialize' as Activity
 };
 
 const playerReducer = (state = initialState, action: Action) => {

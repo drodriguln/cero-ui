@@ -4,7 +4,7 @@ import { OpponentAction } from './actions';
 export type OpponentStore = typeof initialState;
 const initialState = {
   cards: [] as CardData[],
-  activity: 'finish' as Activity
+  activity: 'initialize' as Activity
 };
 
 const opponentReducer = (state = initialState, action: Action) => {
