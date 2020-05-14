@@ -38,7 +38,7 @@ const Hand = () => {
     return (
       <CardMat className={classes.root}>
         <GlowTypography variant='h4'>
-          {playerActivity === 'won' ? 'Player' : 'Opponent'} wins!
+          {playerActivity === 'won' ? 'You win!' : 'Opponent wins!'}
         </GlowTypography>
       </CardMat>
     );
