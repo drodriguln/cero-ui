@@ -22,18 +22,18 @@ type EmptyCardProps = {
   onClick?: () => void;
 }
 
-const findCardImage = (color: CardColor, value: CardValue) => {
-  return imageMap[color]?.[value] ?? backImageSrc;
-}
+const findCardImage = (color: CardColor, value: CardValue) => imageMap[color]?.[value] ?? backImageSrc;
 
 const Card = (props: Props) => {
-  const { value, color, size = 'md', title = `${color} ${value}`, hidden = false, ...otherProps } = props;
+  const {
+    value, color, size = 'md', title = `${color} ${value}`, hidden = false, ...otherProps
+  } = props;
   const { height, width } = sizeMap[size];
   const src = hidden ? backImageSrc : findCardImage(color, value);
   return <img alt={title} src={src} height={height} width={width} {...otherProps} />;
 };
 
-Card.Draw = ({title = 'Draw', size = 'md', ...otherProps}: EmptyCardProps) => {
+Card.Draw = ({ title = 'Draw', size = 'md', ...otherProps }: EmptyCardProps) => {
   const { height, width } = sizeMap[size];
   return <img alt={title} height={height} width={width} src={drawImageSrc} {...otherProps} />;
 };

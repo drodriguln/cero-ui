@@ -11,21 +11,21 @@ type Props = {
 
 const useStyles = makeStyles({
   root: {
-    display: 'flex'
+    display: 'flex',
   },
   button: {
     flex: '0 0 40px',
     minWidth: '40px',
     color: 'white',
     '&:hover': {
-      backgroundColor: 'rgba(255, 255, 255, 0.25)'
-    }
+      backgroundColor: 'rgba(255, 255, 255, 0.25)',
+    },
   },
   buttonLeft: {
-    borderRadius: '4px 0 0 4px'
+    borderRadius: '4px 0 0 4px',
   },
   buttonRight: {
-    borderRadius: '0 4px 4px 0'
+    borderRadius: '0 4px 4px 0',
   },
   buttonLabel: {
     transform: 'scale(4)',
@@ -33,16 +33,18 @@ const useStyles = makeStyles({
   children: {
     overflowX: 'auto',
     width: 760,
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
-const Paginator = ({ page, lastPage, onChange, children }: Props) => {
+const Paginator = ({
+  page, lastPage, onChange, children,
+}: Props) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <Button
-        classes={{root: classNames(classes.button, classes.buttonLeft), label: classes.buttonLabel}}
+        classes={{ root: classNames(classes.button, classes.buttonLeft), label: classes.buttonLabel }}
         onClick={() => onChange(page - 1)}
         disabled={page === 1}
       >
@@ -52,7 +54,7 @@ const Paginator = ({ page, lastPage, onChange, children }: Props) => {
         {children}
       </div>
       <Button
-        classes={{root: classNames(classes.button, classes.buttonRight), label: classes.buttonLabel}}
+        classes={{ root: classNames(classes.button, classes.buttonRight), label: classes.buttonLabel }}
         onClick={() => onChange(page + 1)}
         disabled={page === lastPage}
       >
@@ -60,6 +62,6 @@ const Paginator = ({ page, lastPage, onChange, children }: Props) => {
       </Button>
     </div>
   );
-}
+};
 
 export default Paginator;

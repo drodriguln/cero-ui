@@ -3,15 +3,15 @@ import shuffle from 'shuffle-array';
 import { CardData } from '../types';
 
 const cards: CardData[] = [
-  { id: 1,  color: 'blue', value: '0' },
-  { id: 2,  color: 'blue', value: '1' },
-  { id: 3,  color: 'blue', value: '1' },
-  { id: 4,  color: 'blue', value: '2' },
-  { id: 5,  color: 'blue', value: '2' },
-  { id: 6,  color: 'blue', value: '3' },
-  { id: 7,  color: 'blue', value: '3' },
-  { id: 8,  color: 'blue', value: '4' },
-  { id: 9,  color: 'blue', value: '4' },
+  { id: 1, color: 'blue', value: '0' },
+  { id: 2, color: 'blue', value: '1' },
+  { id: 3, color: 'blue', value: '1' },
+  { id: 4, color: 'blue', value: '2' },
+  { id: 5, color: 'blue', value: '2' },
+  { id: 6, color: 'blue', value: '3' },
+  { id: 7, color: 'blue', value: '3' },
+  { id: 8, color: 'blue', value: '4' },
+  { id: 9, color: 'blue', value: '4' },
   { id: 10, color: 'blue', value: '5' },
   { id: 11, color: 'blue', value: '5' },
   { id: 12, color: 'blue', value: '6' },
@@ -86,7 +86,7 @@ const cards: CardData[] = [
   { id: 81, color: 'yellow', value: '9' },
   { id: 82, color: 'yellow', value: '9' },
   { id: 83, color: 'yellow', value: 'reverse' },
-  { id: 84, color: 'yellow', value: 'skip' }
+  { id: 84, color: 'yellow', value: 'skip' },
 ];
 
 const initialState = shuffle(cards, { copy: true });

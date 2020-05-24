@@ -10,16 +10,16 @@ import { addDiscardCard } from '../../../store/discard/actions';
 const Discard = () => {
   const dispatch = useDispatch();
   const discardCard = useSelector(discardTopCardSelector);
-  const deckCard = useSelector(deckTopCardSelector)
+  const deckCard = useSelector(deckTopCardSelector);
 
   React.useEffect(() => {
     if (deckCard === undefined) return;
-    dispatch(addDiscardCard(deckCard))
-    dispatch(removeDeckCard)
-  }, [])
+    dispatch(addDiscardCard(deckCard));
+    dispatch(removeDeckCard);
+  }, []);
 
   return discardCard !== undefined
-    ? <Card color={discardCard.color} value={discardCard.value} size='lg' />
+    ? <Card color={discardCard.color} value={discardCard.value} size="lg" />
     : null;
 };
 

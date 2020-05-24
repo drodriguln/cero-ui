@@ -1,4 +1,4 @@
-import { CardSrcMap } from './';
+import { CardSrcMap } from '.';
 import zero from '../../assets/img/blue/0.png';
 import one from '../../assets/img/blue/1.png';
 import two from '../../assets/img/blue/2.png';
@@ -23,8 +23,8 @@ const blue: CardSrcMap = {
   7: seven,
   8: eight,
   9: nine,
-  reverse: reverse,
-  skip: skip
-}
+  reverse,
+  skip,
+};
 
 export default blue;

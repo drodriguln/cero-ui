@@ -13,10 +13,10 @@ type CardImageMap = {
 };
 
 const imageMap: CardImageMap = {
-  blue: blue,
-  green: green,
-  red: red,
-  yellow: yellow
-}
+  blue,
+  green,
+  red,
+  yellow,
+};
 
 export default imageMap;

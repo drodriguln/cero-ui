@@ -12,9 +12,9 @@ const useGlobalStyles = makeStyles({
   '@global': {
     body: {
       margin: 0,
-      padding: 0
-    }
-  }
+      padding: 0,
+    },
+  },
 });
 
 const App = () => {
@@ -32,4 +32,4 @@ const App = () => {
   );
 };
 
-export default App
+export default App;

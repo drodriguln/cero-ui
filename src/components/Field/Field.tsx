@@ -21,23 +21,23 @@ const useStyles = makeStyles({
   },
   '@keyframes onLoadZoom': {
     from: {
-      transform: 'translate(-50%, -50%) scale(1.3)'
+      transform: 'translate(-50%, -50%) scale(1.3)',
     },
     to: {
-      transform: 'translate(-50%, -50%) scale(1)'
-    }
-  }
+      transform: 'translate(-50%, -50%) scale(1)',
+    },
+  },
 });
 
 const Hand = () => {
-  const { activity: playerActivity } = useSelector(playerSelector)
+  const { activity: playerActivity } = useSelector(playerSelector);
   const { activity: opponentActivity } = useSelector(opponentSelector);
   const classes = useStyles();
 
   if (playerActivity === 'won' || opponentActivity === 'won') {
     return (
       <CardMat className={classes.root}>
-        <GlowTypography variant='h4'>
+        <GlowTypography variant="h4">
           {playerActivity === 'won' ? 'You win!' : 'Opponent wins!'}
         </GlowTypography>
       </CardMat>
@@ -45,7 +45,7 @@ const Hand = () => {
   }
   return (
     <CardMat className={classes.root}>
-      <Grid container spacing={8} wrap='nowrap'>
+      <Grid container spacing={8} wrap="nowrap">
         <Grid item>
           <Discard />
         </Grid>

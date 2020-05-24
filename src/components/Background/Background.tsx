@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { CardData } from '../../store/types';
 import { useSelector } from 'react-redux';
+import { CardData } from '../../store/types';
 import { discardSelector, discardTopCardSelector } from '../../store/discard/selector';
 import useStyles from './styles';
 
@@ -10,8 +10,8 @@ const backgroundColorMap = {
   green: 'rgb(150, 236, 145)',
   red: 'rgb(255, 185, 185)',
   yellow: 'rgb(244, 243, 184)',
-  gray: 'rgb(212, 212, 212)'
-}
+  gray: 'rgb(212, 212, 212)',
+};
 
 const createBackgroundColor = (previousCard?: CardData, currentCard?: CardData) => {
   const previousColor = backgroundColorMap[previousCard?.color ?? 'gray'];

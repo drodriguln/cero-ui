@@ -17,12 +17,12 @@ const useStyles = makeStyles({
     cursor: 'pointer',
     transition: 'transform .2s',
     '&:hover': {
-      transform: 'scale(1.1)'
+      transform: 'scale(1.1)',
     },
     '&:active': {
-      transform: 'scale(0.95)'
-    }
-  }
+      transform: 'scale(0.95)',
+    },
+  },
 });
 
 const Deck = () => {
@@ -30,15 +30,15 @@ const Deck = () => {
   const deck = useSelector(deckSelector);
   const discard = useSelector(discardSelector);
   const { activity: playerActivity } = useSelector(playerSelector);
-  const topDeckCard = useSelector(deckTopCardSelector)
+  const topDeckCard = useSelector(deckTopCardSelector);
   const classes = useStyles();
 
   const drawCard = () => {
     if (topDeckCard === undefined) return;
     dispatch(setPlayerActivity('draw'));
-    dispatch(addPlayerCard(topDeckCard))
-    dispatch(removeDeckCard)
-  }
+    dispatch(addPlayerCard(topDeckCard));
+    dispatch(removeDeckCard);
+  };
 
   React.useEffect(() => {
     if (deck?.length < 8) return;
@@ -46,7 +46,7 @@ const Deck = () => {
     dispatch(addOpponentCards(deck.slice(deck.length - 16, deck.length - 9)));
     dispatch(removeDeckCards(14));
     dispatch(setPlayerActivity('start'));
-    dispatch(setOpponentActivity('end'))
+    dispatch(setOpponentActivity('end'));
   }, []);
 
   // Shuffle and move unused cards from discard pile into deck when it runs empty.
@@ -62,7 +62,7 @@ const Deck = () => {
 
   return (
     <Card.Draw
-      size='lg'
+      size="lg"
       className={classes.root}
       onClick={playerActivity === 'start' ? drawCard : undefined}
     />

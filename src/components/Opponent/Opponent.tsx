@@ -17,8 +17,8 @@ const useStyles = makeStyles({
   root: {
     position: 'absolute',
     top: 0,
-    left: 0
-  }
+    left: 0,
+  },
 });
 
 const Opponent = () => {
@@ -31,43 +31,12 @@ const Opponent = () => {
   const hasCards = cards?.length !== 0;
   const hasGameEnded = opponentActivity === 'won' || playerActivity === 'won';
 
-  React.useEffect(() => {
-    if (playerActivity === 'end') {
-      dispatch(setOpponentActivity('start'));
-    }
-  }, [playerActivity]);
-
-  React.useEffect(() => {
-    if (opponentActivity === 'initialize' || opponentActivity === 'end') {
-      return;
-    } else if (opponentActivity === 'skipped') {
-      dispatch(setOpponentActivity('end'));
-      return;
-    } else if (opponentActivity === 'draw') {
-      dispatch(setOpponentActivity('start'));
-      return;
-    }
-
-    const card = cards.find((card) => (
-      card.value === topDiscardCard?.value || card.color === topDiscardCard?.color
-    ));
-
-    if (card === undefined) {
-      drawCard();
-    } else {
-      setTimeout(() => {
-        placeCard(card);
-      }, 1000);
-    }
-
-  }, [opponentActivity]);
-
   const drawCard = () => {
     if (topDeckCard === undefined) return;
     dispatch(setOpponentActivity('draw'));
     dispatch(addOpponentCard(topDeckCard));
     dispatch(removeDeckCard);
-  }
+  };
 
   const placeCard = (card: CardData) => {
     if (topDiscardCard?.value !== card.value && topDiscardCard?.color !== card.color) {
@@ -85,16 +54,46 @@ const Opponent = () => {
       dispatch(setPlayerActivity('skipped'));
     }
     dispatch(setOpponentActivity(hasCards ? 'end' : 'won'));
-  }
+  };
+
+  React.useEffect(() => {
+    if (playerActivity === 'end') {
+      dispatch(setOpponentActivity('start'));
+    }
+  }, [playerActivity]);
+
+  React.useEffect(() => {
+    if (opponentActivity === 'initialize' || opponentActivity === 'end') {
+      return;
+    } if (opponentActivity === 'skipped') {
+      dispatch(setOpponentActivity('end'));
+      return;
+    } if (opponentActivity === 'draw') {
+      dispatch(setOpponentActivity('start'));
+      return;
+    }
+
+    const card = cards.find((c) => (
+      c.value === topDiscardCard?.value || c.color === topDiscardCard?.color
+    ));
+
+    if (card === undefined) {
+      drawCard();
+    } else {
+      setTimeout(() => {
+        placeCard(card);
+      }, 1000);
+    }
+  }, [opponentActivity]);
 
   return (
     <Slide
-      direction='down'
+      direction="down"
       timeout={600}
       in={hasCards && !hasGameEnded}
       exit={!hasCards || hasGameEnded}
     >
-      <Hand cards={cards} onCardSelect={placeCard} className={classes.root} type='opponent' />
+      <Hand cards={cards} onCardSelect={placeCard} className={classes.root} type="opponent" />
     </Slide>
   );
 };

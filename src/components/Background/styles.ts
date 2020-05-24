@@ -8,7 +8,7 @@ const backgroundStyles = createStyles({
     backgroundRepeat: 'no-repeat',
     backgroundAttachment: 'fixed',
     minHeight: '100%',
-  }
+  },
 });
 
 const useStyles = (previousCardColor: string, currentCardColor: string) => makeStyles({
@@ -26,20 +26,20 @@ const useStyles = (previousCardColor: string, currentCardColor: string) => makeS
   },
   '@keyframes fadeout': {
     from: {
-      opacity: 1
+      opacity: 1,
     },
     to: {
-      opacity: 0
-    }
+      opacity: 0,
+    },
   },
   '@keyframes fadein': {
     from: {
-      opacity: 0
+      opacity: 0,
     },
     to: {
-      opacity: 1
-    }
-  }
+      opacity: 1,
+    },
+  },
 });
 
 export default useStyles;

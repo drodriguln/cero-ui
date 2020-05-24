@@ -15,13 +15,13 @@ const useStyles = makeStyles({
   root: {
     position: 'absolute',
     bottom: 0,
-    right: 0
-  }
+    right: 0,
+  },
 });
 
 const Player = () => {
   const dispatch = useDispatch();
-  const { cards, activity: playerActivity } = useSelector(playerSelector)
+  const { cards, activity: playerActivity } = useSelector(playerSelector);
   const { activity: opponentActivity } = useSelector(opponentSelector);
   const topDiscardCard = useSelector(discardTopCardSelector);
   const classes = useStyles();
@@ -58,16 +58,16 @@ const Player = () => {
       dispatch(setOpponentActivity('skipped'));
     }
     dispatch(setPlayerActivity('end'));
-  }
+  };
 
   return (
     <Slide
-      direction='up'
+      direction="up"
       timeout={600}
       in={hasCards && !hasGameEnded}
       exit={!hasCards || hasGameEnded}
     >
-      <Hand cards={cards} onCardSelect={placeCard} className={classes.root} type='player' />
+      <Hand cards={cards} onCardSelect={placeCard} className={classes.root} type="player" />
     </Slide>
   );
 };

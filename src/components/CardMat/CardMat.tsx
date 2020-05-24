@@ -16,11 +16,13 @@ type StyleProps = {
 const useStyles = makeStyles({
   root: ({ zIndex }: StyleProps) => ({
     backgroundColor: 'rgba(40, 40, 40, 0.1)',
-    zIndex: zIndex
-  })
+    zIndex,
+  }),
 });
 
-const CardMat = React.forwardRef(({ zIndex = 0, raised = false, className, children }: Props, ref) => {
+const CardMat = React.forwardRef(({
+  zIndex = 0, raised = false, className, children,
+}: Props, ref) => {
   const classes = useStyles({ zIndex });
   return (
     <MuiCard ref={ref} className={classNames(classes.root, className)} raised={raised}>
