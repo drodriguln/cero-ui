@@ -48,25 +48,19 @@ const Opponent = () => {
       return;
     }
 
+    const doSkipPlayer = card.value === 'skip' || card.value === 'reverse';
     dispatch(addDiscardCard(card));
     dispatch(removeOpponentCard(card.id));
-    if (card.value === 'skip' || card.value === 'reverse') {
-      dispatch(setPlayerActivity('skipped'));
-    }
     dispatch(setOpponentActivity(hasCards ? 'end' : 'won'));
+    dispatch(setPlayerActivity(doSkipPlayer ? 'skipped' : 'start'));
   };
-
-  React.useEffect(() => {
-    if (playerActivity === 'end') {
-      dispatch(setOpponentActivity('start'));
-    }
-  }, [playerActivity]);
 
   React.useEffect(() => {
     if (opponentActivity === 'initialize' || opponentActivity === 'end') {
       return;
     } if (opponentActivity === 'skipped') {
       dispatch(setOpponentActivity('end'));
+      dispatch(setPlayerActivity('start'));
       return;
     } if (opponentActivity === 'draw') {
       dispatch(setOpponentActivity('start'));
