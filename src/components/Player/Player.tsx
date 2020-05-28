@@ -28,15 +28,6 @@ const Player = () => {
   const hasCards = cards?.length !== 0;
   const hasGameEnded = opponentActivity === 'won' || playerActivity === 'won';
 
-  React.useEffect(() => {
-    if (playerActivity === 'skipped') {
-      dispatch(setPlayerActivity('end'));
-      dispatch(setOpponentActivity('start'));
-    } else if (playerActivity === 'draw') {
-      dispatch(setPlayerActivity('start'));
-    }
-  }, [playerActivity]);
-
   const placeCard = (card: CardData) => {
     if (topDiscardCard?.value !== card.value && topDiscardCard?.color !== card.color) {
       return;
@@ -53,6 +44,15 @@ const Player = () => {
     dispatch(setPlayerActivity('end'));
     dispatch(setOpponentActivity(doSkipOpponent ? 'skipped' : 'start'));
   };
+
+  React.useEffect(() => {
+    if (playerActivity === 'skipped') {
+      dispatch(setPlayerActivity('end'));
+      dispatch(setOpponentActivity('start'));
+    } else if (playerActivity === 'draw') {
+      dispatch(setPlayerActivity('start'));
+    }
+  }, [playerActivity]);
 
   return (
     <Slide
