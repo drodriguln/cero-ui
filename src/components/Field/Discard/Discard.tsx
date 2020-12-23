@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Card from '../../Card';
@@ -12,7 +12,7 @@ const Discard = () => {
   const discardCard = useSelector(discardTopCardSelector);
   const deckCard = useSelector(deckTopCardSelector);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (deckCard === undefined) return;
     dispatch(addDiscardCard(deckCard));
     dispatch(removeDeckCard);
