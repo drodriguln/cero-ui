@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 import { Button, makeStyles } from '@material-ui/core';
 
@@ -6,7 +6,7 @@ type Props = {
   page: number;
   lastPage: number;
   onChange: (page: number) => void;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const useStyles = makeStyles({

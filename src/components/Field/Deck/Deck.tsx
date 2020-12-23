@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import shuffle from 'shuffle-array';
 import { makeStyles } from '@material-ui/core';
@@ -40,7 +40,7 @@ const Deck = () => {
     dispatch(removeDeckCard);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (deck?.length < 8) return;
     dispatch(addPlayerCards(deck.slice(deck.length - 8, deck.length - 1)));
     dispatch(addOpponentCards(deck.slice(deck.length - 16, deck.length - 9)));
@@ -50,7 +50,7 @@ const Deck = () => {
   }, []);
 
   // Shuffle and move unused cards from discard pile into deck when it runs empty.
-  React.useEffect(() => {
+  useEffect(() => {
     if (deck?.length > 0 || discard?.length < 2) {
       return;
     }

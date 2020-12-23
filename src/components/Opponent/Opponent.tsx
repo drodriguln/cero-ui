@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles, Slide } from '@material-ui/core';
 
@@ -55,7 +55,7 @@ const Opponent = () => {
     dispatch(setPlayerActivity(doSkipPlayer ? 'skipped' : 'start'));
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (opponentActivity === 'initialize' || opponentActivity === 'end') {
       return;
     } if (opponentActivity === 'skipped') {

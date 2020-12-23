@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Grid, Grow, makeStyles } from '@material-ui/core';
 
@@ -45,7 +45,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Hand = React.forwardRef((props: Props, ref) => {
+const Hand = forwardRef((props: Props, ref) => {
   const {
     cards, type, onCardSelect, className,
   } = props;
@@ -54,13 +54,13 @@ const Hand = React.forwardRef((props: Props, ref) => {
   const isActive = type === 'player' && (playerActivity === 'start' || playerActivity === 'draw')
     || type === 'opponent' && (opponentActivity === 'start' || opponentActivity === 'draw');
   const classes = useStyles({ isActive });
-  const [page, setPage] = React.useState(1);
+  const [page, setPage] = useState(1);
   const maxCardsPerPage = 7;
   const lastPage = Math.ceil(cards?.length / maxCardsPerPage);
 
   // Automatically show last page when drawing a card or playing last card on a page
-  const [previousCardsCount, setPreviousCardsCount] = React.useState(cards.length);
-  React.useEffect(() => {
+  const [previousCardsCount, setPreviousCardsCount] = useState(cards.length);
+  useEffect(() => {
     if (
       previousCardsCount < cards.length
       || previousCardsCount > cards.length && cards.length % maxCardsPerPage === 0
@@ -91,8 +91,7 @@ const Hand = React.forwardRef((props: Props, ref) => {
                   />
                 </Grow>
               </Grid>
-            )
-          )}
+            ))}
         </Grid>
       </Paginator>
     </CardMat>
