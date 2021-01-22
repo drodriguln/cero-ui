@@ -10,6 +10,7 @@ import { opponentSelector } from '../../store/opponent/selector';
 import { removePlayerCard, setPlayerActivity } from '../../store/player/actions';
 import { setOpponentActivity } from '../../store/opponent/actions';
 import { addDiscardCard } from '../../store/discard/actions';
+import { storeSelector } from '../../store/selector';
 
 const useStyles = makeStyles({
   root: {
@@ -21,6 +22,7 @@ const useStyles = makeStyles({
 
 const Player = () => {
   const dispatch = useDispatch();
+  const store = useSelector(storeSelector);
   const { cards, activity: playerActivity } = useSelector(playerSelector);
   const { activity: opponentActivity } = useSelector(opponentSelector);
   const topDiscardCard = useSelector(discardTopCardSelector);
@@ -44,6 +46,19 @@ const Player = () => {
     dispatch(setPlayerActivity('end'));
     dispatch(setOpponentActivity(doSkipOpponent ? 'skipped' : 'start'));
   };
+
+  useEffect(() => {
+    fetch('http://localhost:8080/session', {
+      method: 'POST',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(store),
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json));
+  }, []);
 
   useEffect(() => {
     if (playerActivity === 'skipped') {
