@@ -7,8 +7,8 @@ import CardMat from '../CardMat';
 import Card from '../Card';
 import Paginator from './Paginator';
 import { CardData } from '../../store/types';
-import { playerSelector } from '../../store/player/selector';
-import { opponentSelector } from '../../store/opponent/selector';
+import { playerSelector } from '../../store/session/player/selector';
+import { opponentSelector } from '../../store/session/opponent/selector';
 
 type HandType = 'player' | 'opponent';
 
@@ -47,7 +47,7 @@ const useStyles = makeStyles({
 
 const Hand = forwardRef((props: Props, ref) => {
   const {
-    cards, type, onCardSelect, className,
+    cards = [], type, onCardSelect, className,
   } = props;
   const { activity: playerActivity } = useSelector(playerSelector);
   const { activity: opponentActivity } = useSelector(opponentSelector);
@@ -75,7 +75,7 @@ const Hand = forwardRef((props: Props, ref) => {
       <Paginator page={page} lastPage={lastPage} onChange={(pageNum: number) => setPage(pageNum)}>
         <Grid container spacing={1} wrap="nowrap" className={classes.cards}>
           {cards
-            ?.slice((page - 1) * maxCardsPerPage, page * maxCardsPerPage)
+            .slice((page - 1) * maxCardsPerPage, page * maxCardsPerPage)
             .map((card) => (
               <Grid key={card.id} item className={type === 'player' ? classes.card : undefined}>
                 <Grow timeout={400} in>

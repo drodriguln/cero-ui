@@ -1,4 +1,4 @@
-import { CardData } from '../types';
+import { CardData } from '../../types';
 
 export enum DeckAction {
   ADD_CARDS = 'DECK_ADD_CARDS',

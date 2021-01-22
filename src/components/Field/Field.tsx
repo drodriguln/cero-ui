@@ -5,8 +5,8 @@ import { Grid, makeStyles } from '@material-ui/core';
 import CardMat from '../CardMat';
 import Deck from './Deck';
 import Discard from './Discard';
-import { playerSelector } from '../../store/player/selector';
-import { opponentSelector } from '../../store/opponent/selector';
+import { playerSelector } from '../../store/session/player/selector';
+import { opponentSelector } from '../../store/session/opponent/selector';
 import GlowTypography from '../GlowTypography';
 
 const useStyles = makeStyles({

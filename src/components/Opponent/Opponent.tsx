@@ -4,14 +4,14 @@ import { makeStyles, Slide } from '@material-ui/core';
 
 import Hand from '../Hand';
 import { CardData } from '../../store/types';
-import { opponentSelector } from '../../store/opponent/selector';
-import { playerSelector } from '../../store/player/selector';
-import { deckTopCardSelector } from '../../store/deck/selector';
-import { discardTopCardSelector } from '../../store/discard/selector';
-import { addDiscardCard } from '../../store/discard/actions';
-import { addOpponentCard, removeOpponentCard, setOpponentActivity } from '../../store/opponent/actions';
-import { removeDeckCard } from '../../store/deck/actions';
-import { setPlayerActivity } from '../../store/player/actions';
+import { opponentSelector } from '../../store/session/opponent/selector';
+import { playerSelector } from '../../store/session/player/selector';
+import { deckTopCardSelector } from '../../store/session/deck/selector';
+import { discardTopCardSelector } from '../../store/session/discard/selector';
+import { addDiscardCard } from '../../store/session/discard/actions';
+import { addOpponentCard, removeOpponentCard, setOpponentActivity } from '../../store/session/opponent/actions';
+import { removeDeckCard } from '../../store/session/deck/actions';
+import { setPlayerActivity } from '../../store/session/player/actions';
 
 const useStyles = makeStyles({
   root: {

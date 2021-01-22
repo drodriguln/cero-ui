@@ -1,4 +1,4 @@
-import { Action, CardData } from '../types';
+import { Action, CardData } from '../../types';
 import { DiscardAction } from './actions';
 
 const initialState = [] as CardData[];

@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Card from '../../Card';
-import { discardTopCardSelector } from '../../../store/discard/selector';
-import { deckTopCardSelector } from '../../../store/deck/selector';
-import { removeDeckCard } from '../../../store/deck/actions';
-import { addDiscardCard } from '../../../store/discard/actions';
+import { discardTopCardSelector } from '../../../store/session/discard/selector';
+import { deckTopCardSelector } from '../../../store/session/deck/selector';
+import { removeDeckCard } from '../../../store/session/deck/actions';
+import { addDiscardCard } from '../../../store/session/discard/actions';
 
 const Discard = () => {
   const dispatch = useDispatch();

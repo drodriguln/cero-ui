@@ -4,13 +4,13 @@ import shuffle from 'shuffle-array';
 import { makeStyles } from '@material-ui/core';
 
 import Card from '../../Card';
-import { deckSelector, deckTopCardSelector } from '../../../store/deck/selector';
-import { discardSelector } from '../../../store/discard/selector';
-import { playerSelector } from '../../../store/player/selector';
-import { addDeckCards, removeDeckCard, removeDeckCards } from '../../../store/deck/actions';
-import { cleanDiscardCards } from '../../../store/discard/actions';
-import { addPlayerCard, addPlayerCards, setPlayerActivity } from '../../../store/player/actions';
-import { addOpponentCards, setOpponentActivity } from '../../../store/opponent/actions';
+import { deckSelector, deckTopCardSelector } from '../../../store/session/deck/selector';
+import { discardSelector } from '../../../store/session/discard/selector';
+import { playerSelector } from '../../../store/session/player/selector';
+import { addDeckCards, removeDeckCard, removeDeckCards } from '../../../store/session/deck/actions';
+import { cleanDiscardCards } from '../../../store/session/discard/actions';
+import { addPlayerCard, addPlayerCards, setPlayerActivity } from '../../../store/session/player/actions';
+import { addOpponentCards, setOpponentActivity } from '../../../store/session/opponent/actions';
 
 const useStyles = makeStyles({
   root: {

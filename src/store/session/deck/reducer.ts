@@ -1,4 +1,4 @@
-import { Action } from '../types';
+import { Action } from '../../types';
 import { DeckAction } from './actions';
 import initialState from './initialState';
 

@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles, Slide } from '@material-ui/core';
 
 import Hand from '../Hand';
-import { CardData } from '../../store/types';
-import { discardTopCardSelector } from '../../store/discard/selector';
-import { playerSelector } from '../../store/player/selector';
-import { opponentSelector } from '../../store/opponent/selector';
-import { removePlayerCard, setPlayerActivity } from '../../store/player/actions';
-import { setOpponentActivity } from '../../store/opponent/actions';
-import { addDiscardCard } from '../../store/discard/actions';
-import { storeSelector } from '../../store/selector';
+import { CardData, SessionStore } from '../../store/types';
+import { discardTopCardSelector } from '../../store/session/discard/selector';
+import { playerSelector } from '../../store/session/player/selector';
+import { opponentSelector } from '../../store/session/opponent/selector';
+import { removePlayerCard, setPlayerActivity } from '../../store/session/player/actions';
+import { setOpponentActivity } from '../../store/session/opponent/actions';
+import { addDiscardCard } from '../../store/session/discard/actions';
+import { setId } from '../../store/session/id/actions';
+import { sessionSelector } from '../../store/session/selector';
 
 const useStyles = makeStyles({
   root: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
 
 const Player = () => {
   const dispatch = useDispatch();
-  const store = useSelector(storeSelector);
+  const session = useSelector(sessionSelector);
   const { cards, activity: playerActivity } = useSelector(playerSelector);
   const { activity: opponentActivity } = useSelector(opponentSelector);
   const topDiscardCard = useSelector(discardTopCardSelector);
@@ -54,10 +55,10 @@ const Player = () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(store),
+      body: JSON.stringify(session),
     })
       .then((response) => response.json())
-      .then((json) => console.log(json));
+      .then((session: SessionStore) => dispatch(setId(session.id)));
   }, []);
 
   useEffect(() => {

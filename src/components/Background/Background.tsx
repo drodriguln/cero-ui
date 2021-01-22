@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useSelector } from 'react-redux';
 import { CardData } from '../../store/types';
-import { discardSelector, discardTopCardSelector } from '../../store/discard/selector';
+import { discardSelector, discardTopCardSelector } from '../../store/session/discard/selector';
 import useStyles from './styles';
 
 const backgroundColorMap = {

@@ -1,4 +1,4 @@
-import { Activity, CardData } from '../types';
+import { Activity, CardData } from '../../types';
 
 export enum PlayerAction {
   ADD_CARD = 'PLAYER_ADD_CARD',

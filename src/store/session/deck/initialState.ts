@@ -1,6 +1,6 @@
 import shuffle from 'shuffle-array';
 
-import { CardData } from '../types';
+import { CardData } from '../../types';
 
 const cards: CardData[] = [
   { id: 1, color: 'blue', value: '0' },
