@@ -10,8 +10,9 @@ import { opponentSelector } from '../../store/session/opponent/selector';
 import { removePlayerCard, setPlayerActivity } from '../../store/session/player/actions';
 import { setOpponentActivity } from '../../store/session/opponent/actions';
 import { addDiscardCard } from '../../store/session/discard/actions';
-import { setId } from '../../store/session/id/actions';
 import { sessionSelector } from '../../store/session/selector';
+import { setApiSession, updateApiSession } from '../../common/api';
+import { setId } from '../../store/session/id/actions';
 
 const useStyles = makeStyles({
   root: {
@@ -45,26 +46,25 @@ const Player = () => {
     dispatch(addDiscardCard(card));
     dispatch(removePlayerCard(card.id));
     dispatch(setPlayerActivity('end'));
-    dispatch(setOpponentActivity(doSkipOpponent ? 'skipped' : 'start'));
+
+    if (doSkipOpponent) {
+      setOpponentActivity('skipped');
+    } else {
+      updateApiSession(session)
+        .then(() => dispatch(setOpponentActivity('start')));
+    }
   };
 
   useEffect(() => {
-    fetch('http://localhost:8080/session', {
-      method: 'POST',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(session),
-    })
-      .then((response) => response.json())
+    setApiSession(session)
       .then((session: SessionStore) => dispatch(setId(session.id)));
   }, []);
 
   useEffect(() => {
     if (playerActivity === 'skipped') {
       dispatch(setPlayerActivity('end'));
-      dispatch(setOpponentActivity('start'));
+      updateApiSession(session)
+        .then(() => dispatch(setOpponentActivity('start')));
     } else if (playerActivity === 'draw') {
       dispatch(setPlayerActivity('start'));
     }
