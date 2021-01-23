@@ -37,7 +37,7 @@ const Deck = () => {
     if (topDeckCard === undefined) return;
     dispatch(setPlayerActivity('draw'));
     dispatch(addPlayerCard(topDeckCard));
-    dispatch(removeDeckCard);
+    dispatch(removeDeckCard());
   };
 
   useEffect(() => {

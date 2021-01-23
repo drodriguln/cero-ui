@@ -15,7 +15,7 @@ const Discard = () => {
   useEffect(() => {
     if (deckCard === undefined) return;
     dispatch(addDiscardCard(deckCard));
-    dispatch(removeDeckCard);
+    dispatch(removeDeckCard());
   }, []);
 
   return discardCard !== undefined

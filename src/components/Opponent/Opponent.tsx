@@ -38,7 +38,7 @@ const Opponent = () => {
     if (topDeckCard === undefined) return;
     dispatch(setOpponentActivity('draw'));
     dispatch(addOpponentCard(topDeckCard));
-    dispatch(removeDeckCard);
+    dispatch(removeDeckCard());
   };
 
   const placeCard = (card: CardData) => {

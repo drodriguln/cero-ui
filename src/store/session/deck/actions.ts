@@ -7,5 +7,5 @@ export enum DeckAction {
 }
 
 export const addDeckCards = (cards: CardData[]) => ({ type: DeckAction.ADD_CARDS, payload: cards });
-export const removeDeckCard = { type: DeckAction.REMOVE_CARD };
+export const removeDeckCard = () => ({ type: DeckAction.REMOVE_CARD });
 export const removeDeckCards = (count: number) => ({ type: DeckAction.REMOVE_CARDS, payload: count });
