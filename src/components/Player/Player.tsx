@@ -42,29 +42,34 @@ const Player = () => {
       return;
     }
 
-    const doSkipOpponent = card.value === 'skip' || card.value === 'reverse';
     dispatch(addDiscardCard(card));
     dispatch(removePlayerCard(card.id));
     dispatch(setPlayerActivity('end'));
 
-    if (doSkipOpponent) {
-      setOpponentActivity('skipped');
+    if (card.value === 'skip' || card.value === 'reverse') {
+      dispatch(setOpponentActivity('skipped'));
     } else {
       updateApiSession(session)
-        .then(() => dispatch(setOpponentActivity('start')));
+        .then(() => {
+          dispatch(setOpponentActivity('start'))
+        });
     }
   };
 
   useEffect(() => {
     setApiSession(session)
-      .then((session: SessionStore) => dispatch(setId(session.id)));
+      .then((session: SessionStore) => {
+        dispatch(setId(session.id))
+      });
   }, []);
 
   useEffect(() => {
     if (playerActivity === 'skipped') {
       dispatch(setPlayerActivity('end'));
       updateApiSession(session)
-        .then(() => dispatch(setOpponentActivity('start')));
+        .then(() => {
+          dispatch(setOpponentActivity('start'))
+        });
     } else if (playerActivity === 'draw') {
       dispatch(setPlayerActivity('start'));
     }

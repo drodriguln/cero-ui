@@ -34,25 +34,22 @@ const Hand = () => {
   const { activity: opponentActivity } = useSelector(opponentSelector);
   const classes = useStyles();
 
-  if (playerActivity === 'won' || opponentActivity === 'won') {
-    return (
-      <CardMat className={classes.root}>
+  return (
+    <CardMat className={classes.root}>
+      {playerActivity === 'won' || opponentActivity === 'won' ? (
         <GlowTypography variant="h4">
           {playerActivity === 'won' ? 'You win!' : 'Opponent wins!'}
         </GlowTypography>
-      </CardMat>
-    );
-  }
-  return (
-    <CardMat className={classes.root}>
-      <Grid container spacing={8} wrap="nowrap">
-        <Grid item>
-          <Discard />
+      ) : (
+        <Grid container spacing={8} wrap="nowrap">
+          <Grid item>
+            <Discard />
+          </Grid>
+          <Grid item>
+            <Deck />
+          </Grid>
         </Grid>
-        <Grid item>
-          <Deck />
-        </Grid>
-      </Grid>
+      )}
     </CardMat>
   );
 };

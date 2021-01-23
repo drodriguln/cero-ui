@@ -53,6 +53,7 @@ const Hand = forwardRef((props: Props, ref) => {
   const { activity: opponentActivity } = useSelector(opponentSelector);
   const isActive = type === 'player' && (playerActivity === 'start' || playerActivity === 'draw')
     || type === 'opponent' && (opponentActivity === 'start' || opponentActivity === 'draw');
+  const zIndex = type === 'opponent' ? 1 : 2;
   const classes = useStyles({ isActive });
   const [page, setPage] = useState(1);
   const maxCardsPerPage = 7;
@@ -71,7 +72,7 @@ const Hand = forwardRef((props: Props, ref) => {
   }, [cards.length]);
 
   return (
-    <CardMat ref={ref} className={classNames(classes.root, className)} raised={isActive}>
+    <CardMat ref={ref} className={classNames(classes.root, className)} zIndex={zIndex} raised={isActive}>
       <Paginator page={page} lastPage={lastPage} onChange={(pageNum: number) => setPage(pageNum)}>
         <Grid container spacing={1} wrap="nowrap" className={classes.cards}>
           {cards

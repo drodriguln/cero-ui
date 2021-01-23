@@ -4,6 +4,7 @@ import { makeStyles, Slide } from '@material-ui/core';
 
 import Hand from '../Hand';
 import { CardData } from '../../store/types';
+import { sessionSelector } from "../../store/session/selector";
 import { opponentSelector } from '../../store/session/opponent/selector';
 import { playerSelector } from '../../store/session/player/selector';
 import { deckTopCardSelector } from '../../store/session/deck/selector';
@@ -12,6 +13,7 @@ import { addDiscardCard } from '../../store/session/discard/actions';
 import { addOpponentCard, removeOpponentCard, setOpponentActivity } from '../../store/session/opponent/actions';
 import { removeDeckCard } from '../../store/session/deck/actions';
 import { setPlayerActivity } from '../../store/session/player/actions';
+import { updateApiSession } from "../../common/api";
 
 const useStyles = makeStyles({
   root: {
@@ -23,6 +25,7 @@ const useStyles = makeStyles({
 
 const Opponent = () => {
   const dispatch = useDispatch();
+  const session = useSelector(sessionSelector);
   const { cards, activity: opponentActivity } = useSelector(opponentSelector);
   const { activity: playerActivity } = useSelector(playerSelector);
   const topDiscardCard = useSelector(discardTopCardSelector);
@@ -48,11 +51,17 @@ const Opponent = () => {
       return;
     }
 
-    const doSkipPlayer = card.value === 'skip' || card.value === 'reverse';
     dispatch(addDiscardCard(card));
     dispatch(removeOpponentCard(card.id));
     dispatch(setOpponentActivity(hasCards ? 'end' : 'won'));
-    dispatch(setPlayerActivity(doSkipPlayer ? 'skipped' : 'start'));
+    if (card.value === 'skip' || card.value === 'reverse') {
+      dispatch(setPlayerActivity('skipped'));
+    } else {
+      updateApiSession(session)
+        .then(() => {
+          dispatch(setPlayerActivity('start'))
+        });
+    }
   };
 
   useEffect(() => {
@@ -60,7 +69,10 @@ const Opponent = () => {
       return;
     } if (opponentActivity === 'skipped') {
       dispatch(setOpponentActivity('end'));
-      dispatch(setPlayerActivity('start'));
+      updateApiSession(session)
+        .then(() => {
+          dispatch(setPlayerActivity('start'))
+        });
       return;
     } if (opponentActivity === 'draw') {
       dispatch(setOpponentActivity('start'));
