@@ -4,16 +4,12 @@ import { makeStyles, Slide } from '@material-ui/core';
 
 import Hand from '../Hand';
 import { CardData } from '../../store/types';
-import { sessionSelector } from "../../store/session/selector";
 import { opponentSelector } from '../../store/session/opponent/selector';
 import { playerSelector } from '../../store/session/player/selector';
-import { deckTopCardSelector } from '../../store/session/deck/selector';
-import { discardTopCardSelector } from '../../store/session/discard/selector';
+import { discardSelector } from '../../store/session/discard/selector';
 import { addDiscardCard } from '../../store/session/discard/actions';
-import { addOpponentCard, removeOpponentCard, setOpponentActivity } from '../../store/session/opponent/actions';
-import { removeDeckCard } from '../../store/session/deck/actions';
+import { removeOpponentCard, setOpponentActivity } from '../../store/session/opponent/actions';
 import { setPlayerActivity } from '../../store/session/player/actions';
-import { updateSession } from "../../common/api";
 
 const useStyles = makeStyles({
   root: {
@@ -25,24 +21,25 @@ const useStyles = makeStyles({
 
 const Opponent = () => {
   const dispatch = useDispatch();
-  const session = useSelector(sessionSelector);
   const { cards, activity: opponentActivity } = useSelector(opponentSelector);
   const { activity: playerActivity } = useSelector(playerSelector);
-  const topDiscardCard = useSelector(discardTopCardSelector);
-  const topDeckCard = useSelector(deckTopCardSelector);
+  const discardCard = useSelector(discardSelector);
   const classes = useStyles();
   const hasCards = cards?.length !== 0;
   const hasGameEnded = opponentActivity === 'won' || playerActivity === 'won';
 
   const drawCard = () => {
+    //Replace with draw API endpoint
+    /*
     if (topDeckCard === undefined) return;
     dispatch(setOpponentActivity('draw'));
     dispatch(addOpponentCard(topDeckCard));
     dispatch(removeDeckCard());
+     */
   };
 
   const placeCard = (card: CardData) => {
-    if (topDiscardCard?.value !== card.value && topDiscardCard?.color !== card.color) {
+    if (discardCard?.value !== card.value && discardCard?.color !== card.color) {
       return;
     }
 
@@ -57,10 +54,13 @@ const Opponent = () => {
     if (card.value === 'skip' || card.value === 'reverse') {
       dispatch(setPlayerActivity('skipped'));
     } else {
+      /*
       updateSession(session)
         .then(() => {
           dispatch(setPlayerActivity('start'))
         });
+
+       */
     }
   };
 
@@ -69,10 +69,13 @@ const Opponent = () => {
       return;
     } if (opponentActivity === 'skipped') {
       dispatch(setOpponentActivity('end'));
+      /*
       updateSession(session)
         .then(() => {
           dispatch(setPlayerActivity('start'))
         });
+
+       */
       return;
     } if (opponentActivity === 'draw') {
       dispatch(setOpponentActivity('start'));
@@ -80,7 +83,7 @@ const Opponent = () => {
     }
 
     const card = cards.find((c) => (
-      c.value === topDiscardCard?.value || c.color === topDiscardCard?.color
+      c.value === discardCard?.value || c.color === discardCard?.color
     ));
 
     if (card === undefined) {

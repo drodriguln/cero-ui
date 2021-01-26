@@ -1,9 +1,7 @@
 import { CardData } from '../../types';
 
 export enum DiscardAction {
-  ADD_CARD = 'DISCARD_ADD_CARD',
-  CLEAN = 'DISCARD_CLEAN'
+  SET_VALUE = 'DISCARD_SET_VALUE',
 }
 
-export const addDiscardCard = (card: CardData) => ({ type: DiscardAction.ADD_CARD, payload: card });
-export const cleanDiscardCards = () => ({ type: DiscardAction.CLEAN });
+export const setDiscard = (card: CardData) => ({ type: DiscardAction.SET_VALUE, payload: card });

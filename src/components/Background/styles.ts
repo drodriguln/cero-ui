@@ -5,22 +5,14 @@ const backgroundStyles = createStyles({
     position: 'absolute',
     height: '100%',
     width: '100%',
-    backgroundRepeat: 'no-repeat',
-    backgroundAttachment: 'fixed',
     minHeight: '100%',
   },
 });
 
-const useStyles = (previousCardColor: string, currentCardColor: string) => makeStyles({
-  previousImage: {
-    ...backgroundStyles.root,
-    backgroundImage: `radial-gradient(${previousCardColor}, ${previousCardColor})`,
-    zIndex: -1,
-    animation: '0.6s ease-in 0s 1 $fadeout',
-  },
+const useStyles = (currentCardColor: string) => makeStyles({
   currentImage: {
     ...backgroundStyles.root,
-    backgroundImage: `radial-gradient(${currentCardColor} 10%, ${previousCardColor})`,
+    backgroundColor: currentCardColor,
     zIndex: 0,
     animation: '0.6s ease-out 0s 1 $fadein',
   },

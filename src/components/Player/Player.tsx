@@ -4,14 +4,12 @@ import { makeStyles, Slide } from '@material-ui/core';
 
 import Hand from '../Hand';
 import { CardData } from '../../store/types';
-import { discardTopCardSelector } from '../../store/session/discard/selector';
+import { discardSelector } from '../../store/session/discard/selector';
 import { playerSelector } from '../../store/session/player/selector';
 import { opponentSelector } from '../../store/session/opponent/selector';
 import { removePlayerCard, setPlayerActivity } from '../../store/session/player/actions';
 import { setOpponentActivity } from '../../store/session/opponent/actions';
 import { addDiscardCard } from '../../store/session/discard/actions';
-import { sessionSelector } from '../../store/session/selector';
-import { updateSession } from '../../common/api';
 
 const useStyles = makeStyles({
   root: {
@@ -23,16 +21,15 @@ const useStyles = makeStyles({
 
 const Player = () => {
   const dispatch = useDispatch();
-  const session = useSelector(sessionSelector);
   const { cards, activity: playerActivity } = useSelector(playerSelector);
   const { activity: opponentActivity } = useSelector(opponentSelector);
-  const topDiscardCard = useSelector(discardTopCardSelector);
+  const discardCard = useSelector(discardSelector);
   const classes = useStyles();
   const hasCards = cards?.length !== 0;
   const hasGameEnded = opponentActivity === 'won' || playerActivity === 'won';
 
   const placeCard = (card: CardData) => {
-    if (topDiscardCard?.value !== card.value && topDiscardCard?.color !== card.color) {
+    if (discardCard?.value !== card.value && discardCard?.color !== card.color) {
       return;
     }
 
@@ -48,20 +45,26 @@ const Player = () => {
     if (card.value === 'skip' || card.value === 'reverse') {
       dispatch(setOpponentActivity('skipped'));
     } else {
+      /*
       updateSession(session)
         .then(() => {
           dispatch(setOpponentActivity('start'))
         });
+
+       */
     }
   };
 
   useEffect(() => {
     if (playerActivity === 'skipped') {
       dispatch(setPlayerActivity('end'));
+      /*
       updateSession(session)
         .then(() => {
           dispatch(setOpponentActivity('start'))
         });
+
+       */
     } else if (playerActivity === 'draw') {
       dispatch(setPlayerActivity('start'));
     }

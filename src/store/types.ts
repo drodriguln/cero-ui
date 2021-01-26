@@ -1,6 +1,5 @@
 import { Dispatch as ReduxDispatch, AnyAction } from 'redux';
 
-import { DeckStore } from './session/deck/reducer';
 import { DiscardStore } from './session/discard/reducer';
 import { OpponentStore } from './session/opponent/reducer';
 import { PlayerStore } from './session/player/reducer';
@@ -21,9 +20,17 @@ export type CardData = {
 
 export type Activity = 'initialize' | 'start' | 'draw' | 'skipped' | 'end' | 'won';
 
+export type ApiSession = {
+  id: IdStore,
+  discard: {
+    cards: CardData[];
+  },
+  opponent: OpponentStore,
+  player: PlayerStore,
+}
+
 export type Session = {
   id: IdStore,
-  deck: DeckStore,
   discard: DiscardStore,
   opponent: OpponentStore,
   player: PlayerStore,

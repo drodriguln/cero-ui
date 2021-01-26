@@ -9,6 +9,8 @@ export type PlayerStore = typeof initialState;
 
 const playerReducer = (state = initialState, action: Action) => {
   switch (action.type) {
+    case PlayerAction.SET_VALUE:
+      return action.payload;
     case PlayerAction.ADD_CARD:
       return { ...state, cards: [...state.cards, action.payload] };
     case PlayerAction.ADD_CARDS:

@@ -2,14 +2,18 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import Card from '../../Card';
-import { discardTopCardSelector } from '../../../store/session/discard/selector';
+import { discardSelector } from '../../../store/session/discard/selector';
 
 const Discard = () => {
-  const discardCard = useSelector(discardTopCardSelector);
+  const discardCard = useSelector(discardSelector);
 
-  return discardCard !== undefined
-    ? <Card color={discardCard.color} value={discardCard.value} size="lg" />
-    : null;
+  return (
+    <Card
+      color={discardCard.color}
+      value={discardCard.value}
+      size="lg"
+    />
+  );
 };
 
 export default Discard;

@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { useSelector } from 'react-redux';
-import { CardData } from '../../store/types';
-import { discardSelector, discardTopCardSelector } from '../../store/session/discard/selector';
+import { discardSelector } from '../../store/session/discard/selector';
 import useStyles from './styles';
 
 const backgroundColorMap = {
@@ -13,22 +12,13 @@ const backgroundColorMap = {
   gray: 'rgb(212, 212, 212)',
 };
 
-const createBackgroundColor = (previousCard?: CardData, currentCard?: CardData) => {
-  const previousColor = backgroundColorMap[previousCard?.color ?? 'gray'];
-  const currentColor = backgroundColorMap[currentCard?.color ?? 'gray'];
-  return { previous: previousColor, current: currentColor };
-};
-
 const Background = () => {
-  const discard = useSelector(discardSelector);
-  const currentCard = useSelector(discardTopCardSelector);
-  const previousCard = discard?.cards?.length > 1 ? discard?.cards?.[discard.cards?.length - 2] : undefined;
-  const backgroundColor = createBackgroundColor(previousCard, currentCard);
-  const classes = useStyles(backgroundColor.previous, backgroundColor.current)();
+  const discardCard = useSelector(discardSelector);
+  const backgroundColor = backgroundColorMap[discardCard?.color ?? 'gray'];
+  const classes = useStyles(backgroundColor)();
 
   return (
     <div>
-      <div className={classes.previousImage} />
       <div className={classes.currentImage} />
     </div>
   );

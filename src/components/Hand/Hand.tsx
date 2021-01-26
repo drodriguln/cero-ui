@@ -35,6 +35,7 @@ const useStyles = makeStyles({
   },
   card: {
     cursor: 'pointer',
+    padding: 2,
     transition: 'transform .1s ease-out',
     '&:hover': {
       transform: 'scale(1.1)',
@@ -74,7 +75,7 @@ const Hand = forwardRef((props: Props, ref) => {
   return (
     <CardMat ref={ref} className={classNames(classes.root, className)} zIndex={zIndex} raised={isActive}>
       <Paginator page={page} lastPage={lastPage} onChange={(pageNum: number) => setPage(pageNum)}>
-        <Grid container spacing={1} wrap="nowrap" className={classes.cards}>
+        <Grid container wrap="nowrap" className={classes.cards}>
           {cards
             .slice((page - 1) * maxCardsPerPage, page * maxCardsPerPage)
             .map((card) => (
