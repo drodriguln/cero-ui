@@ -13,7 +13,7 @@ import { addDiscardCard } from '../../store/session/discard/actions';
 import { addOpponentCard, removeOpponentCard, setOpponentActivity } from '../../store/session/opponent/actions';
 import { removeDeckCard } from '../../store/session/deck/actions';
 import { setPlayerActivity } from '../../store/session/player/actions';
-import { updateApiSession } from "../../common/api";
+import { updateSession } from "../../common/api";
 
 const useStyles = makeStyles({
   root: {
@@ -57,7 +57,7 @@ const Opponent = () => {
     if (card.value === 'skip' || card.value === 'reverse') {
       dispatch(setPlayerActivity('skipped'));
     } else {
-      updateApiSession(session)
+      updateSession(session)
         .then(() => {
           dispatch(setPlayerActivity('start'))
         });
@@ -69,7 +69,7 @@ const Opponent = () => {
       return;
     } if (opponentActivity === 'skipped') {
       dispatch(setOpponentActivity('end'));
-      updateApiSession(session)
+      updateSession(session)
         .then(() => {
           dispatch(setPlayerActivity('start'))
         });

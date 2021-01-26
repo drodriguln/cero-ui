@@ -1,6 +1,6 @@
-import { SessionStore } from '../store/types';
+import { Session } from '../store/types';
 
-export const updateApiSession = (session: SessionStore) => {
+export const updateSession = (session: Session): Promise<Session> => {
   return fetch(`http://localhost:8080/session/${session.id}`, {
     method: 'PUT',
     cache: 'no-cache',
@@ -12,14 +12,13 @@ export const updateApiSession = (session: SessionStore) => {
   .then((response) => response.json());
 }
 
-export const setApiSession = (session: SessionStore) => {
+export const createSession = (): Promise<Session> => {
   return fetch('http://localhost:8080/session', {
     method: 'POST',
     cache: 'no-cache',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(session),
   })
     .then((response) => response.json());
 }

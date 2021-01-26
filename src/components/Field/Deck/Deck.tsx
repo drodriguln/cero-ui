@@ -7,10 +7,9 @@ import Card from '../../Card';
 import { deckSelector, deckTopCardSelector } from '../../../store/session/deck/selector';
 import { discardSelector } from '../../../store/session/discard/selector';
 import { playerSelector } from '../../../store/session/player/selector';
-import { addDeckCards, removeDeckCard, removeDeckCards } from '../../../store/session/deck/actions';
+import { addDeckCards, removeDeckCard } from '../../../store/session/deck/actions';
 import { cleanDiscardCards } from '../../../store/session/discard/actions';
-import { addPlayerCard, addPlayerCards, setPlayerActivity } from '../../../store/session/player/actions';
-import { addOpponentCards, setOpponentActivity } from '../../../store/session/opponent/actions';
+import { addPlayerCard, setPlayerActivity } from '../../../store/session/player/actions';
 
 const useStyles = makeStyles({
   root: {
@@ -40,25 +39,16 @@ const Deck = () => {
     dispatch(removeDeckCard());
   };
 
-  useEffect(() => {
-    if (deck?.length < 8) return;
-    dispatch(addPlayerCards(deck.slice(deck.length - 8, deck.length - 1)));
-    dispatch(addOpponentCards(deck.slice(deck.length - 16, deck.length - 9)));
-    dispatch(removeDeckCards(14));
-    dispatch(setPlayerActivity('start'));
-    dispatch(setOpponentActivity('end'));
-  }, []);
-
   // Shuffle and move unused cards from discard pile into deck when it runs empty.
   useEffect(() => {
-    if (deck?.length > 0 || discard?.length < 2) {
+    if (deck?.cards?.length > 0 || discard?.cards?.length < 2) {
       return;
     }
-    const unusedDiscardCards = discard.slice(0, discard.length - 1);
+    const unusedDiscardCards = discard?.cards?.slice(0, discard?.cards?.length - 1);
     const shuffledDiscardCards = shuffle(unusedDiscardCards, { copy: true });
     dispatch(addDeckCards(shuffledDiscardCards));
     dispatch(cleanDiscardCards());
-  }, [deck?.length, discard?.length]);
+  }, [deck?.cards?.length, discard?.cards?.length]);
 
   return (
     <Card.Draw

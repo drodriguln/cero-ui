@@ -21,7 +21,7 @@ export type CardData = {
 
 export type Activity = 'initialize' | 'start' | 'draw' | 'skipped' | 'end' | 'won';
 
-export type SessionStore = {
+export type Session = {
   id: IdStore,
   deck: DeckStore,
   discard: DiscardStore,
@@ -29,7 +29,7 @@ export type SessionStore = {
   player: PlayerStore,
 }
 export type Store = {
-  session: SessionStore,
+  session: Session,
 }
 
 export type Dispatch = ReduxDispatch;

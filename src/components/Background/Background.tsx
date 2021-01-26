@@ -22,7 +22,7 @@ const createBackgroundColor = (previousCard?: CardData, currentCard?: CardData) 
 const Background = () => {
   const discard = useSelector(discardSelector);
   const currentCard = useSelector(discardTopCardSelector);
-  const previousCard = discard?.length > 1 ? discard[discard.length - 2] : undefined;
+  const previousCard = discard?.cards?.length > 1 ? discard?.cards?.[discard.cards?.length - 2] : undefined;
   const backgroundColor = createBackgroundColor(previousCard, currentCard);
   const classes = useStyles(backgroundColor.previous, backgroundColor.current)();
 

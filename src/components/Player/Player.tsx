@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles, Slide } from '@material-ui/core';
 
 import Hand from '../Hand';
-import { CardData, SessionStore } from '../../store/types';
+import { CardData } from '../../store/types';
 import { discardTopCardSelector } from '../../store/session/discard/selector';
 import { playerSelector } from '../../store/session/player/selector';
 import { opponentSelector } from '../../store/session/opponent/selector';
@@ -11,8 +11,7 @@ import { removePlayerCard, setPlayerActivity } from '../../store/session/player/
 import { setOpponentActivity } from '../../store/session/opponent/actions';
 import { addDiscardCard } from '../../store/session/discard/actions';
 import { sessionSelector } from '../../store/session/selector';
-import { setApiSession, updateApiSession } from '../../common/api';
-import { setId } from '../../store/session/id/actions';
+import { updateSession } from '../../common/api';
 
 const useStyles = makeStyles({
   root: {
@@ -49,7 +48,7 @@ const Player = () => {
     if (card.value === 'skip' || card.value === 'reverse') {
       dispatch(setOpponentActivity('skipped'));
     } else {
-      updateApiSession(session)
+      updateSession(session)
         .then(() => {
           dispatch(setOpponentActivity('start'))
         });
@@ -57,16 +56,9 @@ const Player = () => {
   };
 
   useEffect(() => {
-    setApiSession(session)
-      .then((session: SessionStore) => {
-        dispatch(setId(session.id))
-      });
-  }, []);
-
-  useEffect(() => {
     if (playerActivity === 'skipped') {
       dispatch(setPlayerActivity('end'));
-      updateApiSession(session)
+      updateSession(session)
         .then(() => {
           dispatch(setOpponentActivity('start'))
         });
