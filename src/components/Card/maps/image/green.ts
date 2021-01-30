@@ -9,7 +9,6 @@ import six from '../../assets/img/green/6.png';
 import seven from '../../assets/img/green/7.png';
 import eight from '../../assets/img/green/8.png';
 import nine from '../../assets/img/green/9.png';
-import reverse from '../../assets/img/green/reverse.png';
 import skip from '../../assets/img/green/skip.png';
 import { CardValue } from '../../../../enum';
 
@@ -24,7 +23,6 @@ const green: CardSrcMap = {
   [CardValue.SEVEN]: seven,
   [CardValue.EIGHT]: eight,
   [CardValue.NINE]: nine,
-  [CardValue.REVERSE]: reverse,
   [CardValue.SKIP]: skip,
 };
 

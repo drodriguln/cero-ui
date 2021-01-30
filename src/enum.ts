@@ -16,7 +16,6 @@ export enum CardValue {
   SEVEN = 'SEVEN',
   EIGHT = 'EIGHT',
   NINE = 'NINE',
-  REVERSE = 'REVERSE',
   SKIP = 'SKIP',
 }
 
