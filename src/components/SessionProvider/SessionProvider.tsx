@@ -2,16 +2,23 @@ import React, { ReactElement, ReactNode, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Typography } from '@material-ui/core';
 
-import { ApiSession } from "../../store/types";
-import { createSession } from "../../common/api";
-import { setPlayer } from "../../store/session/player/actions";
-import { setOpponent } from "../../store/session/opponent/actions";
-import { setId } from "../../store/session/id/actions";
-import { setDiscard } from "../../store/session/discard/actions";
+import { Session } from "../../store/types";
+import { setSession } from "../../store/session/actions";
 
 type Props = {
   children: ReactNode;
 };
+
+const createSession = (): Promise<Session> => {
+  return fetch('http://localhost:8080/session', {
+    method: 'POST',
+    cache: 'no-cache',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+    .then((response) => response.json());
+}
 
 const SessionProvider = ({ children }: Props) => {
   const [loading, setLoading] = useState(false);
@@ -20,11 +27,8 @@ const SessionProvider = ({ children }: Props) => {
   useEffect(() => {
     setLoading(true);
     createSession()
-      .then((session: ApiSession) => {
-        dispatch(setId(session.id))
-        dispatch(setPlayer(session.player));
-        dispatch(setOpponent(session.opponent));
-        dispatch(setDiscard(session.discard.cards[0]));
+      .then((session: Session) => {
+        setSession(dispatch, session);
       })
       .finally(() => setLoading(false));
   }, []);

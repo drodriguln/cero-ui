@@ -13,8 +13,8 @@ const backgroundColorMap = {
 };
 
 const Background = () => {
-  const discardCard = useSelector(discardSelector);
-  const backgroundColor = backgroundColorMap[discardCard?.color ?? 'gray'];
+  const discard = useSelector(discardSelector);
+  const backgroundColor = backgroundColorMap[discard.color ?? 'gray'];
   const classes = useStyles(backgroundColor)();
 
   return (

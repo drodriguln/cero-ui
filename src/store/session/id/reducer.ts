@@ -3,7 +3,7 @@ import { IdAction } from './actions';
 
 const initialState = '';
 
-export type IdStore = typeof initialState;
+export type Id = typeof initialState;
 
 const idReducer = (state = initialState, action: Action) => {
   switch (action.type) {

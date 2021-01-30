@@ -1,9 +1,9 @@
 import { Dispatch as ReduxDispatch, AnyAction } from 'redux';
 
-import { DiscardStore } from './session/discard/reducer';
-import { OpponentStore } from './session/opponent/reducer';
-import { PlayerStore } from './session/player/reducer';
-import { IdStore } from './session/id/reducer';
+import { Discard } from './session/discard/reducer';
+import { Opponent } from './session/opponent/reducer';
+import { Player } from './session/player/reducer';
+import { Id } from './session/id/reducer';
 
 export type CardValue = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | 'reverse' | 'skip';
 export type CardColor = 'blue' | 'green' | 'red' | 'yellow';
@@ -20,20 +20,11 @@ export type CardData = {
 
 export type Activity = 'initialize' | 'start' | 'draw' | 'skipped' | 'end' | 'won';
 
-export type ApiSession = {
-  id: IdStore,
-  discard: {
-    cards: CardData[];
-  },
-  opponent: OpponentStore,
-  player: PlayerStore,
-}
-
 export type Session = {
-  id: IdStore,
-  discard: DiscardStore,
-  opponent: OpponentStore,
-  player: PlayerStore,
+  id: Id,
+  discard: Discard,
+  opponent: Opponent,
+  player: Player,
 }
 export type Store = {
   session: Session,

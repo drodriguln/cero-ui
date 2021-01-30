@@ -1,9 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 
 import Card from '../../Card';
 import { playerSelector } from '../../../store/session/player/selector';
+import { idSelector } from "../../../store/session/id/selector";
+import { setPlayer } from "../../../store/session/player/actions";
+import { Player } from "../../../store/session/player/reducer";
 
 const useStyles = makeStyles({
   root: {
@@ -18,11 +21,31 @@ const useStyles = makeStyles({
   },
 });
 
+const drawCard = (sessionId: String, playerId: String): Promise<Player> => {
+  const url = `http://localhost:8080/session/${sessionId}/player/${playerId}/draw`;
+  return fetch(url, {
+    method: 'POST',
+    cache: 'no-cache',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+    .then((response) => response.json());
+}
+
 const Deck = () => {
+  const dispatch = useDispatch();
+  const sessionId = useSelector(idSelector);
   const { activity: playerActivity } = useSelector(playerSelector);
   const classes = useStyles();
 
-  const drawCard = () => {
+  const onClick = async () => {
+    if (playerActivity !== 'start') {
+      return;
+    }
+    const player = await drawCard(sessionId, 'player');
+    dispatch(setPlayer(player));
+
     // Replace with draw API endpoint
     /*
     if (topDeckCard === undefined) return;
@@ -49,7 +72,7 @@ const Deck = () => {
     <Card.Draw
       size="lg"
       className={classes.root}
-      onClick={playerActivity === 'start' ? drawCard : undefined}
+      onClick={onClick}
     />
   );
 };

@@ -15,7 +15,7 @@ type HandType = 'player' | 'opponent';
 type Props = {
   cards: CardData[];
   type: HandType;
-  onCardSelect: (card: CardData) => void;
+  onCardSelect?: (card: CardData) => void;
   className?: string;
 }
 
@@ -86,8 +86,8 @@ const Hand = forwardRef((props: Props, ref) => {
                     value={card.value}
                     hidden={type === 'opponent'}
                     onClick={() => {
-                      if (type === 'player' && playerActivity === 'start' && onCardSelect !== undefined) {
-                        onCardSelect(card);
+                      if (type === 'player' && playerActivity === 'start') {
+                        onCardSelect?.(card);
                       }
                     }}
                   />

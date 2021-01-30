@@ -5,12 +5,12 @@ import Card from '../../Card';
 import { discardSelector } from '../../../store/session/discard/selector';
 
 const Discard = () => {
-  const discardCard = useSelector(discardSelector);
+  const discard = useSelector(discardSelector);
 
   return (
     <Card
-      color={discardCard.color}
-      value={discardCard.value}
+      color={discard.color}
+      value={discard.value}
       size="lg"
     />
   );
