@@ -10,7 +10,7 @@ import { useOpponent } from '../../store/session/opponent/selector';
 import { removePlayerCard, setPlayerStatus } from '../../store/session/player/actions';
 import { setSession } from '../../store/session/actions';
 import { setDiscard } from '../../store/session/discard/actions';
-import { Status } from '../../enum';
+import { PlayerStatus } from '../../enum';
 import { CardData, Session } from '../../types';
 
 const useStyles = makeStyles({
@@ -42,7 +42,7 @@ const Player = () => {
   const discard = useDiscard();
   const classes = useStyles();
   const hasCards = cards?.length !== 0;
-  const hasGameEnded = opponentStatus === Status.WON || playerStatus === Status.WON;
+  const hasGameEnded = opponentStatus === PlayerStatus.WON || playerStatus === PlayerStatus.WON;
 
   const onSelect = async (card: CardData) => {
     if (discard.value !== card.value && discard.color !== card.color) {
@@ -50,7 +50,7 @@ const Player = () => {
     }
 
     // Set card temporarily so another card can't be placed while the API updates the session
-    dispatch(setPlayerStatus(Status.END));
+    dispatch(setPlayerStatus(PlayerStatus.END));
     dispatch(removePlayerCard(card));
     dispatch(setDiscard(card));
 

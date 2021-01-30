@@ -1,4 +1,4 @@
-import { Status } from '../../../enum';
+import { PlayerStatus } from '../../../enum';
 import { CardData, Player } from '../../../types';
 
 export enum PlayerAction {
@@ -8,5 +8,5 @@ export enum PlayerAction {
 }
 
 export const setPlayer = (player: Player) => ({ type: PlayerAction.SET_VALUE, payload: player });
-export const setPlayerStatus = (status: Status) => ({ type: PlayerAction.SET_STATUS, payload: status });
+export const setPlayerStatus = (status: PlayerStatus) => ({ type: PlayerAction.SET_STATUS, payload: status });
 export const removePlayerCard = (card: CardData) => ({ type: PlayerAction.REMOVE_CARD, payload: card });

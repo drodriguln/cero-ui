@@ -8,7 +8,7 @@ import Paginator from './Paginator';
 import { CardData } from '../../types';
 import { usePlayer } from '../../store/session/player/selector';
 import { useOpponent } from '../../store/session/opponent/selector';
-import { Status } from '../../enum';
+import { PlayerStatus } from '../../enum';
 
 type HandType = 'player' | 'opponent';
 
@@ -52,8 +52,8 @@ const Hand = forwardRef((props: Props, ref) => {
   } = props;
   const { status: playerStatus } = usePlayer();
   const { status: opponentStatus } = useOpponent();
-  const isActive = type === 'player' && (playerStatus === Status.START)
-    || type === 'opponent' && (opponentStatus === Status.START);
+  const isActive = type === 'player' && (playerStatus === PlayerStatus.START)
+    || type === 'opponent' && (opponentStatus === PlayerStatus.START);
   const zIndex = type === 'opponent' ? 1 : 2;
   const classes = useStyles({ isActive });
   const [page, setPage] = useState(1);
@@ -86,7 +86,7 @@ const Hand = forwardRef((props: Props, ref) => {
                     value={card.value}
                     hidden={type === 'opponent'}
                     onClick={() => {
-                      if (type === 'player' && playerStatus === Status.START) {
+                      if (type === 'player' && playerStatus === PlayerStatus.START) {
                         onCardSelect?.(card);
                       }
                     }}

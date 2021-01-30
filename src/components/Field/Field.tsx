@@ -7,7 +7,7 @@ import Discard from './Discard';
 import { usePlayer } from '../../store/session/player/selector';
 import { useOpponent } from '../../store/session/opponent/selector';
 import GlowTypography from '../GlowTypography';
-import { Status } from '../../enum';
+import { PlayerStatus } from '../../enum';
 
 const useStyles = makeStyles({
   root: {
@@ -36,9 +36,9 @@ const Hand = () => {
 
   return (
     <CardMat className={classes.root}>
-      {playerStatus === Status.WON || opponentStatus === Status.WON ? (
+      {playerStatus === PlayerStatus.WON || opponentStatus === PlayerStatus.WON ? (
         <GlowTypography variant="h4">
-          {playerStatus === Status.WON ? 'You win!' : 'Opponent wins!'}
+          {playerStatus === PlayerStatus.WON ? 'You win!' : 'Opponent wins!'}
         </GlowTypography>
       ) : (
         <Grid container spacing={8} wrap="nowrap">

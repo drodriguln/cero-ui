@@ -3,7 +3,8 @@ import React from 'react';
 import backImageSrc from './assets/img/back.png';
 import drawImageSrc from './assets/img/draw.png';
 import { imageMap, sizeMap } from './maps';
-import { CardColor, CardSize, CardValue } from '../../types';
+import { CardColor } from '../../enum';
+import { CardSize, CardValue } from '../../types';
 
 type Props = {
   value: CardValue;

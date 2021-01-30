@@ -4,7 +4,7 @@ import { makeStyles, Slide } from '@material-ui/core';
 import Hand from '../Hand';
 import { useOpponent } from '../../store/session/opponent/selector';
 import { usePlayer } from '../../store/session/player/selector';
-import { Status } from '../../enum';
+import { PlayerStatus } from '../../enum';
 
 const useStyles = makeStyles({
   root: {
@@ -19,7 +19,7 @@ const Opponent = () => {
   const { status: playerStatus } = usePlayer();
   const classes = useStyles();
   const hasCards = cards?.length !== 0;
-  const hasGameEnded = opponentStatus === Status.WON || playerStatus === Status.WON;
+  const hasGameEnded = opponentStatus === PlayerStatus.WON || playerStatus === PlayerStatus.WON;
 
   return (
     <Slide

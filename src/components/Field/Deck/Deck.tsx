@@ -7,7 +7,7 @@ import { usePlayer } from '../../../store/session/player/selector';
 import { useId } from '../../../store/session/id/selector';
 import { setPlayer } from '../../../store/session/player/actions';
 import { Player } from '../../../types';
-import { Status } from '../../../enum';
+import { PlayerStatus } from '../../../enum';
 
 const useStyles = makeStyles({
   root: {
@@ -41,7 +41,7 @@ const Deck = () => {
   const classes = useStyles();
 
   const onClick = async () => {
-    if (playerStatus !== Status.START) {
+    if (playerStatus !== PlayerStatus.START) {
       return;
     }
 
