@@ -3,8 +3,9 @@ import React from 'react';
 import backImageSrc from './assets/img/back.png';
 import drawImageSrc from './assets/img/draw.png';
 import { imageMap, sizeMap } from './maps';
-import { CardColor } from '../../enum';
-import { CardSize, CardValue } from '../../types';
+import { CardColor, CardValue } from '../../enum';
+
+type CardSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 type Props = {
   value: CardValue;

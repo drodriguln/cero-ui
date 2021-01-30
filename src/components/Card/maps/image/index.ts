@@ -2,8 +2,7 @@ import blue from './blue';
 import green from './green';
 import red from './red';
 import yellow from './yellow';
-import { CardColor } from '../../../../enum';
-import { CardValue } from '../../../../types';
+import { CardColor, CardValue } from '../../../../enum';
 
 export type CardSrcMap = {
   [key in CardValue]: string;

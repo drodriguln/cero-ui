@@ -21,12 +21,12 @@ const useStyles = (currentCardColor: string) => makeStyles({
       opacity: 1,
     },
     to: {
-      opacity: 0.65,
+      opacity: 0.6,
     },
   },
   '@keyframes fadein': {
     from: {
-      opacity: 0.65,
+      opacity: 0.6,
     },
     to: {
       opacity: 1,
