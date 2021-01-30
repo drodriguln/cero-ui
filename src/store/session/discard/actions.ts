@@ -1,4 +1,4 @@
-import { CardData } from '../../types';
+import { CardData } from '../../../types';
 
 export enum DiscardAction {
   SET_VALUE = 'DISCARD_SET_VALUE',

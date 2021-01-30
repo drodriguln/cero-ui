@@ -6,9 +6,10 @@ import { useSelector } from 'react-redux';
 import CardMat from '../CardMat';
 import Card from '../Card';
 import Paginator from './Paginator';
-import { CardData } from '../../store/types';
+import { CardData } from '../../types';
 import { playerSelector } from '../../store/session/player/selector';
 import { opponentSelector } from '../../store/session/opponent/selector';
+import { Status } from '../../enum';
 
 type HandType = 'player' | 'opponent';
 
@@ -50,10 +51,10 @@ const Hand = forwardRef((props: Props, ref) => {
   const {
     cards = [], type, onCardSelect, className,
   } = props;
-  const { activity: playerActivity } = useSelector(playerSelector);
-  const { activity: opponentActivity } = useSelector(opponentSelector);
-  const isActive = type === 'player' && (playerActivity === 'start' || playerActivity === 'draw')
-    || type === 'opponent' && (opponentActivity === 'start' || opponentActivity === 'draw');
+  const { status: playerStatus } = useSelector(playerSelector);
+  const { status: opponentStatus } = useSelector(opponentSelector);
+  const isActive = type === 'player' && (playerStatus === Status.START)
+    || type === 'opponent' && (opponentStatus === Status.START);
   const zIndex = type === 'opponent' ? 1 : 2;
   const classes = useStyles({ isActive });
   const [page, setPage] = useState(1);
@@ -86,7 +87,7 @@ const Hand = forwardRef((props: Props, ref) => {
                     value={card.value}
                     hidden={type === 'opponent'}
                     onClick={() => {
-                      if (type === 'player' && playerActivity === 'start') {
+                      if (type === 'player' && playerStatus === Status.START) {
                         onCardSelect?.(card);
                       }
                     }}

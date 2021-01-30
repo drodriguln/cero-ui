@@ -1,4 +1,4 @@
-import { CardColor, CardValue } from '../../../../store/types';
+import { CardColor, CardValue } from '../../../../types';
 import blue from './blue';
 import green from './green';
 import red from './red';

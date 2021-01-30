@@ -1,11 +1,12 @@
-import { Action, Activity, CardData } from '../../types';
 import { OpponentAction } from './actions';
+import { Status } from '../../../enum';
+import { Action } from '../../types';
+import { CardData, Player } from '../../../types';
 
-const initialState = {
+const initialState: Player = {
   cards: [] as CardData[],
-  activity: 'initialize' as Activity,
+  status: Status.INITIALIZE,
 };
-export type Opponent = typeof initialState;
 
 const opponentReducer = (state = initialState, action: Action) => {
   switch (action.type) {

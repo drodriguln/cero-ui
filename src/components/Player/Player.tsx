@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles, Slide } from '@material-ui/core';
 
 import Hand from '../Hand';
-import { CardData, Session } from '../../store/types';
 import { idSelector } from '../../store/session/id/selector';
 import { discardSelector } from '../../store/session/discard/selector';
 import { playerSelector } from '../../store/session/player/selector';
 import { opponentSelector } from '../../store/session/opponent/selector';
-import { setPlayerActivity } from '../../store/session/player/actions';
-import { setSession } from "../../store/session/actions";
-import { setDiscard } from "../../store/session/discard/actions";
+import { removePlayerCard, setPlayerStatus } from '../../store/session/player/actions';
+import { setSession } from '../../store/session/actions';
+import { setDiscard } from '../../store/session/discard/actions';
+import { Status } from '../../enum';
+import { CardData, Session } from '../../types';
 
 const useStyles = makeStyles({
   root: {
@@ -36,24 +37,21 @@ const executeTurn = (sessionId: String, playerId: String, card: CardData): Promi
 const Player = () => {
   const dispatch = useDispatch();
   const sessionId = useSelector(idSelector);
-  const { cards, activity: playerActivity } = useSelector(playerSelector);
-  const { activity: opponentActivity } = useSelector(opponentSelector);
+  const { cards, status: playerStatus } = useSelector(playerSelector);
+  const { status: opponentStatus } = useSelector(opponentSelector);
   const discard = useSelector(discardSelector);
   const classes = useStyles();
   const hasCards = cards?.length !== 0;
-  const hasGameEnded = opponentActivity === 'won' || playerActivity === 'won';
+  const hasGameEnded = opponentStatus === Status.WON || playerStatus === Status.WON;
 
   const onSelect = async (card: CardData) => {
     if (discard.value !== card.value && discard.color !== card.color) {
       return;
     }
 
-    if (cards?.length === 1 && opponentActivity !== 'initialize') {
-      dispatch(setPlayerActivity('won'));
-      return;
-    }
-
-    // Show placed card in the UI temporarily while the API updates the session
+    // Set card temporarily so another card can't be placed while the API updates the session
+    dispatch(setPlayerStatus(Status.END));
+    dispatch(removePlayerCard(card));
     dispatch(setDiscard(card));
 
     const session = await executeTurn(sessionId, 'player', card);

@@ -1,8 +1,8 @@
-import { Action, CardData } from '../../types';
+import { Action } from '../../types';
+import { Discard } from '../../../types';
 import { DiscardAction } from './actions';
 
-const initialState = {} as CardData;
-export type Discard = typeof initialState;
+const initialState = {} as Discard;
 
 const discardReducer = (state = initialState, action: Action) => {
   switch (action.type) {
