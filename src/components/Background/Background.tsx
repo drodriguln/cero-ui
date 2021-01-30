@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
-import { discardSelector } from '../../store/session/discard/selector';
+import { useDiscard } from '../../store/session/discard/selector';
 import useStyles from './styles';
 
 const backgroundColorMap = {
@@ -13,7 +12,7 @@ const backgroundColorMap = {
 };
 
 const Background = () => {
-  const discard = useSelector(discardSelector);
+  const discard = useDiscard();
   const backgroundColor = backgroundColorMap[discard.color ?? 'gray'];
   const classes = useStyles(backgroundColor)();
 

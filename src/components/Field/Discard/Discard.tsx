@@ -1,11 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import Card from '../../Card';
-import { discardSelector } from '../../../store/session/discard/selector';
+import { useDiscard } from '../../../store/session/discard/selector';
 
 const Discard = () => {
-  const discard = useSelector(discardSelector);
+  const discard = useDiscard();
 
   return (
     <Card

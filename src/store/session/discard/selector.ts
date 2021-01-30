@@ -1,3 +1,6 @@
 import { Store } from '../../types';
+import { useSelector } from 'react-redux';
 
-export const discardSelector = (state: Store) => state.session.discard;
+export const useDiscard = () => {
+  return useSelector((state: Store) => state.session.discard);
+}

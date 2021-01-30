@@ -1,10 +1,10 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 
 import Card from '../../Card';
-import { playerSelector } from '../../../store/session/player/selector';
-import { idSelector } from '../../../store/session/id/selector';
+import { usePlayer } from '../../../store/session/player/selector';
+import { useId } from '../../../store/session/id/selector';
 import { setPlayer } from '../../../store/session/player/actions';
 import { Player } from '../../../types';
 import { Status } from '../../../enum';
@@ -36,8 +36,8 @@ const drawCard = (sessionId: String, playerId: String): Promise<Player> => {
 
 const Deck = () => {
   const dispatch = useDispatch();
-  const sessionId = useSelector(idSelector);
-  const { status: playerStatus } = useSelector(playerSelector);
+  const sessionId = useId();
+  const { status: playerStatus } = usePlayer();
   const classes = useStyles();
 
   const onClick = async () => {

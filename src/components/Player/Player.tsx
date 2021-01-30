@@ -1,12 +1,12 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { makeStyles, Slide } from '@material-ui/core';
 
 import Hand from '../Hand';
-import { idSelector } from '../../store/session/id/selector';
-import { discardSelector } from '../../store/session/discard/selector';
-import { playerSelector } from '../../store/session/player/selector';
-import { opponentSelector } from '../../store/session/opponent/selector';
+import { useId } from '../../store/session/id/selector';
+import { useDiscard } from '../../store/session/discard/selector';
+import { usePlayer } from '../../store/session/player/selector';
+import { useOpponent } from '../../store/session/opponent/selector';
 import { removePlayerCard, setPlayerStatus } from '../../store/session/player/actions';
 import { setSession } from '../../store/session/actions';
 import { setDiscard } from '../../store/session/discard/actions';
@@ -36,10 +36,10 @@ const executeTurn = (sessionId: String, playerId: String, card: CardData): Promi
 
 const Player = () => {
   const dispatch = useDispatch();
-  const sessionId = useSelector(idSelector);
-  const { cards, status: playerStatus } = useSelector(playerSelector);
-  const { status: opponentStatus } = useSelector(opponentSelector);
-  const discard = useSelector(discardSelector);
+  const sessionId = useId();
+  const { cards, status: playerStatus } = usePlayer();
+  const { status: opponentStatus } = useOpponent();
+  const discard = useDiscard();
   const classes = useStyles();
   const hasCards = cards?.length !== 0;
   const hasGameEnded = opponentStatus === Status.WON || playerStatus === Status.WON;

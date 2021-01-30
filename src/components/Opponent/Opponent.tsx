@@ -1,10 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { makeStyles, Slide } from '@material-ui/core';
 
 import Hand from '../Hand';
-import { opponentSelector } from '../../store/session/opponent/selector';
-import { playerSelector } from '../../store/session/player/selector';
+import { useOpponent } from '../../store/session/opponent/selector';
+import { usePlayer } from '../../store/session/player/selector';
 import { Status } from '../../enum';
 
 const useStyles = makeStyles({
@@ -16,8 +15,8 @@ const useStyles = makeStyles({
 });
 
 const Opponent = () => {
-  const { cards, status: opponentStatus } = useSelector(opponentSelector);
-  const { status: playerStatus } = useSelector(playerSelector);
+  const { cards, status: opponentStatus } = useOpponent();
+  const { status: playerStatus } = usePlayer();
   const classes = useStyles();
   const hasCards = cards?.length !== 0;
   const hasGameEnded = opponentStatus === Status.WON || playerStatus === Status.WON;

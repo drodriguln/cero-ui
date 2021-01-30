@@ -1,12 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Grid, makeStyles } from '@material-ui/core';
 
 import CardMat from '../CardMat';
 import Deck from './Deck';
 import Discard from './Discard';
-import { playerSelector } from '../../store/session/player/selector';
-import { opponentSelector } from '../../store/session/opponent/selector';
+import { usePlayer } from '../../store/session/player/selector';
+import { useOpponent } from '../../store/session/opponent/selector';
 import GlowTypography from '../GlowTypography';
 import { Status } from '../../enum';
 
@@ -31,8 +30,8 @@ const useStyles = makeStyles({
 });
 
 const Hand = () => {
-  const { status: playerStatus } = useSelector(playerSelector);
-  const { status: opponentStatus } = useSelector(opponentSelector);
+  const { status: playerStatus } = usePlayer();
+  const { status: opponentStatus } = useOpponent();
   const classes = useStyles();
 
   return (

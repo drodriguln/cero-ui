@@ -1,5 +1,6 @@
 import { Store } from '../../types';
+import { useSelector } from 'react-redux';
 
-export const playerSelector = (state: Store) => {
-    return state.session.player;
-};
+export const usePlayer = () => {
+    return useSelector((state: Store) => state.session.player);
+}

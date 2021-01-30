@@ -2,13 +2,12 @@ import React, { forwardRef, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Grid, Grow, makeStyles } from '@material-ui/core';
 
-import { useSelector } from 'react-redux';
 import CardMat from '../CardMat';
 import Card from '../Card';
 import Paginator from './Paginator';
 import { CardData } from '../../types';
-import { playerSelector } from '../../store/session/player/selector';
-import { opponentSelector } from '../../store/session/opponent/selector';
+import { usePlayer } from '../../store/session/player/selector';
+import { useOpponent } from '../../store/session/opponent/selector';
 import { Status } from '../../enum';
 
 type HandType = 'player' | 'opponent';
@@ -51,8 +50,8 @@ const Hand = forwardRef((props: Props, ref) => {
   const {
     cards = [], type, onCardSelect, className,
   } = props;
-  const { status: playerStatus } = useSelector(playerSelector);
-  const { status: opponentStatus } = useSelector(opponentSelector);
+  const { status: playerStatus } = usePlayer();
+  const { status: opponentStatus } = useOpponent();
   const isActive = type === 'player' && (playerStatus === Status.START)
     || type === 'opponent' && (opponentStatus === Status.START);
   const zIndex = type === 'opponent' ? 1 : 2;
