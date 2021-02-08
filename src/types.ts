@@ -15,13 +15,9 @@ export type Player = {
   cards: CardData[],
   status: PlayerStatus,
 };
-export type Opponent = {
-  cardCount: number,
-  status: PlayerStatus,
-};
 
 export type Session = {
   discard: Discard,
-  opponent: Opponent,
+  opponent: Player,
   player: Player,
 }

@@ -1,10 +1,10 @@
 import { OpponentAction } from './actions';
 import { PlayerStatus } from '../../../enum';
 import { Action } from '../../types';
-import { Opponent } from '../../../types';
+import { CardData, Player } from '../../../types';
 
-const initialState: Opponent = {
-  cardCount: 0,
+const initialState: Player = {
+  cards: [] as CardData[],
   status: PlayerStatus.INITIALIZE,
 };
 
