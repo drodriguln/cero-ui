@@ -1,8 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { makeStyles, Slide } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 
-import Hand from '../Hand';
 import { useId } from '../../store/session/id/selector';
 import { useDiscard } from '../../store/session/discard/selector';
 import { usePlayer } from '../../store/session/player/selector';
@@ -12,14 +11,7 @@ import { setSession } from '../../store/session/actions';
 import { setDiscard } from '../../store/session/discard/actions';
 import { PlayerStatus } from '../../enum';
 import { CardData, Session } from '../../types';
-
-const useStyles = makeStyles({
-  root: {
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-  },
-});
+import PlayerHand from "./PlayerHand";
 
 const executeTurn = (sessionId: String, card: CardData): Promise<Session> => {
   const url = `/api/sessions/${sessionId}/discard`;
@@ -40,7 +32,6 @@ const Player = () => {
   const { cards, status: playerStatus } = usePlayer();
   const { status: opponentStatus } = useOpponent();
   const discard = useDiscard();
-  const classes = useStyles();
   const hasCards = cards?.length !== 0;
   const hasGameEnded = opponentStatus === PlayerStatus.WON || playerStatus === PlayerStatus.WON;
 
@@ -65,12 +56,7 @@ const Player = () => {
       in={hasCards && !hasGameEnded}
       exit={!hasCards || hasGameEnded}
     >
-      <Hand
-        cards={cards}
-        onCardSelect={onSelect}
-        className={classes.root}
-        type="player"
-      />
+      <PlayerHand onCardSelect={onSelect} />
     </Slide>
   );
 };
