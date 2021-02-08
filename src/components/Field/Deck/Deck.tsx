@@ -22,8 +22,8 @@ const useStyles = makeStyles({
   },
 });
 
-const drawCard = (sessionId: String, playerId: String): Promise<Player> => {
-  const url = `http://localhost:8080/session/${sessionId}/player/${playerId}/draw`;
+const drawCard = (sessionId: String): Promise<Player> => {
+  const url = `/api/sessions/${sessionId}/draw`;
   return fetch(url, {
     method: 'POST',
     cache: 'no-cache',
@@ -45,7 +45,7 @@ const Deck = () => {
       return;
     }
 
-    const player = await drawCard(sessionId, 'player');
+    const player = await drawCard(sessionId);
     dispatch(setPlayer(player));
   };
 

@@ -10,7 +10,7 @@ type Props = {
 };
 
 const createSession = (): Promise<Session> => {
-  return fetch('http://localhost:8080/session', {
+  return fetch('/api/sessions', {
     method: 'POST',
     cache: 'no-cache',
     headers: {

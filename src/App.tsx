@@ -7,7 +7,7 @@ import Field from './components/Field';
 import Opponent from './components/Opponent';
 import Player from './components/Player';
 import Background from './components/Background';
-import {SessionProvider} from "./components/SessionProvider";
+import { SessionProvider } from "./components/SessionProvider";
 
 const useGlobalStyles = makeStyles({
   '@global': {

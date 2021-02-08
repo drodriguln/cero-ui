@@ -21,8 +21,8 @@ const useStyles = makeStyles({
   },
 });
 
-const executeTurn = (sessionId: String, playerId: String, card: CardData): Promise<Session> => {
-  const url = `http://localhost:8080/session/${sessionId}/player/${playerId}/discard`;
+const executeTurn = (sessionId: String, card: CardData): Promise<Session> => {
+  const url = `/api/sessions/${sessionId}/discard`;
   return fetch(url, {
     method: 'POST',
     cache: 'no-cache',
@@ -54,7 +54,7 @@ const Player = () => {
     dispatch(removePlayerCard(card));
     dispatch(setDiscard(card));
 
-    const session = await executeTurn(sessionId, 'player', card);
+    const session = await executeTurn(sessionId, card);
     setSession(dispatch, session);
   };
 
