@@ -17,6 +17,7 @@ export type Player = {
 };
 
 export type Session = {
+  id: string,
   discard: Discard,
   opponent: Player,
   player: Player,

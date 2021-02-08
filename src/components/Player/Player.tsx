@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { makeStyles, Slide } from '@material-ui/core';
 
 import Hand from '../Hand';
+import { useId } from '../../store/session/id/selector';
 import { useDiscard } from '../../store/session/discard/selector';
 import { usePlayer } from '../../store/session/player/selector';
 import { useOpponent } from '../../store/session/opponent/selector';
@@ -20,12 +21,11 @@ const useStyles = makeStyles({
   },
 });
 
-const executeTurn = (playerId: String, card: CardData): Promise<Session> => {
-  const url = `/api/players/${playerId}/discard`;
+const executeTurn = (sessionId: String, playerId: String, card: CardData): Promise<Session> => {
+  const url = `http://localhost:8080/session/${sessionId}/player/${playerId}/discard`;
   return fetch(url, {
     method: 'POST',
     cache: 'no-cache',
-    credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -36,6 +36,7 @@ const executeTurn = (playerId: String, card: CardData): Promise<Session> => {
 
 const Player = () => {
   const dispatch = useDispatch();
+  const sessionId = useId();
   const { cards, status: playerStatus } = usePlayer();
   const { status: opponentStatus } = useOpponent();
   const discard = useDiscard();
@@ -53,7 +54,7 @@ const Player = () => {
     dispatch(removePlayerCard(card));
     dispatch(setDiscard(card));
 
-    const session = await executeTurn('player', card);
+    const session = await executeTurn(sessionId, 'player', card);
     setSession(dispatch, session);
   };
 
