@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
 
 import CardMat from '../CardMat';
@@ -8,6 +8,7 @@ import { usePlayer } from '../../store/session/player/selector';
 import { useOpponent } from '../../store/session/opponent/selector';
 import GlowTypography from '../GlowTypography';
 import { PlayerStatus } from '../../enum';
+import { useId } from "../../store/session/id/selector";
 
 const useStyles = makeStyles({
   root: {
@@ -29,14 +30,36 @@ const useStyles = makeStyles({
   },
 });
 
+const deleteSession = (sessionId: string) => {
+  return fetch(`/api/sessions/${sessionId}`, {
+    method: 'DELETE',
+    cache: 'no-cache',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  });
+}
+
 const Hand = () => {
+  const sessionId = useId();
   const { status: playerStatus } = usePlayer();
   const { status: opponentStatus } = useOpponent();
+  const hasWinner = playerStatus === PlayerStatus.WON || opponentStatus === PlayerStatus.WON;
   const classes = useStyles();
+
+  useEffect(() => {
+    if (!hasWinner) {
+      return;
+    }
+
+    (async () => {
+      await deleteSession(sessionId);
+    })();
+  }, [hasWinner]);
 
   return (
     <CardMat className={classes.root}>
-      {playerStatus === PlayerStatus.WON || opponentStatus === PlayerStatus.WON ? (
+      {hasWinner ? (
         <GlowTypography variant="h4">
           {playerStatus === PlayerStatus.WON ? 'You win!' : 'Opponent wins!'}
         </GlowTypography>
