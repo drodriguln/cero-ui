@@ -7,6 +7,7 @@
     "clean": "rm -rf dist",
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
+    "start": "webpack-dev-server --mode production",
     "start:dev": "webpack-dev-server --mode development",
     "lint": "eslint --ext .ts,.tsx ./src",
     "lint:fix": "npm run lint -- --fix"
