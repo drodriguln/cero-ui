@@ -68,7 +68,7 @@ const Hand = forwardRef((props: Props, ref) => {
           {(React.Children.toArray(children) as ReactElement[])
             .slice((page - 1) * MAX_CARDS_PER_PAGE, page * MAX_CARDS_PER_PAGE)
             .map((child) => (
-              <Grid key={child?.props?.key} item className={isSelectable ? classes.selectableCard : undefined}>
+              <Grid key={child?.key} item className={isSelectable ? classes.selectableCard : undefined}>
                 <Grow timeout={400} in>
                   {child}
                 </Grow>
