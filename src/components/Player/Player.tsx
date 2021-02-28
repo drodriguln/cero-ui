@@ -1,58 +1,53 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { makeStyles, Slide } from '@material-ui/core';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Slide } from '@material-ui/core';
 
-import Hand from '../Hand';
-import { CardData } from '../../store/types';
-import { discardTopCardSelector } from '../../store/discard/selector';
-import { playerSelector } from '../../store/player/selector';
-import { opponentSelector } from '../../store/opponent/selector';
-import { removePlayerCard, setPlayerActivity } from '../../store/player/actions';
-import { setOpponentActivity } from '../../store/opponent/actions';
-import { addDiscardCard } from '../../store/discard/actions';
+import { useId } from '../../store/session/id/selector';
+import { useDiscard } from '../../store/session/discard/selector';
+import { usePlayer } from '../../store/session/player/selector';
+import { useOpponent } from '../../store/session/opponent/selector';
+import { removePlayerCard, setPlayerStatus } from '../../store/session/player/actions';
+import { setSession } from '../../store/session/actions';
+import { setDiscard } from '../../store/session/discard/actions';
+import { PlayerStatus } from '../../enum';
+import { CardData, Session } from '../../types';
+import PlayerHand from "./PlayerHand";
 
-const useStyles = makeStyles({
-  root: {
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-  },
-});
+const executeTurn = (sessionId: String, card: CardData): Promise<Session> => {
+  const url = `/api/sessions/${sessionId}/discard`;
+  return fetch(url, {
+    method: 'POST',
+    cache: 'no-cache',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(card),
+  })
+    .then((response) => response.json());
+}
 
 const Player = () => {
   const dispatch = useDispatch();
-  const { cards, activity: playerActivity } = useSelector(playerSelector);
-  const { activity: opponentActivity } = useSelector(opponentSelector);
-  const topDiscardCard = useSelector(discardTopCardSelector);
-  const classes = useStyles();
+  const sessionId = useId();
+  const { cards, status: playerStatus } = usePlayer();
+  const { status: opponentStatus } = useOpponent();
+  const discard = useDiscard();
   const hasCards = cards?.length !== 0;
-  const hasGameEnded = opponentActivity === 'won' || playerActivity === 'won';
+  const hasGameEnded = opponentStatus === PlayerStatus.WON || playerStatus === PlayerStatus.WON;
 
-  const placeCard = (card: CardData) => {
-    if (topDiscardCard?.value !== card.value && topDiscardCard?.color !== card.color) {
+  const onSelect = async (card: CardData) => {
+    if (discard.value !== card.value && discard.color !== card.color) {
       return;
     }
 
-    if (cards?.length === 1 && opponentActivity !== 'initialize') {
-      dispatch(setPlayerActivity('won'));
-      return;
-    }
+    // Set card temporarily so another card can't be placed while the API updates the session
+    dispatch(setPlayerStatus(PlayerStatus.END));
+    dispatch(removePlayerCard(card));
+    dispatch(setDiscard(card));
 
-    const doSkipOpponent = card.value === 'skip' || card.value === 'reverse';
-    dispatch(addDiscardCard(card));
-    dispatch(removePlayerCard(card.id));
-    dispatch(setPlayerActivity('end'));
-    dispatch(setOpponentActivity(doSkipOpponent ? 'skipped' : 'start'));
+    const session = await executeTurn(sessionId, card);
+    setSession(dispatch, session);
   };
-
-  useEffect(() => {
-    if (playerActivity === 'skipped') {
-      dispatch(setPlayerActivity('end'));
-      dispatch(setOpponentActivity('start'));
-    } else if (playerActivity === 'draw') {
-      dispatch(setPlayerActivity('start'));
-    }
-  }, [playerActivity]);
 
   return (
     <Slide
@@ -61,7 +56,7 @@ const Player = () => {
       in={hasCards && !hasGameEnded}
       exit={!hasCards || hasGameEnded}
     >
-      <Hand cards={cards} onCardSelect={placeCard} className={classes.root} type="player" />
+      <PlayerHand onCardSelect={onSelect} />
     </Slide>
   );
 };

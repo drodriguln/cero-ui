@@ -1,31 +1,23 @@
 import React, { forwardRef, ReactNode } from 'react';
-import classNames from 'classnames';
-import { Card as MuiCard, makeStyles } from '@material-ui/core';
+import { Card as MuiCard } from '@material-ui/core';
 
 type Props = {
   zIndex?: number;
   raised?: boolean;
+  transparent?: boolean;
   className?: string;
   children: ReactNode;
 }
 
-type StyleProps = {
-  zIndex: number;
-}
-
-const useStyles = makeStyles({
-  root: ({ zIndex }: StyleProps) => ({
-    backgroundColor: 'rgba(40, 40, 40, 0.1)',
-    zIndex,
-  }),
-});
-
 const CardMat = forwardRef(({
   zIndex = 0, raised = false, className, children,
 }: Props, ref) => {
-  const classes = useStyles({ zIndex });
+  const style = {
+    backgroundColor: !raised ? 'rgba(40, 40, 40, 0.1)' : 'rgba(160, 160, 160, 0.5)',
+    zIndex,
+  }
   return (
-    <MuiCard ref={ref} className={classNames(classes.root, className)} raised={raised}>
+    <MuiCard ref={ref} style={style} className={className} raised={raised}>
       {children}
     </MuiCard>
   );

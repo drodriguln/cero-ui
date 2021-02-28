@@ -1,8 +1,8 @@
-import { CardColor, CardValue } from '../../../../store/types';
 import blue from './blue';
 import green from './green';
 import red from './red';
 import yellow from './yellow';
+import { CardColor, CardValue } from '../../../../enum';
 
 export type CardSrcMap = {
   [key in CardValue]: string;
@@ -13,10 +13,10 @@ type CardImageMap = {
 };
 
 const imageMap: CardImageMap = {
-  blue,
-  green,
-  red,
-  yellow,
+  [CardColor.BLUE]: blue,
+  [CardColor.GREEN]: green,
+  [CardColor.RED]: red,
+  [CardColor.YELLOW]: yellow,
 };
 
 export default imageMap;

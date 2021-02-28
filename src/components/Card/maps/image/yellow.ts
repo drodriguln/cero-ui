@@ -9,22 +9,21 @@ import six from '../../assets/img/yellow/6.png';
 import seven from '../../assets/img/yellow/7.png';
 import eight from '../../assets/img/yellow/8.png';
 import nine from '../../assets/img/yellow/9.png';
-import reverse from '../../assets/img/yellow/reverse.png';
 import skip from '../../assets/img/yellow/skip.png';
+import { CardValue } from '../../../../enum';
 
 const yellow: CardSrcMap = {
-  0: zero,
-  1: one,
-  2: two,
-  3: three,
-  4: four,
-  5: five,
-  6: six,
-  7: seven,
-  8: eight,
-  9: nine,
-  reverse,
-  skip,
+  [CardValue.ZERO]: zero,
+  [CardValue.ONE]: one,
+  [CardValue.TWO]: two,
+  [CardValue.THREE]: three,
+  [CardValue.FOUR]: four,
+  [CardValue.FIVE]: five,
+  [CardValue.SIX]: six,
+  [CardValue.SEVEN]: seven,
+  [CardValue.EIGHT]: eight,
+  [CardValue.NINE]: nine,
+  [CardValue.SKIP]: skip,
 };
 
 export default yellow;

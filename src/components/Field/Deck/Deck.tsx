@@ -1,16 +1,13 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import shuffle from 'shuffle-array';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 
 import Card from '../../Card';
-import { deckSelector, deckTopCardSelector } from '../../../store/deck/selector';
-import { discardSelector } from '../../../store/discard/selector';
-import { playerSelector } from '../../../store/player/selector';
-import { addDeckCards, removeDeckCard, removeDeckCards } from '../../../store/deck/actions';
-import { cleanDiscardCards } from '../../../store/discard/actions';
-import { addPlayerCard, addPlayerCards, setPlayerActivity } from '../../../store/player/actions';
-import { addOpponentCards, setOpponentActivity } from '../../../store/opponent/actions';
+import { usePlayer } from '../../../store/session/player/selector';
+import { useId } from '../../../store/session/id/selector';
+import { setPlayer } from '../../../store/session/player/actions';
+import { Player } from '../../../types';
+import { PlayerStatus } from '../../../enum';
 
 const useStyles = makeStyles({
   root: {
@@ -25,46 +22,38 @@ const useStyles = makeStyles({
   },
 });
 
+const drawCard = (sessionId: String): Promise<Player> => {
+  const url = `/api/sessions/${sessionId}/draw`;
+  return fetch(url, {
+    method: 'POST',
+    cache: 'no-cache',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+    .then((response) => response.json());
+}
+
 const Deck = () => {
   const dispatch = useDispatch();
-  const deck = useSelector(deckSelector);
-  const discard = useSelector(discardSelector);
-  const { activity: playerActivity } = useSelector(playerSelector);
-  const topDeckCard = useSelector(deckTopCardSelector);
+  const sessionId = useId();
+  const { status: playerStatus } = usePlayer();
   const classes = useStyles();
 
-  const drawCard = () => {
-    if (topDeckCard === undefined) return;
-    dispatch(setPlayerActivity('draw'));
-    dispatch(addPlayerCard(topDeckCard));
-    dispatch(removeDeckCard);
-  };
-
-  useEffect(() => {
-    if (deck?.length < 8) return;
-    dispatch(addPlayerCards(deck.slice(deck.length - 8, deck.length - 1)));
-    dispatch(addOpponentCards(deck.slice(deck.length - 16, deck.length - 9)));
-    dispatch(removeDeckCards(14));
-    dispatch(setPlayerActivity('start'));
-    dispatch(setOpponentActivity('end'));
-  }, []);
-
-  // Shuffle and move unused cards from discard pile into deck when it runs empty.
-  useEffect(() => {
-    if (deck?.length > 0 || discard?.length < 2) {
+  const onClick = async () => {
+    if (playerStatus !== PlayerStatus.START) {
       return;
     }
-    const unusedDiscardCards = discard.slice(0, discard.length - 1);
-    const shuffledDiscardCards = shuffle(unusedDiscardCards, { copy: true });
-    dispatch(addDeckCards(shuffledDiscardCards));
-    dispatch(cleanDiscardCards());
-  }, [deck?.length, discard?.length]);
+
+    const player = await drawCard(sessionId);
+    dispatch(setPlayer(player));
+  };
 
   return (
     <Card.Draw
       size="lg"
       className={classes.root}
-      onClick={playerActivity === 'start' ? drawCard : undefined}
+      onClick={onClick}
     />
   );
 };

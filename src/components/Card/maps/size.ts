@@ -1,4 +1,4 @@
-import { CardDimensions } from '../../../store/types';
+import { CardDimensions } from '../../../types';
 
 type CardSizeMap = {
   xs: CardDimensions;

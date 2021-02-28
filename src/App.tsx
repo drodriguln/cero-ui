@@ -1,5 +1,5 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider as StoreProvider } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 
 import store from './store';
@@ -7,6 +7,7 @@ import Field from './components/Field';
 import Opponent from './components/Opponent';
 import Player from './components/Player';
 import Background from './components/Background';
+import { SessionProvider } from "./components/SessionProvider";
 
 const useGlobalStyles = makeStyles({
   '@global': {
@@ -21,14 +22,14 @@ const App = () => {
   useGlobalStyles();
 
   return (
-    <Provider store={store}>
-      <>
+    <StoreProvider store={store}>
+      <SessionProvider>
         <Background />
         <Opponent />
         <Field />
         <Player />
-      </>
-    </Provider>
+      </SessionProvider>
+    </StoreProvider>
   );
 };
 

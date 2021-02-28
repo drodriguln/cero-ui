@@ -1,21 +1,14 @@
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { forwardRef, ReactElement, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Grid, Grow, makeStyles } from '@material-ui/core';
 
-import { useSelector } from 'react-redux';
 import CardMat from '../CardMat';
-import Card from '../Card';
 import Paginator from './Paginator';
-import { CardData } from '../../store/types';
-import { playerSelector } from '../../store/player/selector';
-import { opponentSelector } from '../../store/opponent/selector';
-
-type HandType = 'player' | 'opponent';
 
 type Props = {
-  cards: CardData[];
-  type: HandType;
-  onCardSelect: (card: CardData) => void;
+  children: ReactElement[];
+  isActive?: boolean;
+  isSelectable?: boolean;
   className?: string;
 }
 
@@ -33,8 +26,9 @@ const useStyles = makeStyles({
   cards: {
     padding: '10px 5px',
   },
-  card: {
+  selectableCard: {
     cursor: 'pointer',
+    padding: 2,
     transition: 'transform .1s ease-out',
     '&:hover': {
       transform: 'scale(1.1)',
@@ -45,50 +39,38 @@ const useStyles = makeStyles({
   },
 });
 
+const MAX_CARDS_PER_PAGE = 7;
+
 const Hand = forwardRef((props: Props, ref) => {
-  const {
-    cards, type, onCardSelect, className,
-  } = props;
-  const { activity: playerActivity } = useSelector(playerSelector);
-  const { activity: opponentActivity } = useSelector(opponentSelector);
-  const isActive = type === 'player' && (playerActivity === 'start' || playerActivity === 'draw')
-    || type === 'opponent' && (opponentActivity === 'start' || opponentActivity === 'draw');
+  const { children, isActive = false, isSelectable = false, className } = props;
   const classes = useStyles({ isActive });
   const [page, setPage] = useState(1);
-  const maxCardsPerPage = 7;
-  const lastPage = Math.ceil(cards?.length / maxCardsPerPage);
+
+  const numberOfCards = React.Children.count(children);
+  const lastPage = Math.ceil(numberOfCards / MAX_CARDS_PER_PAGE);
 
   // Automatically show last page when drawing a card or playing last card on a page
-  const [previousCardsCount, setPreviousCardsCount] = useState(cards.length);
+  const [previousCardsCount, setPreviousCardsCount] = useState(numberOfCards);
   useEffect(() => {
     if (
-      previousCardsCount < cards.length
-      || previousCardsCount > cards.length && cards.length % maxCardsPerPage === 0
+      previousCardsCount < numberOfCards
+      || previousCardsCount > numberOfCards && numberOfCards % MAX_CARDS_PER_PAGE === 0
     ) {
       setPage(lastPage);
     }
-    setPreviousCardsCount(cards.length);
-  }, [cards.length]);
+    setPreviousCardsCount(numberOfCards);
+  }, [numberOfCards]);
 
   return (
-    <CardMat ref={ref} className={classNames(classes.root, className)} raised={isActive}>
+    <CardMat ref={ref} className={classNames(classes.root, className)} zIndex={isActive ? 1 : 2} raised={isActive}>
       <Paginator page={page} lastPage={lastPage} onChange={(pageNum: number) => setPage(pageNum)}>
-        <Grid container spacing={1} wrap="nowrap" className={classes.cards}>
-          {cards
-            ?.slice((page - 1) * maxCardsPerPage, page * maxCardsPerPage)
-            .map((card) => (
-              <Grid key={card.id} item className={type === 'player' ? classes.card : undefined}>
+        <Grid container wrap="nowrap" className={classes.cards}>
+          {(React.Children.toArray(children) as ReactElement[])
+            .slice((page - 1) * MAX_CARDS_PER_PAGE, page * MAX_CARDS_PER_PAGE)
+            .map((child) => (
+              <Grid key={child?.key} item className={isSelectable ? classes.selectableCard : undefined}>
                 <Grow timeout={400} in>
-                  <Card
-                    color={card.color}
-                    value={card.value}
-                    hidden={type === 'opponent'}
-                    onClick={() => {
-                      if (type === 'player' && playerActivity === 'start' && onCardSelect !== undefined) {
-                        onCardSelect(card);
-                      }
-                    }}
-                  />
+                  {child}
                 </Grow>
               </Grid>
             ))}
