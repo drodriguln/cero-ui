@@ -2,7 +2,7 @@ import React, { forwardRef, ReactElement, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Grid, Grow, makeStyles } from '@material-ui/core';
 
-import CardMat from '../CardMat';
+import CardMat from '../CardContainer';
 import Paginator from './Paginator';
 
 type Props = {
@@ -41,7 +41,7 @@ const useStyles = makeStyles({
 
 const MAX_CARDS_PER_PAGE = 7;
 
-const Hand = forwardRef((props: Props, ref) => {
+const CardHand = forwardRef((props: Props, ref) => {
   const { children, isActive = false, isSelectable = false, className } = props;
   const classes = useStyles({ isActive });
   const [page, setPage] = useState(1);
@@ -80,4 +80,4 @@ const Hand = forwardRef((props: Props, ref) => {
   );
 });
 
-export default Hand;
+export default CardHand;

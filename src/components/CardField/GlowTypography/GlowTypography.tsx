@@ -5,6 +5,7 @@ import classNames from 'classnames';
 const useStyles = makeStyles({
   root: {
     color: 'DimGray',
+    textAlign: 'center',
     animation: '$glow 2.5s ease-in-out infinite alternate',
   },
   '@keyframes glow': {

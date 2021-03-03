@@ -7,7 +7,7 @@
     "clean": "rm -rf dist",
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
-    "build:svg": "svgr -d src/components/Card/Images src/assets/svg",
+    "build:svg": "svgr -d src/components/Card/CardImage src/assets/svg",
     "start": "webpack-dev-server --mode production",
     "start:dev": "webpack-dev-server --mode development",
     "lint": "eslint --ext .ts,.tsx ./src",

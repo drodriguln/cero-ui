@@ -3,7 +3,7 @@ import { Provider as StoreProvider } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 
 import store from './store';
-import Field from './components/Field';
+import Field from './components/CardField';
 import Opponent from './components/Opponent';
 import Player from './components/Player';
 import Background from './components/Background';

@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 
 import { PlayerStatus } from "../../../enum";
 import Card from "../../Card";
-import Hand from "../../Hand";
+import CardHand from "../../CardHand";
 import { useOpponent } from "../../../store/session/opponent/selector";
 import { makeStyles } from "@material-ui/core";
 
@@ -25,9 +25,9 @@ const OpponentHand = forwardRef(({}, ref) => {
   const classes = useStyles();
 
   return (
-    <Hand ref={ref} className={classes.root} isActive={status === PlayerStatus.START}>
+    <CardHand ref={ref} className={classes.root} isActive={status === PlayerStatus.START}>
       {cards}
-    </Hand>
+    </CardHand>
   );
 });
 

@@ -9,7 +9,7 @@ type Props = {
   children: ReactNode;
 }
 
-const CardMat = forwardRef(({
+const CardContainer = forwardRef(({
   zIndex = 0, raised = false, className, children,
 }: Props, ref) => {
   const style = {
@@ -23,4 +23,4 @@ const CardMat = forwardRef(({
   );
 });
 
-export default CardMat;
+export default CardContainer;

@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
 
-import CardMat from '../CardMat';
+import CardMat from '../CardContainer';
 import Deck from './Deck';
 import Discard from './Discard';
 import { usePlayer } from '../../store/session/player/selector';
 import { useOpponent } from '../../store/session/opponent/selector';
-import GlowTypography from '../GlowTypography';
+import GlowTypography from './GlowTypography';
 import { PlayerStatus } from '../../enum';
 import { useId } from "../../store/session/id/selector";
 

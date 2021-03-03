@@ -1,8 +1,8 @@
 import React from 'react';
 
-import backImageSrc from './assets/img/back.png';
-import drawImageSrc from './assets/img/draw.png';
-import { imageMap, sizeMap } from './maps';
+import CardImageBack from '../Card/CardImage/Back';
+import CardImageDraw from '../Card/CardImage/Draw';
+import imageMap from './imageMap';
 import { CardColor, CardValue } from '../../enum';
 
 type CardSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -28,25 +28,45 @@ type EmptyCardProps = {
   onClick?: () => void;
 }
 
-const findCardImage = (color: CardColor, value: CardValue) => imageMap[color]?.[value] ?? backImageSrc;
+const sizeMap = {
+  xs: { height: 70, width: 50 },
+  sm: { height: 98, width: 70 },
+  md: { height: 140, width: 100 },
+  lg: { height: 196, width: 140 },
+  xl: { height: 280, width: 200 },
+};
+
+const findCardImage = (color: CardColor, value: CardValue) => imageMap[color]?.[value] ?? CardImageBack;
 
 const Card = (props: Props) => {
   const {
     value, color, size = 'md', title = `${color} ${value}`, ...otherProps
   } = props;
   const { height, width } = sizeMap[size];
-  const src = findCardImage(color, value);
-  return <img alt={title} src={src} height={height} width={width} {...otherProps} />;
+  const CardImage = findCardImage(color, value);
+  return (
+    <div title={title} {...otherProps}>
+      <CardImage height={height} width={width} />
+    </div>
+  );
 };
 
 Card.Hidden = ({ title = 'Hidden', size = 'sm', ...otherProps }: CardHiddenProps) => {
   const { height, width } = sizeMap[size];
-  return <img alt={title} src={backImageSrc} height={height} width={width} {...otherProps} />;
+  return (
+    <div title={title} {...otherProps}>
+      <CardImageBack height={height} width={width} />
+    </div>
+  );
 };
 
 Card.Draw = ({ title = 'Draw', size = 'md', ...otherProps }: EmptyCardProps) => {
   const { height, width } = sizeMap[size];
-  return <img alt={title} height={height} width={width} src={drawImageSrc} {...otherProps} />;
+  return (
+    <div title={title} {...otherProps}>
+      <CardImageDraw height={height} width={width} />
+    </div>
+  );
 };
 
 export default Card;
