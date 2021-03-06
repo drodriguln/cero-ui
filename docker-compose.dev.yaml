@@ -1,8 +1,4 @@
 services:
-  ui:
-    build: .
-    ports:
-      - "80:80"
   api:
     image: drodriguln/cero-api
     ports:
