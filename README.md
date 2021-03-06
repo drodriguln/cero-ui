@@ -1,6 +1,6 @@
 # Cero UI
 Cero is a card game web application based on Crazy Eights. The UI and API for Cero is split between two code bases: `cero-ui` and `cero-api`. 
-This UI is built using React and Material UI, and communicates game actions to the `cero-api` backend.
+This UI is built using React and Material UI, and communicates game actions to the [cero-api](https://github.com/drodriguln/cero-api) backend.
 
 _Card assets were created by Cara Sheridan._
 
