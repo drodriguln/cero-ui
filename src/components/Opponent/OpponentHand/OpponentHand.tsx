@@ -12,6 +12,9 @@ const useStyles = makeStyles({
     top: 0,
     left: 0,
   },
+  children: {
+    width: 530,
+  },
 });
 
 const createHiddenCards = (count: number) => {
@@ -23,9 +26,19 @@ const OpponentHand = forwardRef(({}, ref) => {
   const { status, cardCount } = useOpponent();
   const cards = createHiddenCards(cardCount);
   const classes = useStyles();
+  const PaginatorProps = {
+    classes: {
+      children: classes.children
+    },
+  };
 
   return (
-    <CardHand ref={ref} className={classes.root} isActive={status === PlayerStatus.START}>
+    <CardHand
+      ref={ref}
+      className={classes.root}
+      isActive={status === PlayerStatus.START}
+      PaginatorProps={PaginatorProps}
+    >
       {cards}
     </CardHand>
   );

@@ -3,18 +3,21 @@ import classNames from 'classnames';
 import { Grid, Grow, makeStyles } from '@material-ui/core';
 
 import CardMat from '../CardContainer';
-import Paginator from './Paginator';
+import Paginator, { PaginatorClasses } from './Paginator';
 
 type Props = {
   children: ReactElement[];
   isActive?: boolean;
   isSelectable?: boolean;
   className?: string;
-}
+  PaginatorProps?: {
+    classes?: PaginatorClasses;
+  };
+};
 
 type StyleProps = {
   isActive: boolean;
-}
+};
 
 const useStyles = makeStyles({
   root: ({ isActive }: StyleProps) => ({
@@ -37,12 +40,15 @@ const useStyles = makeStyles({
       transform: 'scale(0.95)',
     },
   },
+  nonSelectableCard: {
+    padding: 2,
+  },
 });
 
 const MAX_CARDS_PER_PAGE = 7;
 
 const CardHand = forwardRef((props: Props, ref) => {
-  const { children, isActive = false, isSelectable = false, className } = props;
+  const { children, isActive = false, isSelectable = false, className, PaginatorProps } = props;
   const classes = useStyles({ isActive });
   const [page, setPage] = useState(1);
 
@@ -63,12 +69,16 @@ const CardHand = forwardRef((props: Props, ref) => {
 
   return (
     <CardMat ref={ref} className={classNames(classes.root, className)} zIndex={isActive ? 1 : 2} raised={isActive}>
-      <Paginator page={page} lastPage={lastPage} onChange={(pageNum: number) => setPage(pageNum)}>
+      <Paginator page={page} lastPage={lastPage} onChange={(pageNum: number) => setPage(pageNum)} {...PaginatorProps}>
         <Grid container wrap="nowrap" className={classes.cards}>
           {(React.Children.toArray(children) as ReactElement[])
             .slice((page - 1) * MAX_CARDS_PER_PAGE, page * MAX_CARDS_PER_PAGE)
             .map((child) => (
-              <Grid key={child?.key} item className={isSelectable ? classes.selectableCard : undefined}>
+              <Grid
+                key={child?.key}
+                item
+                className={isSelectable ? classes.selectableCard : classes.nonSelectableCard}
+              >
                 <Grow timeout={400} in>
                   {child}
                 </Grow>

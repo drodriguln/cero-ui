@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Grid, makeStyles } from '@material-ui/core';
+import { Grid, makeStyles, Typography } from '@material-ui/core';
 
 import CardMat from '../CardContainer';
 import Deck from './Deck';
@@ -60,9 +60,14 @@ const Hand = () => {
   return (
     <CardMat className={classes.root}>
       {hasWinner ? (
-        <GlowTypography variant="h4">
-          {playerStatus === PlayerStatus.WON ? 'You win!' : 'Opponent wins!'}
-        </GlowTypography>
+        <div>
+          <GlowTypography variant="h4" align="center" gutterBottom>
+            cero!
+          </GlowTypography>
+          <Typography variant="h6" align="center">
+            {playerStatus === PlayerStatus.WON ? 'You win' : 'Opponent wins'}
+          </Typography>
+        </div>
       ) : (
         <Grid container spacing={8} wrap="nowrap">
           <Grid item>

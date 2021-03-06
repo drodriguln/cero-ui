@@ -2,12 +2,18 @@ import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 import { Button, makeStyles } from '@material-ui/core';
 
+export type PaginatorClasses = {
+  root?: string;
+  children?: string;
+};
+
 type Props = {
   page: number;
   lastPage: number;
   onChange: (page: number) => void;
   children: ReactNode;
-}
+  classes?: PaginatorClasses;
+};
 
 const useStyles = makeStyles({
   root: {
@@ -38,19 +44,22 @@ const useStyles = makeStyles({
 });
 
 const Paginator = ({
-  page, lastPage, onChange, children,
+  page, lastPage, onChange, children, classes: externalClasses,
 }: Props) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <Button
-        classes={{ root: classNames(classes.button, classes.buttonLeft), label: classes.buttonLabel }}
+        classes={{
+          root: classNames(classes.button, classes.buttonLeft, externalClasses?.root),
+          label: classes.buttonLabel,
+        }}
         onClick={() => onChange(page - 1)}
         disabled={page === 1}
       >
         &lsaquo;
       </Button>
-      <div className={classes.children}>
+      <div className={classNames(classes.children, externalClasses?.children)}>
         {children}
       </div>
       <Button

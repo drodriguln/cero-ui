@@ -4,47 +4,47 @@ const SvgOne = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
-    width={3107}
-    height={4315}
-    viewBox="0 0 2330.25 3236.25"
+    width={777}
+    height={1079}
+    viewBox="0 0 582.75 809.25"
     {...props}
   >
     <defs>
       <clipPath id="one_svg__a">
-        <path d="M0 .145h2329.5v3235.21H0zm0 0" />
+        <path d="M.145 0h582.21v808.5H.145zm0 0" />
       </clipPath>
       <clipPath id="one_svg__b">
-        <path d="M0 .145h1299V1432H0zm0 0" />
+        <path d="M.145 0H325v358H.145zm0 0" />
       </clipPath>
       <clipPath id="one_svg__c">
-        <path d="M1133 1802h1196.5v1433.355H1133zm0 0" />
+        <path d="M283 450h299.355v358.5H283zm0 0" />
       </clipPath>
       <symbol overflow="visible" id="one_svg__d">
-        <path d="M769.016 0h-327.36v-631.86c0-76.738 1.63-146.94 4.89-210.609-20.136 24.492-45.167 50.07-75.093 76.735L235.938-653.891 68.577-859.625l409.813-333.89h290.625zm0 0" />
+        <path d="M192.266 0h-81.844v-157.969c0-19.187.406-36.742 1.219-52.672-5.032 6.125-11.293 12.524-18.782 19.188l-33.875 27.969-41.843-51.438 102.468-83.469h72.657zm0 0" />
       </symbol>
       <symbol overflow="visible" id="one_svg__e">
-        <path d="M302.156 0H173.531v-248.266c0-30.156.64-57.742 1.922-82.765-7.906 9.625-17.742 19.68-29.5 30.156l-53.25 43.938-65.766-80.829L187.97-468.953h114.187zm0 0" />
+        <path d="M75.547 0H43.39v-62.063c0-7.539.156-14.44.468-20.703-1.98 2.407-4.437 4.922-7.375 7.547L23.172-64.234 6.734-84.438 47-117.233h28.547zm0 0" />
       </symbol>
     </defs>
     <g clipPath="url(#one_svg__a)">
-      <path d="M0 .145h2329.5v3235.21H0zm0 0" fill="#fff" />
-      <path d="M0 .145h2329.5v3235.21H0zm0 0" fill="#f8e459" />
+      <path d="M.145 0h582.46v808.848H.145zm0 0" fill="#fff" />
+      <path d="M.145 0h582.46v808.848H.145zm0 0" fill="#f8e459" />
     </g>
     <g clipPath="url(#one_svg__b)">
       <path
-        d="M348.71-966.68l949.813 863.676L-97.043 1431.75l-949.816-863.672zm0 0"
+        d="M87.352-241.719L324.82-25.785l-348.914 383.71-237.465-215.933zm0 0"
         fill="#fff"
       />
     </g>
     <g clipPath="url(#one_svg__c)">
       <path
-        d="M2528.922 1802.629l949.812 863.676-1395.566 1534.754-949.816-863.676zm0 0"
+        d="M632.434 450.648l237.468 215.93-348.91 383.711-237.469-215.93zm0 0"
         fill="#fff"
       />
     </g>
-    <use xlinkHref="#one_svg__d" x={674.93} y={2079.294} fill="#fff" />
-    <use xlinkHref="#one_svg__e" x={40.494} y={575.221} fill="#f8e459" />
-    <use xlinkHref="#one_svg__e" x={1904.094} y={3095.175} fill="#f8e459" />
+    <use xlinkHref="#one_svg__d" x={168.913} y={519.816} fill="#fff" />
+    <use xlinkHref="#one_svg__e" x={18.792} y={137.464} fill="#f8e459" />
+    <use xlinkHref="#one_svg__e" x={467.724} y={788.793} fill="#f8e459" />
   </svg>
 );
 
