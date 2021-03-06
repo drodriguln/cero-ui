@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 
 import { PlayerStatus } from "../../../enum";
 import Card from "../../Card";
-import Hand from "../../Hand";
+import CardHand from "../../CardHand";
 import { useOpponent } from "../../../store/session/opponent/selector";
 import { makeStyles } from "@material-ui/core";
 
@@ -11,6 +11,9 @@ const useStyles = makeStyles({
     position: 'absolute',
     top: 0,
     left: 0,
+  },
+  children: {
+    width: 530,
   },
 });
 
@@ -23,11 +26,21 @@ const OpponentHand = forwardRef(({}, ref) => {
   const { status, cardCount } = useOpponent();
   const cards = createHiddenCards(cardCount);
   const classes = useStyles();
+  const PaginatorProps = {
+    classes: {
+      children: classes.children
+    },
+  };
 
   return (
-    <Hand ref={ref} className={classes.root} isActive={status === PlayerStatus.START}>
+    <CardHand
+      ref={ref}
+      className={classes.root}
+      isActive={status === PlayerStatus.START}
+      PaginatorProps={PaginatorProps}
+    >
       {cards}
-    </Hand>
+    </CardHand>
   );
 });
 

@@ -23,9 +23,7 @@ const Background = () => {
   const classes = useStyles(backgroundColor)();
 
   return (
-    <div>
-      <div className={classes.currentImage} />
-    </div>
+    <div className={classes.currentImage} />
   );
 };
 

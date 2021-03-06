@@ -3,7 +3,7 @@ import React, { forwardRef } from 'react';
 import { PlayerStatus } from "../../../enum";
 import Card from "../../Card";
 import { usePlayer } from "../../../store/session/player/selector";
-import Hand from "../../Hand";
+import CardHand from "../../CardHand";
 import { CardData } from "../../../types";
 import { makeStyles } from "@material-ui/core";
 
@@ -24,7 +24,7 @@ const PlayerHand = forwardRef(({ onCardSelect }: Props, ref) => {
   const classes = useStyles();
 
   return (
-    <Hand ref={ref} className={classes.root} isActive={status === PlayerStatus.START} isSelectable>
+    <CardHand ref={ref} className={classes.root} isActive={status === PlayerStatus.START} isSelectable>
       {cards.map((card) => (
         <Card
           key={card.id}
@@ -37,7 +37,7 @@ const PlayerHand = forwardRef(({ onCardSelect }: Props, ref) => {
           }}
         />
       ))}
-    </Hand>
+    </CardHand>
   );
 });
 
