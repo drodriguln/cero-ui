@@ -69,7 +69,7 @@ const Hand = () => {
           </Typography>
         </div>
       ) : (
-        <Grid container spacing={8} wrap="nowrap">
+        <Grid container spacing={4} wrap="nowrap">
           <Grid item>
             <Discard />
           </Grid>

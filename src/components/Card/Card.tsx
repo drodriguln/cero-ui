@@ -51,30 +51,33 @@ const Card = (props: Props) => {
   } = props;
   const classes = useStyles();
   const { height, width } = sizeMap[size];
+  const style = { maxWidth: width, maxHeight: height };
   const CardImage = findCardImage(color, value);
   return (
     <div title={title} {...otherProps}>
-      <CardImage height={height} width={width} className={classes.card} />
+      <CardImage height="100%" width="100%" style={style} className={classes.card} />
     </div>
   );
 };
 
 Card.Hidden = ({ title = 'Hidden', size = 'sm', ...otherProps }: CardHiddenProps) => {
-  const { height, width } = sizeMap[size];
   const classes = useStyles();
+  const { height, width } = sizeMap[size];
+  const style = { maxWidth: width, maxHeight: height };
   return (
     <div title={title} {...otherProps}>
-      <CardImageBack height={height} width={width} className={classes.card} />
+      <CardImageBack height="100%" width="100%" style={style} className={classes.card} />
     </div>
   );
 };
 
 Card.Draw = ({ title = 'Draw', size = 'md', ...otherProps }: EmptyCardProps) => {
-  const { height, width } = sizeMap[size];
   const classes = useStyles();
+  const { height, width } = sizeMap[size];
+  const style = { maxWidth: width, maxHeight: height };
   return (
     <div title={title} {...otherProps}>
-      <CardImageDraw height={height} width={width} className={classes.card} />
+      <CardImageDraw height="100%" width="100%" style={style} className={classes.card} />
     </div>
   );
 };
