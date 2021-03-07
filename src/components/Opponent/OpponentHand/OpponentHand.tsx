@@ -1,10 +1,12 @@
 import React, { forwardRef } from 'react';
 
-import { PlayerStatus } from "../../../enum";
-import Card from "../../Card";
-import CardHand from "../../CardHand";
-import { useOpponent } from "../../../store/session/opponent/selector";
-import { makeStyles } from "@material-ui/core";
+import { PlayerStatus } from '../../../enum';
+import Card from '../../Card';
+import CardHand from '../../CardHand';
+import { useOpponent } from '../../../store/session/opponent/selector';
+import { makeStyles } from '@material-ui/core';
+
+type Props = {};
 
 const useStyles = makeStyles({
   root: {
@@ -22,7 +24,7 @@ const createHiddenCards = (count: number) => {
     .map((item, index) => <Card.Hidden key={index} />);
 };
 
-const OpponentHand = forwardRef(({}, ref) => {
+const OpponentHand = forwardRef((props: Props, ref) => {
   const { status, cardCount } = useOpponent();
   const cards = createHiddenCards(cardCount);
   const classes = useStyles();

@@ -1,0 +1,14 @@
+name: Lint Code
+on: push
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install
+        run: npm install
+      - name: Run ESLint
+        run: ./node_modules/.bin/eslint --ext .ts,.tsx ./src

@@ -3,7 +3,7 @@ import { Slide } from '@material-ui/core';
 
 import { useOpponent } from '../../store/session/opponent/selector';
 import { usePlayer } from '../../store/session/player/selector';
-import OpponentHand from "./OpponentHand";
+import OpponentHand from './OpponentHand';
 import { PlayerStatus } from '../../enum';
 
 const Opponent = () => {

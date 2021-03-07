@@ -11,7 +11,7 @@ import { setSession } from '../../store/session/actions';
 import { setDiscard } from '../../store/session/discard/actions';
 import { PlayerStatus } from '../../enum';
 import { CardData, Session } from '../../types';
-import PlayerHand from "./PlayerHand";
+import PlayerHand from './PlayerHand';
 
 const executeTurn = (sessionId: String, card: CardData): Promise<Session> => {
   const url = `/api/sessions/${sessionId}/discard`;
