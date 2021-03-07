@@ -8,12 +8,12 @@ const useStyles = makeStyles({
   },
   '@keyframes glow': {
     from: {
-      textShadow: '0 0 15px PaleGoldenRod, 0 0 30px PaleGoldenRod, 0 0 20px PaleGoldenRod, 0 0 15px PaleGoldenRod, '
-        + '0 0 20px PaleGoldenRod, 0 0 25px PaleGoldenRod',
+      textShadow: '0 0 15px PaleGoldenRod, 0 0 30px PaleGoldenRod, 0 0 20px PaleGoldenRod, 0 0 15px PaleGoldenRod, ' +
+        '0 0 20px PaleGoldenRod, 0 0 25px PaleGoldenRod',
     },
     to: {
-      textShadow: '0 0 20px #ffec80, 0 0 15px #ffec80, 0 0 25px #ffec80, 0 0 15px #ffec80, '
-        + '0 0 30px #ffec80, 0 0 25px #ffec80',
+      textShadow: '0 0 20px #ffec80, 0 0 15px #ffec80, 0 0 25px #ffec80, 0 0 15px #ffec80, ' +
+        '0 0 30px #ffec80, 0 0 25px #ffec80',
     },
   },
 });

@@ -59,8 +59,8 @@ const CardHand = forwardRef((props: Props, ref) => {
   const [previousCardsCount, setPreviousCardsCount] = useState(numberOfCards);
   useEffect(() => {
     if (
-      previousCardsCount < numberOfCards
-      || previousCardsCount > numberOfCards && numberOfCards % MAX_CARDS_PER_PAGE === 0
+      previousCardsCount < numberOfCards ||
+      previousCardsCount > numberOfCards && numberOfCards % MAX_CARDS_PER_PAGE === 0
     ) {
       setPage(lastPage);
     }

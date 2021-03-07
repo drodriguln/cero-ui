@@ -1,50 +1,48 @@
 {
-  "env": {
-    "browser": true,
-    "es6": true
-  },
-  "extends": [
-    "airbnb"
-  ],
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
-  },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
+    "env": {
+        "browser": true
     },
-    "ecmaVersion": 2020,
-    "project": "./tsconfig.json",
-    "sourceType": "module"
-  },
-  "plugins": [
-    "react",
-    "@typescript-eslint"
-  ],
-  "rules": {
-    "@typescript-eslint/no-use-before-define": ["error"],
-    "@typescript-eslint/no-shadow": ["error"],
-    "no-use-before-define": "off", // reports incorrectly when using @typescript-eslint
-    "no-shadow": "off", // reports incorrectly when using @typescript-eslint
-    "import/no-unresolved": "off", // Disabled since it doesn't properly detect imports
-    "import/prefer-default-export": "off", // Personal preference
-    "max-len": ["error", {"code": 120}], // Personal preference
-    "no-console": "off", // Until better error handling is implemented
-    "no-mixed-operators": "off", // Personal preference
-    "no-plusplus": "off", // Personal preference (for loop usage)
-    "no-unused-vars": "off", // Disabled in favor of @typescript-eslint version
-    "react/jsx-filename-extension": "off", // Not working correctly -- complains about JSX being in .tsx files
-    "react/jsx-props-no-spreading": "off", // Personal preference
-    "react/require-default-props": "off", // default props aren't used in this TS project
-    "import/extensions": ["error", "ignorePackages", { "ts": "never", "tsx": "never" }]
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".ts", ".tsx"]
-      }
-    }
-  }
+    "extends": [
+        "standard"
+    ],
+    "plugins": [
+        "react",
+        "@typescript-eslint"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2021,
+        "project": "./tsconfig.json",
+        "sourceType": "module"
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".ts", ".tsx"]
+            }
+        }
+    },
+    "rules": {
+        "semi": "off",
+        "comma-dangle": "off",
+        "@typescript-eslint/no-use-before-define": ["error"],
+        "@typescript-eslint/no-shadow": ["error"],
+        "no-use-before-define": "off", // reports incorrectly when using @typescript-eslint
+        "no-shadow": "off", // reports incorrectly when using @typescript-eslint
+        "import/no-unresolved": "off", // Disabled since it doesn't properly detect imports
+        "import/prefer-default-export": "off", // Personal preference
+        "max-len": ["error", {"code": 120}], // Personal preference
+        "no-console": "off", // Until better error handling is implemented
+        "no-mixed-operators": "off", // Personal preference
+        "no-plusplus": "off", // Personal preference (for loop usage)
+        "no-unused-vars": "off", // Disabled in favor of @typescript-eslint version
+        "react/jsx-filename-extension": "off", // Not working correctly -- complains about JSX being in .tsx files
+        "react/jsx-props-no-spreading": "off", // Personal preference
+        "react/require-default-props": "off", // default props aren't used in this TS project
+        "import/extensions": ["error", "ignorePackages", { "ts": "never", "tsx": "never" }]
+    },
+    "ignorePatterns": ["src/components/Card/CardImage/**/*.tsx"]
 }

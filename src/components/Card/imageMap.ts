@@ -1,7 +1,7 @@
 import {
-  Zero as BlueZero, One as BlueOne, Two as BlueTwo, 
+  Zero as BlueZero, One as BlueOne, Two as BlueTwo,
   Three as BlueThree, Four as BlueFour, Five as BlueFive,
-  Six as BlueSix, Seven as BlueSeven, Eight as BlueEight, 
+  Six as BlueSix, Seven as BlueSeven, Eight as BlueEight,
   Nine as BlueNine, Skip as BlueSkip,
 } from './CardImage/Blue';
 import {

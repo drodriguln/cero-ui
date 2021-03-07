@@ -8,7 +8,7 @@ import { usePlayer } from '../../store/session/player/selector';
 import { useOpponent } from '../../store/session/opponent/selector';
 import GlowTypography from './GlowTypography';
 import { PlayerStatus } from '../../enum';
-import { useId } from "../../store/session/id/selector";
+import { useId } from '../../store/session/id/selector';
 
 const useStyles = makeStyles({
   root: {
@@ -59,7 +59,8 @@ const Hand = () => {
 
   return (
     <CardMat className={classes.root}>
-      {hasWinner ? (
+      {hasWinner
+        ? (
         <div>
           <GlowTypography variant="h4" align="center" gutterBottom>
             cero!
@@ -68,7 +69,8 @@ const Hand = () => {
             {playerStatus === PlayerStatus.WON ? 'You win' : 'Opponent wins'}
           </Typography>
         </div>
-      ) : (
+          )
+        : (
         <Grid container spacing={4} wrap="nowrap">
           <Grid item>
             <Discard />
@@ -77,7 +79,7 @@ const Hand = () => {
             <Deck />
           </Grid>
         </Grid>
-      )}
+          )}
     </CardMat>
   );
 };

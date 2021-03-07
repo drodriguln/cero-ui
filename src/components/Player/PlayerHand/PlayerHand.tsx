@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
 
-import { PlayerStatus } from "../../../enum";
-import Card from "../../Card";
-import { usePlayer } from "../../../store/session/player/selector";
-import CardHand from "../../CardHand";
-import { CardData } from "../../../types";
-import { makeStyles } from "@material-ui/core";
+import { PlayerStatus } from '../../../enum';
+import Card from '../../Card';
+import { usePlayer } from '../../../store/session/player/selector';
+import CardHand from '../../CardHand';
+import { CardData } from '../../../types';
+import { makeStyles } from '@material-ui/core';
 
 type Props = {
   onCardSelect: (card: CardData) => void;

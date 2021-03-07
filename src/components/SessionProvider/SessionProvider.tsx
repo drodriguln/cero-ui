@@ -2,7 +2,7 @@ import React, { ReactElement, ReactNode, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Typography } from '@material-ui/core';
 
-import { setSession } from "../../store/session/actions";
+import { setSession } from '../../store/session/actions';
 import { Session } from '../../types';
 
 type Props = {

@@ -15,7 +15,6 @@ const backgroundColorMap: BackgroundColorMap = {
   gray: 'rgb(212, 212, 212)',
 };
 
-
 const Background = () => {
   const discard = useDiscard();
   const colorKey = discard.color?.toString()?.toLowerCase() ?? 'gray';
