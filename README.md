@@ -11,6 +11,8 @@ You can play the game [here](http://34.83.61.213)!
 This project is still a work in progress, and as such there are milestones yet to hit before hitting the first major release.
 
  - [x] session controlled by api
+ - [x] dockerize
+ - [x] make available in the cloud
  - [ ] unit tests (jest + @react/testing-library)
  - [ ] mobile friendly
 
