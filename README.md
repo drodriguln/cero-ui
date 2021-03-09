@@ -13,7 +13,7 @@ This project is still a work in progress, and as such there are milestones yet t
  - [x] session controlled by api
  - [x] dockerize
  - [x] make available in the cloud
- - [ ] unit tests (jest + @react/testing-library)
+ - [ ] unit tests (jest + @testing-library/react)
  - [ ] mobile friendly
 
 ## Getting Started
