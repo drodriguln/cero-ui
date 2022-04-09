@@ -4,9 +4,6 @@ This UI is built using React and Material UI, and communicates game actions to t
 
 _Card assets were created by Cara Sheridan._
 
-## Try it Out
-You can play the game [here](http://54.160.72.103)!
-
 ## Path to v1.0
 This project is still a work in progress, and as such there are milestones yet to hit before hitting the first major release.
 
